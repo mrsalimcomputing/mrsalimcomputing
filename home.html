@@ -61,7 +61,7 @@
     <!-- LOGIN CHECK (AFTER AUTH) -->
     <!-- ========================= -->
     <script type="module">
-        import { getCurrentUser } from "./js/userManager.js";
+        import { getCurrentUser } from "./userManager.js";
 
         const user = getCurrentUser();
         window.isPlayMode = !user;
@@ -95,9 +95,9 @@
     <!-- ========================= -->
     <!-- MAIN SCRIPTS (LOAD LAST) -->
     <!-- ========================= -->
-    <script type="module" src="./js/firebaseConfig.js"></script>
-    <script type="module" src="js/main.js"></script>
-    <script type="module" src="js/headerUser.js"></script>
+    <script type="module" src="./firebaseConfig.js"></script>
+    <script type="module" src="./main.js"></script>
+    <script type="module" src="./headerUser.js"></script>
 
 </body>
 </html>
