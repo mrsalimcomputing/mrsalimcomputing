@@ -44,7 +44,7 @@ auth.useDeviceLanguage();
 // REDIRECT TO MAIN MENU
 // --------------------------------------------------
 function goToMainMenu() {
-  window.location.href = "index.html";
+  window.location.href = "home.html";
 }
 
 
