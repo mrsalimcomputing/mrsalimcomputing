@@ -3,105 +3,41 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <!-- ⭐ NEW TITLE -->
-    <title>Learn with Mr Salim : Computing</title>
-
-    <!-- MAIN STYLES -->
+    <title>Login - Learn with Mr Salim </title>
     <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="animations.css">
 </head>
 
 <body>
 
-    <!-- ========================= -->
-    <!-- WELCOME USER BANNER       -->
-    <!-- ========================= -->
-    <div id="userWelcome" class="welcome-banner">
-        <!-- Filled by JS -->
-    </div>
-
-    <!-- ========================= -->
-    <!-- MOTIVATIONAL QUOTE        -->
-    <!-- ========================= -->
-    <div class="quote-banner">
-        “Every click is progress — keep learning, keep growing.”
-    </div>
-
-    <!-- ========================= -->
-    <!-- LANGUAGE SELECTOR         -->
-    <!-- ========================= -->
-    <div class="language-selector">
-        <select id="languageSelect" onchange="changeLanguage(this.value)">
-            <option value="en">English</option>
-            <option value="fr">Français</option>
-            <option value="es">Español</option>
-            <option value="ar">العربية</option>
-        </select>
-    </div>
-
-    <!-- ========================= -->
-    <!-- LOGOUT BUTTON             -->
-    <!-- ========================= -->
-    <button id="logoutBtn" class="logout-btn">Logout</button>
-
-    <!-- ========================= -->
-    <!-- FIREBASE AUTH (MUST LOAD FIRST) -->
-    <!-- ========================= -->
-    <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
-        import { getAuth } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
-        import { app } from "./js/firebaseConfig.js";
-
-        const auth = getAuth(app);
-        window.auth = auth;
-    </script>
-
-    <!-- ========================= -->
-    <!-- LOGIN CHECK (AFTER AUTH) -->
-    <!-- ========================= -->
-    <script type="module">
-        import { getCurrentUser } from "./js/userManager.js";
-
-        const user = getCurrentUser();
-        window.isPlayMode = !user;
-    </script>
-
-    <!-- ========================= -->
-    <!-- MAIN MENU                 -->
-    <!-- ========================= -->
-    <div id="menuScreen" class="menu-screen">
+    <div class="menu-screen">
         <h1 class="menu-title">Learn with Mr Salim</h1>
-        <p class="menu-subtitle">Computing made fun, fast, and interactive.</p>
+        <p class="menu-subtitle">Choose how you want to play</p>
 
-    <div class="button-row">
-        <button class="menu-btn" onclick="window.location.href='ks3.html'">KS3</button>
-        <button class="menu-btn locked" onclick="alert('KS4 is locked — Coming Soon!')">KS4 🔒 Coming Soon</button>
-        <button class="menu-btn locked"onclick="alert('KS5 is locked — Coming Soon!')">KS5 🔒 Coming Soon</button>
+        <div class="button-column">
+
+            <!-- GOOGLE LOGIN BUTTON -->
+            <button id="googleLoginBtn" class="menu-btn google-btn">
+                Sign in with Google
+            </button>
+
+            <!-- MICROSOFT LOGIN BUTTON -->
+            <button id="microsoftLoginBtn" class="menu-btn microsoft-btn">
+                Sign in with Microsoft
+            </button>
+
+            <!-- PLAY WITHOUT LOGIN -->
+            <button id="playBtn" class="menu-btn guest-btn">
+                Play
+            </button>
+
+        </div>
     </div>
 
-    </div>
-
-    <!-- ========================= -->
-    <!-- LANGUAGE SWITCH LOGIC     -->
-    <!-- ========================= -->
-    <script>
-        function changeLanguage(lang) {
-            alert("Language changed to: " + lang);
-            // Future: load translations dynamically here
-        }
-    </script>
-
-    <!-- ========================= -->
-    <!-- MAIN SCRIPTS (LOAD LAST) -->
-    <!-- ========================= -->
+    <!-- LOAD FIREBASE FIRST -->
     <script type="module" src="./js/firebaseConfig.js"></script>
-    <script type="module" src="js/main.js"></script>
-    <script type="module" src="js/headerUser.js"></script>
-
+    <script type="module" src="js/login.js"></script>
 </body>
 </html>
-
 
 
 
