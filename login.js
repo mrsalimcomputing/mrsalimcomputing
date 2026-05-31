@@ -1,5 +1,7 @@
 // js/login.js
 console.log("login.js is running");
+console.log("LOADING");
+
 
 import { app, db } from "./firebaseConfig.js";
 
