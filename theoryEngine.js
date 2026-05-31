@@ -1,10 +1,10 @@
 // ===============================
 // IMPORTS
 // ===============================
-import { hideAllScreens } from "../navigation.js";
-import { getCurrentUser } from "../userManager.js";
+import { hideAllScreens } from "./navigation.js";
+import { getCurrentUser } from "./userManager.js";
 
-import { db } from "../firebaseConfig.js";
+import { db } from "./firebaseConfig.js";
 import {
   doc,
   setDoc,

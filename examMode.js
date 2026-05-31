@@ -1,8 +1,8 @@
 // ===============================
 // IMPORTS
 // ===============================
-import { getCurrentUser } from "../userManager.js";
-import { db } from "../firebaseConfig.js";
+import { getCurrentUser } from "./userManager.js";
+import { db } from "./firebaseConfig.js";
 
 import {
   doc,
