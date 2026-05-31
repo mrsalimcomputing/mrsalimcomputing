@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KS5 Options</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- 🔹 BACK BUTTON (top-left) -->
+    <button class="back-btn" onclick="goBack()">Back</button>
+
+    <!-- 🔹 WELCOME BANNER (centered) -->
+    <div id="userWelcome" class="welcome-banner" style="text-align:center; width:100%;"></div>
+
+    <!-- 🔹 LANGUAGE SELECTOR (top-right) -->
+    <div class="language-selector" style="position:absolute; top:15px; right:110px;">
+        <select id="languageSelect" onchange="changeLanguage(this.value)">
+            <option value="en">English</option>
+            <option value="fr">Français</option>
+            <option value="es">Español</option>
+            <option value="ar">العربية</option>
+        </select>
+    </div>
+
+    <!-- 🔹 LOGOUT BUTTON (top-right) -->
+    <button id="logoutBtn" class="logout-btn" style="top:15px; right:20px;">Logout</button>
+
+    <!-- 🔹 MAIN CONTENT -->
+    <div class="menu-screen">
+        <h1 class="menu-title">KS5 Options</h1>
+        <p class="menu-subtitle">Choose your qualification:</p>
+
+        <div id="ks5Screen" class="ks4-grid">
+
+            <button class="menu-btn"
+                onclick="window.location.href='ks5-unit.html?course=' + encodeURIComponent('OCR A Level Computer Science')">
+                OCR A Level Computer Science
+            </button>
+
+            <button class="menu-btn"
+                onclick="window.location.href='ks5-unit.html?course=' + encodeURIComponent('OCR AAQ IT: Data Analytics')">
+                OCR AAQ IT: Data Analytics
+            </button>
+
+            <button class="menu-btn"
+                onclick="window.location.href='ks5-unit.html?course=' + encodeURIComponent('OCR AAQ Cyber Security and Networks')">
+                OCR AAQ Cyber Security & Networks
+            </button>
+
+        </div>
+    </div>
+
+    <!-- 🔹 USER HEADER SCRIPT -->
+    <script type="module" src="js/headerUser.js"></script>
+
+    <!-- 🔹 BACK + LANGUAGE LOGIC -->
+    <script>
+        function goBack() {
+            if (document.referrer !== "") {
+                window.history.back();
+            } else {
+                window.location.href = "index.html";
+            }
+        }
+
+        function changeLanguage(lang) {
+            alert("Language changed to: " + lang);
+        }
+    </script>
+
+</body>
+</html>
+
+
+

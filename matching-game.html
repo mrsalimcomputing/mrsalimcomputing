@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Matching Game</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- ========================= -->
+    <!-- MATCHING GAME RULES POPUP -->
+    <!-- ========================= -->
+    <div id="matchRulesPopup" class="popup-overlay">
+        <div class="popup-box">
+            <h2>Matching Game</h2>
+            <p>You will get 5 seconds to memorise the cards before the game starts.</p>
+
+            <div class="popup-buttons">
+                <button class="menu-back-btn" onclick="window.location.href='index.html'">Menu</button>
+                <button id="startMatchBtn" class="menu-back-btn">Play</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ========================= -->
+    <!-- MATCHING GAME END POPUP   -->
+    <!-- ========================= -->
+    <div id="matchEndPopup" class="popup-overlay" style="display:none;">
+        <div class="popup-box">
+            <h2 id="matchEndTitle">You matched all pairs in 0.000 seconds!</h2>
+
+            <p id="matchEndScore" style="font-size: 1.2rem; margin-top: 10px;"></p>
+            <p id="matchEndAccuracy" style="font-size: 1.2rem; margin-bottom: 20px;"></p>
+
+            <div class="popup-buttons">
+                <button class="menu-back-btn" onclick="window.location.href='index.html'">Menu</button>
+                <button id="playAgainMatchBtn" class="menu-back-btn">Play Again</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ========================= -->
+    <!-- MATCHING GAME SCREEN      -->
+    <!-- ========================= -->
+    <div id="matchGameScreen" class="screen" style="display:none;">
+
+        <header class="top-bar">
+
+            <!-- Quit button -->
+            <button id="matchQuitBtn" class="quit-btn-top">Quit</button>
+
+            <!-- Timer -->
+            <div class="timer">Time: <span id="matchTime">0.000</span>s</div>
+
+            <!-- Score + Attempts + Accuracy -->
+            <div class="top-info">Score: <span id="matchScore">0</span></div>
+            <div class="top-info">Attempts: <span id="matchAttempts">0</span></div>
+            <div class="top-info">Accuracy: <span id="matchAccuracy">0%</span></div>
+
+        </header>
+
+        <main>
+
+            <!-- The card grid -->
+            <div id="matchGrid" class="match-grid"></div>
+
+            <!-- Reveal button -->
+            <button id="matchRevealBtn" class="menu-back-btn" style="margin-top: 20px;">
+                Reveal Cards (3s)
+            </button>
+
+        </main>
+
+    </div>
+
+    <!-- ========================= -->
+    <!-- SCRIPT LOADER             -->
+    <!-- ========================= -->
+    <script type="module">
+        import { showMatchRules } from "./js/engines/matchEngine.js";
+        import { matchingData } from "./js/matchingData.js";
+
+        const params = new URLSearchParams(window.location.search);
+
+        const course = decodeURIComponent(params.get("course"));
+        const unit = decodeURIComponent(params.get("unit"));
+        const topic = decodeURIComponent(params.get("topic"));
+
+        window.currentTopic = topic;
+
+        console.log("MATCH RECEIVED:", course, unit, topic);
+
+        let data = null;
+
+        // ⭐ KS3 (course = "KS3")
+        if (matchingData?.["KS3"]?.[unit]?.[topic]) {
+            data = matchingData["KS3"][unit][topic];
+        }
+
+        // ⭐ KS4 (course = "Cambridge_Nationals_IT_Level_2")
+        if (!data && matchingData?.["KS4"]?.[course]?.[unit]) {
+            const unitObj = matchingData["KS4"][course][unit];
+
+            // Direct topic
+            if (unitObj?.[topic]) {
+                data = unitObj[topic];
+            }
+
+            // Inside categories (e.g., "Design Tools")
+            if (!data) {
+                for (const categoryName in unitObj) {
+                    if (unitObj[categoryName]?.[topic]) {
+                        data = unitObj[categoryName][topic];
+                        break;
+                    }
+                }
+            }
+        }
+
+        if (!data) {
+            alert("No matching data found for: " + topic);
+            console.error("Missing:", course, unit, topic);
+            window.history.back();
+        } else {
+            window.currentMatchData = data;
+            showMatchRules();
+        }
+    </script>
+
+</body>
+</html>
+
+
+
+
+
+
+

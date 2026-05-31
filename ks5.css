@@ -1,0 +1,72 @@
+/* ============================================================
+   KS5 PAGE — MATCH KS3 STYLE PERFECTLY
+   ============================================================ */
+
+.ks5-container {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* centers vertically */
+    align-items: center;
+    overflow: hidden;
+}
+
+/* Title + Subtitle */
+.ks5-container .menu-title {
+    font-size: 3.5rem; /* same as KS3 */
+    font-weight: 900;
+    color: #ECFEFF;
+    text-shadow: 0 4px 10px rgba(0,0,0,0.4);
+    margin-bottom: 10px;
+}
+
+.ks5-container .menu-subtitle {
+    font-size: 1.4rem;
+    color: #34D399; /* same green tone as KS3 */
+    margin-bottom: 30px;
+}
+
+/* ============================================================
+   KS5 GRID — same layout as KS3
+   ============================================================ */
+.ks5-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+    width: 90%;
+    max-width: 900px;
+    margin-top: 10px;
+}
+
+/* ============================================================
+   KS5 BUTTONS — identical to KS3 buttons
+   ============================================================ */
+.ks5-btn {
+    background: #0891B2;
+    color: #ECFEFF;
+    border: 3px solid #0F172A;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 700;
+    box-shadow: 4px 4px 0 #0F172A;
+    transition: 0.25s ease;
+
+    width: 100%;
+    height: 65px; /* increased to match KS3 */
+    font-size: 1rem; /* same text size as KS3 */
+    padding: 12px;
+}
+
+.ks5-btn:hover {
+    background: #34D399;
+    color: #0F172A;
+    transform: scale(1.05);
+}
+
+.ks5-btn:active {
+    transform: translate(2px, 2px);
+    box-shadow: 2px 2px 0 #0F172A;
+}
+
+

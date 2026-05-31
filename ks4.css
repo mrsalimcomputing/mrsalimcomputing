@@ -1,0 +1,69 @@
+/* ============================================================
+   KS4 PAGE — ISOLATED LAYOUT
+   ============================================================ */
+
+.ks4-container {
+    width: 100%;
+    min-height: 100vh;
+    padding-top: 120px; /* matches KS3 spacing */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow: hidden;
+}
+
+/* Title + Subtitle */
+.ks4-container .menu-title {
+    font-size: 3rem;
+    font-weight: 900;
+    color: #ECFEFF;
+    text-shadow: 0 4px 10px rgba(0,0,0,0.4);
+    margin-bottom: 10px;
+}
+
+.ks4-container .menu-subtitle {
+    font-size: 1.3rem;
+    color: #34D399;
+    margin-bottom: 25px;
+}
+
+/* ============================================================
+   KS4 GRID
+   ============================================================ */
+.ks4-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 12px;
+    width: 90%;
+    max-width: 1200px;
+}
+
+/* ============================================================
+   KS4 BUTTONS
+   ============================================================ */
+.ks4-btn {
+    background: #0891B2;
+    color: #ECFEFF;
+    border: 3px solid #0F172A;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 700;
+    box-shadow: 4px 4px 0 #0F172A;
+    transition: 0.25s ease;
+
+    width: 100%;
+    height: 55px;
+    font-size: 0.9rem;
+    padding: 10px;
+}
+
+.ks4-btn:hover {
+    background: #34D399;
+    color: #0F172A;
+    transform: scale(1.05);
+}
+
+.ks4-btn:active {
+    transform: translate(2px, 2px);
+    box-shadow: 2px 2px 0 #0F172A;
+}

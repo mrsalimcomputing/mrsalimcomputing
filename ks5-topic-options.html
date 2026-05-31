@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KS5 Topic Options</title>
+
+    <!-- GLOBAL STYLES -->
+    <link rel="stylesheet" href="style.css">
+
+    <!-- KS5‑ONLY STYLES -->
+    <link rel="stylesheet" href="ks5.css">
+</head>
+
+<body>
+
+    <!-- 🔹 BACK BUTTON -->
+    <button class="back-btn" onclick="goBack()">Back</button>
+
+    <!-- 🔹 WELCOME BANNER -->
+    <div id="userWelcome" class="welcome-banner" style="text-align:center; width:100%;"></div>
+
+    <!-- 🔹 LANGUAGE SELECTOR -->
+    <div class="language-selector" style="position:absolute; top:15px; right:110px;">
+        <select id="languageSelect" onchange="changeLanguage(this.value)">
+            <option value="en">English</option>
+            <option value="fr">Français</option>
+            <option value="es">Español</option>
+            <option value="ar">العربية</option>
+        </select>
+    </div>
+
+    <!-- 🔹 LOGOUT BUTTON -->
+    <button id="logoutBtn" class="logout-btn" style="top:15px; right:20px;">Logout</button>
+
+    <!-- ============================================================
+         KS5 CONTAINER (STATIC + CENTERED LIKE KS3)
+         ============================================================ -->
+    <div class="ks5-container">
+
+        <div class="menu-screen">
+            <h1 class="menu-title" id="topicTitle">KS5 Topic</h1>
+            <p class="menu-subtitle" id="subtitle">Choose an activity:</p>
+
+            <div id="ks5Screen" class="ks5-grid"></div>
+        </div>
+
+    </div>
+
+    <!-- 🔹 USER HEADER SCRIPT -->
+    <script type="module" src="js/headerUser.js"></script>
+
+    <!-- 🔹 TOPIC OPTIONS LOGIC -->
+    <script type="module">
+        import { getCurrentUser } from "./js/userManager.js";
+        import { ks5Topics } from "./js/KS5/ks5Topics.js";
+
+        const user = getCurrentUser();
+        window.isPlayMode = !user;
+
+        const params = new URLSearchParams(window.location.search);
+        const course = decodeURIComponent(params.get("course"));
+        const unit   = decodeURIComponent(params.get("unit"));
+        const topic  = decodeURIComponent(params.get("topic"));
+
+        document.getElementById("topicTitle").innerText = topic;
+
+        const container = document.getElementById("ks5Screen");
+        const subtitle  = document.getElementById("subtitle");
+
+        const courseData = ks5Topics[course];
+        const unitData   = courseData[unit];
+
+        // ⭐ If topic has subtopics → show subtopic buttons
+        if (unitData.subtopics && unitData.subtopics[topic]) {
+            subtitle.innerText = "Choose a subtopic:";
+
+            unitData.subtopics[topic].forEach(sub => {
+                const btn = document.createElement("button");
+                btn.className = "ks5-btn";   // 🔥 NEW CLASS
+                btn.innerText = sub;
+
+                btn.onclick = () => {
+                    window.location.href =
+                        `ks5-topic-options.html?course=${encodeURIComponent(course)}&unit=${encodeURIComponent(unit)}&topic=${encodeURIComponent(sub)}`;
+                };
+
+                container.appendChild(btn);
+            });
+        }
+
+        // ⭐ If topic has NO subtopics → show activity buttons
+        else {
+            loadActivityButtons(topic);
+        }
+
+        function loadActivityButtons(topicValue) {
+            subtitle.innerText = "Choose an activity:";
+
+            const activities = [
+                { label: "Theory Quiz",   page: "theory-quiz" },
+                { label: "Matching Game", page: "matching-game" },
+                { label: "Exam Mode",     page: "exam-mode" }
+            ];
+
+            activities.forEach(act => {
+                const btn = document.createElement("button");
+                btn.className = "ks5-btn";   // 🔥 NEW CLASS
+                btn.innerText = act.label;
+
+                btn.onclick = () => {
+                    window.location.href =
+                        `${act.page}.html?course=${encodeURIComponent(course)}&unit=${encodeURIComponent(unit)}&topic=${encodeURIComponent(topicValue)}`;
+                };
+
+                container.appendChild(btn);
+            });
+
+            if (!window.isPlayMode) {
+                const lbBtn = document.createElement("button");
+                lbBtn.className = "ks5-btn";   // 🔥 NEW CLASS
+                lbBtn.innerText = "Leaderboard";
+                lbBtn.onclick = () => {
+                    window.location.href =
+                        `leaderboard.html?course=${encodeURIComponent(course)}&unit=${encodeURIComponent(unit)}&topic=${encodeURIComponent(topicValue)}`;
+                };
+                container.appendChild(lbBtn);
+            }
+        }
+    </script>
+
+    <!-- 🔹 BACK + LANGUAGE LOGIC -->
+    <script>
+        function goBack() {
+            if (document.referrer !== "") {
+                window.history.back();
+            } else {
+                window.location.href = "ks5.html";
+            }
+        }
+
+        function changeLanguage(lang) {
+            alert("Language changed to: " + lang);
+        }
+    </script>
+
+</body>
+</html>
+

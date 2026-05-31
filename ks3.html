@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KS3 Topics</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- WELCOME -->
+    <div id="userWelcome" class="welcome-banner" style="text-align:center; width:100%;"></div>
+
+    <!-- BACK BUTTON -->
+    <button class="back-btn" onclick="goBack()">Back</button>
+
+    <!-- LANGUAGE -->
+    <div class="language-selector" style="position:absolute; top:15px; right:110px;">
+        <select id="languageSelect" onchange="changeLanguage(this.value)">
+            <option value="en">English</option>
+            <option value="fr">Français</option>
+            <option value="es">Español</option>
+            <option value="ar">العربية</option>
+        </select>
+    </div>
+
+    <!-- LOGOUT -->
+    <button id="logoutBtn" class="logout-btn" style="top:15px; right:20px;">Logout</button>
+
+    <!-- MAIN -->
+    <div id="ks3Screen" class="menu-screen">
+        <h1 class="menu-title">KS3 Topics</h1>
+        <p class="menu-subtitle">Choose a Category:</p>
+        <div id="categoryButtons" class="button-row"></div>
+    </div>
+
+    <script type="module" src="js/headerUser.js"></script>
+
+    <script type="module">
+        import { ks3Topics } from "./js/KS3/ks3Topics.js";
+
+        const container = document.getElementById("categoryButtons");
+
+        Object.keys(ks3Topics).forEach(category => {
+        const btn = document.createElement("button");
+        btn.className = "menu-btn";
+        btn.innerText = category;
+
+        if (category === "Programming") {
+            // ✅ Active and clickable
+            btn.onclick = () => window.location.href = `ks3-topics.html?category=${encodeURIComponent(category)}`;
+        } else {
+            // 🔒 Locked / Coming Soon
+            btn.classList.add("locked");
+            btn.onclick = () => alert(`${category} is locked — Coming Soon!`);
+            btn.innerText = `${category} 🔒 `;
+        }
+
+        container.appendChild(btn);
+        });
+        function changeLanguage(lang) {
+            alert("Language changed to: " + lang);
+        }
+    </script>
+
+    <script>
+    function goBack() {
+        if (document.referrer !== "") window.history.back();
+        else window.location.href = "index.html";
+    }
+    </script>
+
+</body>
+</html>
+
+
+

@@ -1,0 +1,188 @@
+/* ============================================================
+   ANIMATIONS.CSS — ALL ANIMATIONS SEPARATED
+   Soft Brutalist + Radial Glow Theme
+   ============================================================ */
+
+/* ============================================================
+   FADE IN
+   ============================================================ */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Apply fade-in to screens */
+.screen {
+    animation: fadeIn 0.5s ease forwards;
+}
+
+/* ============================================================
+   SLIDE UP
+   ============================================================ */
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(40px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.menu-btn,
+.quiz-btn,
+.exam-answer-btn,
+.match-box {
+    animation: slideUp 0.4s ease;
+}
+
+/* ============================================================
+   BUTTON PRESS (BRUTALIST)
+   ============================================================ */
+@keyframes brutalPress {
+    0% {
+        transform: translate(0, 0);
+        box-shadow: 4px 4px 0 #0F172A;
+    }
+    100% {
+        transform: translate(2px, 2px);
+        box-shadow: 2px 2px 0 #0F172A;
+    }
+}
+
+.menu-btn:active,
+.quiz-btn:active,
+.exam-answer-btn:active,
+.match-box:active,
+.back-btn:active,
+.quit-btn-top:active,
+.reveal-btn:active,
+#matchRevealBtn:active {
+    animation: brutalPress 0.1s linear;
+}
+
+/* ============================================================
+   GLOW PULSE (CORRECT ANSWER)
+   ============================================================ */
+@keyframes glowPulse {
+    0%, 100% {
+        box-shadow: 0 0 0 rgba(52, 211, 153, 0);
+    }
+    50% {
+        box-shadow: 0 0 25px rgba(52, 211, 153, 0.8);
+    }
+}
+
+.correct-glow {
+    animation: glowPulse 0.6s ease-out;
+}
+
+/* ============================================================
+   SHAKE (WRONG ANSWER)
+   ============================================================ */
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    20% { transform: translateX(-6px); }
+    40% { transform: translateX(6px); }
+    60% { transform: translateX(-6px); }
+    80% { transform: translateX(6px); }
+}
+
+.wrong-shake {
+    animation: shake 0.35s ease;
+}
+
+/* ============================================================
+   MATCHING CARD FLIP
+   ============================================================ */
+@keyframes flipCard {
+    from {
+        transform: rotateY(0deg);
+    }
+    to {
+        transform: rotateY(180deg);
+    }
+}
+
+.card-flip {
+    animation: flipCard 0.4s ease forwards;
+    transform-style: preserve-3d;
+}
+
+/* ============================================================
+   POPUP FADE + SCALE
+   ============================================================ */
+@keyframes popupIn {
+    0% {
+        opacity: 0;
+        transform: scale(0.85);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.popup-box {
+    animation: popupIn 0.25s ease-out;
+}
+
+/* ============================================================
+   BUTTON HOVER LIFT (BRUTALIST)
+   ============================================================ */
+@keyframes hoverLift {
+    from {
+        transform: translate(0, 0);
+    }
+    to {
+        transform: translate(-2px, -2px);
+    }
+}
+
+.menu-btn:hover,
+.quiz-btn:hover,
+.exam-answer-btn:hover,
+.match-box:hover,
+.back-btn:hover,
+.quit-btn-top:hover,
+.reveal-btn:hover,
+#matchRevealBtn:hover {
+    animation: hoverLift 0.15s ease forwards;
+}
+
+/* ============================================================
+   LEADERBOARD BOX HOVER
+   ============================================================ */
+@keyframes boxHover {
+    from {
+        transform: translate(0, 0);
+        box-shadow: 6px 6px 0 #0F172A;
+    }
+    to {
+        transform: translate(-4px, -4px);
+        box-shadow: 10px 10px 0 #0F172A;
+    }
+}
+
+.mode-box:hover {
+    animation: boxHover 0.2s ease forwards;
+}
+
+/* ============================================================
+   SCREEN TRANSITION (FADE)
+   ============================================================ */
+@keyframes screenFade {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.screen {
+    animation: screenFade 0.4s ease;
+}

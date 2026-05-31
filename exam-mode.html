@@ -1,0 +1,114 @@
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exam Mode</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- ========================= -->
+    <!-- EXAM MODE RULES POPUP    -->
+    <!-- ========================= -->
+    <div id="examRulesPopup" class="popup-overlay">
+        <div class="popup-box">
+            <h2>Instructions</h2>
+            <p>You will be shown exam-style questions. You have 30 seconds per question.</p>
+
+            <div class="popup-buttons">
+                <button class="menu-back-btn" onclick="window.location.href='index.html'">Menu</button>
+                <button id="startExamBtn" class="menu-back-btn">Play</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ========================= -->
+    <!-- EXAM MODE END POPUP      -->
+    <!-- ========================= -->
+    <div id="examEndPopup" class="popup-overlay" style="display:none;">
+        <div class="popup-box">
+            <h2 id="examEndScore">You scored 0 out of 0</h2>
+
+            <div class="popup-buttons">
+                <button class="menu-back-btn" onclick="window.location.href='index.html'">Menu</button>
+                <button id="playAgainExamBtn" class="menu-back-btn">Play Again</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ========================= -->
+    <!-- EXAM MODE SCREEN         -->
+    <!-- ========================= -->
+    <div id="quizContainer" class="screen" style="display:none;">
+
+        <!-- TOP BAR -->
+        <header class="top-bar">
+            <div id="examScore">Score: 0</div>
+            <button id="examQuitBtn" class="quit-btn-top">Quit</button>
+            <div id="examTimer">Time: <span id="timer">30</span>s</div>
+        </header>
+
+        <!-- QUESTION TEXT -->
+        <div class="question-box" id="questionText">Loading question...</div>
+
+        <!-- ANSWER BUTTONS -->
+        <div class="exam-grid">
+            <button id="answer0" class="exam-answer-btn"></button>
+            <button id="answer1" class="exam-answer-btn"></button>
+            <button id="answer2" class="exam-answer-btn"></button>
+            <button id="answer3" class="exam-answer-btn"></button>
+        </div>
+
+    </div>
+
+    <script type="module">
+        import { showExamRules } from "./js/engines/examMode.js";
+        import { examQuestionBank } from "./js/examQuestions.js";
+
+        const params = new URLSearchParams(window.location.search);
+
+        const course = decodeURIComponent(params.get("course"));
+        const unit   = decodeURIComponent(params.get("unit"));
+        const topic  = decodeURIComponent(params.get("topic"));
+
+        console.log("EXAM MODE RECEIVED:", course, unit, topic);
+
+        window.examTopic = topic;
+
+        let questions = null;
+
+        // ⭐ KS3 (course = "KS3")
+        if (examQuestionBank?.["KS3"]?.[unit]?.[topic]) {
+            questions = examQuestionBank["KS3"][unit][topic];
+        }
+
+        // ⭐ KS4 (course = Cambridge_Nationals_IT_Level_2)
+        if (!questions && examQuestionBank?.["KS4"]?.[course]?.[unit]) {
+            const unitObj = examQuestionBank["KS4"][course][unit];
+
+            // Direct topic
+            if (unitObj?.[topic]) {
+                questions = unitObj[topic];
+            }
+
+            // Inside categories (e.g., Design Tools)
+            if (!questions) {
+                for (const categoryName in unitObj) {
+                    if (unitObj[categoryName]?.[topic]) {
+                        questions = unitObj[categoryName][topic];
+                        break;
+                    }
+                }
+            }
+        }
+
+        if (!questions) {
+            alert("No exam questions found for: " + topic);
+            console.error("Missing exam questions:", course, unit, topic);
+            window.history.back();
+        } else {
+            showExamRules(questions);
+        }
+    </script>
+
+</body>

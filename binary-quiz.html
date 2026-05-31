@@ -1,0 +1,136 @@
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Binary Quiz</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- ========================= -->
+    <!-- BINARY QUIZ RULES POPUP  -->
+    <!-- ========================= -->
+    <div id="binaryRulesPopup" class="popup-overlay">
+        <div class="popup-box">
+            <h2>Instructions</h2>
+            <p>You will be shown a binary number. Select the correct decimal value.</p>
+
+            <div class="popup-buttons">
+                <button class="menu-back-btn" onclick="window.location.href='index.html'">Menu</button>
+                <button id="startBinaryBtn" class="menu-back-btn">Play</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ========================= -->
+    <!-- BINARY QUIZ END POPUP    -->
+    <!-- ========================= -->
+    <div id="binaryEndPopup" class="popup-overlay" style="display:none;">
+        <div class="popup-box">
+            <h2 id="binaryEndScore">Final Score: 0</h2>
+            <p id="binaryEndAccuracy"></p>
+
+            <div class="popup-buttons">
+                <button class="menu-back-btn" onclick="window.location.href='index.html'">Menu</button>
+                <button id="playAgainBinaryBtn" class="menu-back-btn">Play Again</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ========================= -->
+    <!-- BINARY QUIZ SCREEN       -->
+    <!-- ========================= -->
+    <div id="gameScreen" class="screen" style="display:none;">
+
+        <div class="game-container">
+
+            <!-- ⭐ FULL-WIDTH BLUE TOP BAR -->
+            <header class="top-bar">
+
+                <div class="score">Score: <span id="score">0</span></div>
+
+                <span class="top-info">Question: <span id="questionCount">0</span></span>
+                <span class="top-info">Accuracy: <span id="accuracy">0%</span></span>
+
+                <button id="binaryQuitBtn" class="quit-btn-top">Quit</button>
+
+                <div class="timer">Time: <span id="time">60</span>s</div>
+            </header>
+
+            <main>
+
+                <!-- ⭐ FULL-WIDTH QUESTION BOX -->
+                <div class="question-box" id="questionBox">Loading question...</div>
+
+                <!-- ⭐ 12 LARGE ANSWER BUTTONS -->
+                <div class="quiz-grid">
+                    <button class="quiz-btn"></button>
+                    <button class="quiz-btn"></button>
+                    <button class="quiz-btn"></button>
+                    <button class="quiz-btn"></button>
+                    <button class="quiz-btn"></button>
+                    <button class="quiz-btn"></button>
+                    <button class="quiz-btn"></button>
+                    <button class="quiz-btn"></button>
+                    <button class="quiz-btn"></button>
+                    <button class="quiz-btn"></button>
+                    <button class="quiz-btn"></button>
+                    <button class="quiz-btn"></button>
+                </div>
+
+            </main>
+
+        </div>
+
+    </div>
+
+    <script type="module">
+        import { startBinaryQuiz, showBinaryRules } from "./js/engines/binaryEngine.js";
+        import { startDenaryToBinaryQuiz, showDenaryToBinaryRules } from "./js/engines/denaryToBinaryEngine.js";
+        import { startBinaryAdditionQuiz, showBinaryAdditionRules } from "./js/engines/binaryAdditionEngine.js";
+
+        import { startBinaryEasyQuiz, showBinaryEasyRules } from "./js/engines/binaryEngineEASY.js";
+        import { startDenaryToBinaryEasyQuiz, showDenaryToBinaryEasyRules } from "./js/engines/denaryToBinaryEngineEASY.js";
+        import { startBinaryAdditionEasyQuiz, showBinaryAdditionEasyRules } from "./js/engines/binaryAdditionEngineEASY.js";
+
+        const params = new URLSearchParams(window.location.search);
+        const topic = decodeURIComponent(params.get("topic") || "");
+        const t = topic.toLowerCase();
+
+        const startBtn = document.getElementById("startBinaryBtn");
+
+        // ⭐ EASY MODES FIRST — MUST BE FIRST
+        if (t.includes("binary to denary") && t.includes("easy")) {
+            showBinaryEasyRules();
+            startBtn.onclick = () => startBinaryEasyQuiz();
+        }
+        else if (t.includes("denary to binary") && t.includes("easy")) {
+            showDenaryToBinaryEasyRules();
+            startBtn.onclick = () => startDenaryToBinaryEasyQuiz();
+        }
+        else if (t.includes("binary addition") && t.includes("easy")) {
+            showBinaryAdditionEasyRules();
+            startBtn.onclick = () => startBinaryAdditionEasyQuiz();
+        }
+
+        // ⭐ HARD MODES AFTER EASY
+        else if (t.includes("denary to binary")) {
+            showDenaryToBinaryRules();
+            startBtn.onclick = () => startDenaryToBinaryQuiz();
+        }
+        else if (t.includes("binary addition")) {
+            showBinaryAdditionRules();
+            startBtn.onclick = () => startBinaryAdditionQuiz();
+        }
+        else {
+            showBinaryRules();
+            startBtn.onclick = () => startBinaryQuiz();
+        }
+    </script>
+
+
+
+
+
+</body>
+

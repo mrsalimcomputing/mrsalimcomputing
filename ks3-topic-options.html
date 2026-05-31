@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KS3 Topic Options</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<button class="back-btn" onclick="goBack()">Back</button>
+
+<div id="userWelcome" class="welcome-banner" style="text-align:center; width:100%;"></div>
+
+<div class="language-selector" style="position:absolute; top:15px; right:110px;">
+    <select id="languageSelect" onchange="changeLanguage(this.value)">
+        <option value="en">English</option>
+        <option value="fr">Français</option>
+        <option value="es">Español</option>
+        <option value="ar">العربية</option>
+    </select>
+</div>
+
+<button id="logoutBtn" class="logout-btn" style="top:15px; right:20px;">Logout</button>
+
+<div id="ks3Screen" class="menu-screen">
+    <h1 class="menu-title" id="topicTitle">KS3 Topic</h1>
+    <p class="menu-subtitle">Choose an activity:</p>
+    <div id="buttonContainer" class="button-row"></div>
+</div>
+
+<script type="module" src="js/headerUser.js"></script>
+
+<script type="module">
+    import { getCurrentUser } from "./js/userManager.js";
+
+    const user = getCurrentUser();
+    window.isPlayMode = !user;
+
+    const params = new URLSearchParams(window.location.search);
+
+    let course = params.get("course");
+    let unit   = params.get("unit");
+    let topic  = params.get("topic");
+
+    const legacyCategory = params.get("category");
+    if (!course && legacyCategory) course = "KS3";
+    if (!unit && legacyCategory) unit = legacyCategory;
+
+    course = course ? decodeURIComponent(course) : null;
+    unit   = unit   ? decodeURIComponent(unit)   : null;
+    topic  = topic  ? decodeURIComponent(topic)  : null;
+
+    const topicTitleEl = document.getElementById("topicTitle");
+    const container = document.getElementById("buttonContainer");
+
+    if (!topic) topicTitleEl.innerText = "No topic selected";
+    else topicTitleEl.innerText = topic;
+
+    function addButton(label, url) {
+        const btn = document.createElement("button");
+        btn.className = "menu-btn";
+        btn.innerText = label;
+        btn.onclick = () => window.location.href = url;
+        container.appendChild(btn);
+    }
+
+    const t = (topic || "").toLowerCase();
+
+    const binaryTopics = [
+        "binary to denary",
+        "binary to denary (easy)",
+        "denary to binary",
+        "denary to binary (easy)",
+        "binary addition",
+        "binary addition (easy)"
+    ];
+
+    const matchingOnlyTopics = [
+        "input/output devices",
+        "storage devices"
+    ];
+
+    if (binaryTopics.includes(t)) {
+
+        addButton(
+            "Binary Quiz",
+            `binary-quiz.html?course=${encodeURIComponent(course)}&unit=${encodeURIComponent(unit)}&topic=${encodeURIComponent(topic)}`
+        );
+
+        if (!window.isPlayMode) {
+            addButton(
+                "Leaderboard",
+                `leaderboard.html?course=${encodeURIComponent(course)}&unit=${encodeURIComponent(unit)}&topic=${encodeURIComponent(topic)}`
+            );
+        }
+    }
+
+    else if (matchingOnlyTopics.includes(t)) {
+
+        addButton(
+            "Matching Game",
+            `matching-game.html?course=${encodeURIComponent(course)}&unit=${encodeURIComponent(unit)}&topic=${encodeURIComponent(topic)}`
+        );
+
+        if (!window.isPlayMode) {
+            addButton(
+                "Leaderboard",
+                `leaderboard.html?course=${encodeURIComponent(course)}&unit=${encodeURIComponent(unit)}&topic=${encodeURIComponent(topic)}`
+            );
+        }
+    }
+
+    else {
+
+        addButton(
+            "Theory Quiz",
+            `theory-quiz.html?course=${encodeURIComponent(course)}&unit=${encodeURIComponent(unit)}&topic=${encodeURIComponent(topic)}`
+        );
+
+        addButton(
+            "Matching Game",
+            `matching-game.html?course=${encodeURIComponent(course)}&unit=${encodeURIComponent(unit)}&topic=${encodeURIComponent(topic)}`
+        );
+
+        addButton(
+            "Exam Mode",
+            `exam-mode.html?course=${encodeURIComponent(course)}&unit=${encodeURIComponent(unit)}&topic=${encodeURIComponent(topic)}`
+        );
+
+        if (!window.isPlayMode) {
+            addButton(
+                "Leaderboard",
+                `leaderboard.html?course=${encodeURIComponent(course)}&unit=${encodeURIComponent(unit)}&topic=${encodeURIComponent(topic)}`
+            );
+        }
+    }
+
+    function changeLanguage(lang) {
+        alert("Language changed to: " + lang);
+    }
+</script>
+
+<script>
+function goBack() {
+    if (document.referrer !== "") window.history.back();
+    else window.location.href = "index.html";
+}
+</script>
+
+</body>
+</html>
+
+
+
+

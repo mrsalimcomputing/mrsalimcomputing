@@ -1,0 +1,130 @@
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Theory Quiz</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- ========================= -->
+    <!-- THEORY QUIZ RULES POPUP  -->
+    <!-- ========================= -->
+    <div id="theoryRulesPopup" class="popup-overlay">
+        <div class="popup-box">
+            <h2>Instructions</h2>
+            <p>You will be shown a question. Select the correct answer from the options.</p>
+
+            <div class="popup-buttons">
+                <button class="menu-back-btn" onclick="window.location.href='index.html'">Menu</button>
+                <button id="startTheoryBtn" class="menu-back-btn">Play</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ========================= -->
+    <!-- THEORY QUIZ END POPUP    -->
+    <!-- ========================= -->
+    <div id="theoryEndPopup" class="popup-overlay" style="display:none;">
+        <div class="popup-box">
+            <h2 id="theoryEndScore">You scored 0 out of 0</h2>
+            <p id="endAccuracyText"></p>
+            <div class="popup-buttons">
+                <button class="menu-back-btn" onclick="window.location.href='index.html'">Menu</button>
+                <button id="playAgainTheoryBtn" class="menu-back-btn">Play Again</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ========================= -->
+    <!-- THEORY QUIZ SCREEN       -->
+    <!-- ========================= -->
+    <div id="theoryQuizScreen" class="screen" style="display:none;">
+
+        <header class="top-bar">
+            <div class="score">Score: <span id="theoryScore">0</span></div>
+
+            <span class="top-info">Question: <span id="questionCount">0</span></span>
+            <span class="top-info">Accuracy: <span id="accuracy">0%</span></span>
+
+            <button id="theoryQuitBtn" class="quit-btn-top">Quit</button>
+
+            <div class="timer">Time: <span id="theoryTime">60</span>s</div>
+        </header>
+
+        <main>
+            <div class="question-box" id="theoryQuestionBox">Loading question...</div>
+
+            <div class="quiz-grid">
+                <button class="quiz-btn"></button>
+                <button class="quiz-btn"></button>
+                <button class="quiz-btn"></button>
+                <button class="quiz-btn"></button>
+                <button class="quiz-btn"></button>
+                <button class="quiz-btn"></button>
+                <button class="quiz-btn"></button>
+                <button class="quiz-btn"></button>
+                <button class="quiz-btn"></button>
+            </div>
+        </main>
+
+    </div>
+
+    <script type="module">
+        import { startTheoryQuiz, showTheoryRules } from "./js/engines/theoryEngine.js";
+        import { theoryData } from "./js/theoryData.js";
+
+        const params = new URLSearchParams(window.location.search);
+
+        const courseParam = decodeURIComponent(params.get("course"));
+        const unit = decodeURIComponent(params.get("unit"));
+        const topic = decodeURIComponent(params.get("topic"));
+
+        console.log("THEORY QUIZ RECEIVED:", courseParam, unit, topic);
+
+        window.currentTopic = topic;
+
+
+        function findQuestions(courseParam, unit, topic) {
+            // KS3: courseParam is "KS3"
+            if (courseParam === "KS3") {
+                const courseObj = theoryData?.["KS3"];
+                const unitObj = courseObj?.[unit];
+                return unitObj?.[topic] || null;
+            }
+
+            // KS4: courseParam is qualification, e.g. "Cambridge_Nationals_IT_Level_2"
+            const ks4Obj = theoryData?.["KS4"];
+            const qualObj = ks4Obj?.[courseParam];
+            if (!qualObj) return null;
+
+            const unitObj = qualObj?.[unit];
+            if (!unitObj) return null;
+
+            // 1) Try direct topic under unit
+            if (unitObj?.[topic]) return unitObj[topic];
+
+            // 2) Try inside categories (Design Tools, etc.)
+            for (const categoryName in unitObj) {
+                const category = unitObj[categoryName];
+                if (category?.[topic]) {
+                    return category[topic];
+                }
+            }
+
+            return null;
+        }
+
+        const questions = findQuestions(courseParam, unit, topic);
+
+        if (!questions) {
+            alert("No theory questions found for: " + topic);
+            console.error("Missing:", { courseParam, unit, topic, theoryData });
+            window.history.back();
+        } else {
+            showTheoryRules(questions);
+        }
+    </script>
+
+</body>
+
