@@ -53,7 +53,7 @@
         btn.className = "menu-btn";
         btn.innerText = topic;
 
-        if (topic === "Data Types") {
+        if (topic === "Data Types" || topic === "Variables and Values" || topic === "Health and Safety Act" || topic === "Computer Misuse Act" || topic === "Data Protection Act") {
             // ✅ Active and clickable
             btn.onclick = () => {
             window.location.href = `ks3-topic-options.html?course=KS3&unit=${encodeURIComponent(category)}&topic=${encodeURIComponent(topic)}`;

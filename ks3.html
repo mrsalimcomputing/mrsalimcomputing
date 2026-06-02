@@ -47,7 +47,7 @@
         btn.className = "menu-btn";
         btn.innerText = category;
 
-        if (category === "Programming") {
+        if (category === "Programming" || category === "Laws and Regulations") {
             // ✅ Active and clickable
             btn.onclick = () => window.location.href = `ks3-topics.html?category=${encodeURIComponent(category)}`;
         } else {

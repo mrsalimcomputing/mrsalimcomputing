@@ -1,4 +1,5 @@
 export const theoryData = {
+
   "KS3": {
     "Computer Systems": {
       "Hardware Components": [
@@ -64,70 +65,112 @@ export const theoryData = {
         {question:"Which data type is True?",correct:["Boolean","bool"],wrong:["String","Integer","Float","List","Tuple","Dictionary","Binary","Byte","Object","Char","DataBlock","TrueString","FalseString","WholeNumber","Decimal","DigitString"]},
         {question:"Which data type is used for words and sentences?",correct:["String","str"],wrong:["Integer","Float","Boolean","List","Tuple","Dictionary","Binary","Byte","Object","Char","DataBlock","TrueFalse","WholeNumber","Decimal","DigitString","NumBlock"]},
         {question:"Which data type is used for numbers with decimal places?",correct:["Float","float"],wrong:["Integer","String","Boolean","List","Tuple","Dictionary","Binary","Byte","Object","Char","DataBlock","TrueFalse","WholeNumber","Decimal","DigitString","NumBlock"]}
+      ],
+
+      "Variables and Values": [
+        {question:"What is the variable name in: name = 'Ali'?",correct:["name","The word name"],wrong:["Ali","'Ali'","=","String","Float","Boolean","List","Tuple","Dictionary","Binary","Byte","Object","Data","Digit","Value"]},
+        {question:"What is the value in: age = 14?",correct:["14","The number 14"],wrong:["age","=","Python","True","False","Float","String","List","Tuple","Dictionary","Binary","Byte","Object","Data","Digit"]},
+        {question:"What is the variable name in: score = 10?",correct:["score","The word score"],wrong:["10","'10'","=","String","Float","Boolean","List","Tuple","Dictionary","Binary","Byte","Object","Data","Digit","Value"]},
+        {question:"What value is stored in: username = 'sam'?",correct:["'sam'","sam"],wrong:["username","=","String","Float","Boolean","List","Tuple","Dictionary","Binary","Byte","Object","Data","Digit","Value"]},
+        {question:"What is the variable name in: price = 4.99?",correct:["price","The word price"],wrong:["4.99","'4.99'","=","String","Float","Boolean","List","Tuple","Dictionary","Binary","Byte","Object","Data","Digit","Value"]},
+        {question:"What value is stored in: logged_in = True?",correct:["True","true"],wrong:["logged_in","=","String","Float","List","Tuple","Dictionary","Binary","Byte","Object","Data","Digit","False","Value"]},
+        {question:"What is the variable name in: colour = 'blue'?",correct:["colour","The word colour"],wrong:["blue","'blue'","=","String","Float","Boolean","List","Tuple","Dictionary","Binary","Byte","Object","Data","Digit","Value"]},
+        {question:"What value is stored in: level = 3?",correct:["3","Three"],wrong:["level","=","Python","True","False","Float","String","List","Tuple","Dictionary","Binary","Byte","Object","Data","Digit"]},
+        {question:"What is the variable name in: city = 'London'?",correct:["city","The word city"],wrong:["London","'London'","=","String","Float","Boolean","List","Tuple","Dictionary","Binary","Byte","Object","Data","Digit","Value"]},
+        {question:"What value is stored in: points = 0?",correct:["0","Zero"],wrong:["points","=","Python","True","False","Float","String","List","Tuple","Dictionary","Binary","Byte","Object","Data","Digit"]},
+        {question:"What is the variable name in: temp = 22?",correct:["temp","The word temp"],wrong:["22","'22'","=","String","Float","Boolean","List","Tuple","Dictionary","Binary","Byte","Object","Data","Digit","Value"]},
+        {question:"What value is stored in: message = 'Hello'?",correct:["'Hello'","Hello"],wrong:["message","=","String","Float","Boolean","List","Tuple","Dictionary","Binary","Byte","Object","Data","Digit","Value"]},
       ]
-    }
+    },
+
+  "Laws and Regulations": {
+
+      "Data Protection Act": [
+        {question:"What does GDPR stand for?",correct:["General Data Protection Regulation","General data protection regulation"],wrong:["Global Data Privacy Rule","General Data Privacy Regulation","Global Data Protection Regulation","General Data Protection Rule","Global Data Privacy Regulation","General Data Privacy Rule","Global Data Protection Rule","General Data Privacy Act","Global Data Privacy Act","General Data Protection Act","Global Data Protection Law","General Data Privacy Law","Global Data Protection Policy","General Data Privacy Policy"]},
+        {question:"What is the main purpose of GDPR?",correct:["Protect personal data and privacy","Regulate data protection and privacy"],wrong:["Allow free data sharing","Promote data collection","Regulate internet usage","Control online content","Manage social media use","Enforce copyright laws","Regulate advertising online","Control software development","Manage hardware manufacturing","Enforce cybersecurity measures","Regulate e-commerce activities","Control online communication","Manage digital marketing practices"]},
+        {question:"What does the Data Protection Act protect?",correct:["Personal data","Private information"],wrong:["Computer speed","WiFi strength","Screen brightness","Keyboard layout","Mouse settings","Printer ink","Speaker volume","Battery life","Fan speed","GPU heat","Cable types","Monitor size","Game scores","Music files","Video quality"]},
+        {question:"What is personal data?",correct:["Information about a person","Details like name or address"],wrong:["WiFi password","PC speed","Screen size","Keyboard colour","Mouse DPI","Printer ink","Speaker volume","Battery level","Fan speed","GPU heat","Cable types","Monitor size","Game scores","Music files","Video quality"]},
+        {question:"Why must companies keep data secure?",correct:["Protect people","Prevent misuse"],wrong:["Speed up PC","Improve WiFi","Stop viruses","Print faster","Store files","Play videos","Install apps","Browse websites","Record audio","Scan images","Play games","Edit code","Write emails","Design hardware","Run updates"]},
+        {question:"Why must data be accurate?",correct:["Avoid mistakes","Keep records correct"],wrong:["Make PC faster","Improve graphics","Stop hacking","Print better","Store files","Play videos","Install apps","Browse websites","Record audio","Scan images","Play games","Edit code","Write emails","Design hardware","Run updates"]},
+        {question:"Why must data be kept only as long as needed?",correct:["Reduce risk","Protect privacy"],wrong:["Speed up PC","Improve WiFi","Stop viruses","Print faster","Store files","Play videos","Install apps","Browse websites","Record audio","Scan images","Play games","Edit code","Write emails","Design hardware","Run updates"]},
+        {question:"Why must data be collected fairly?",correct:["Be honest","Follow rules"],wrong:["Speed up PC","Improve graphics","Stop hacking","Print better","Store files","Play videos","Install apps","Browse websites","Record audio","Scan images","Play games","Edit code","Write emails","Design hardware","Run updates"]},
+        {question:"Why must data be used only for its purpose?",correct:["Follow the law","Protect privacy"],wrong:["Speed up PC","Improve WiFi","Stop viruses","Print faster","Store files","Play videos","Install apps","Browse websites","Record audio","Scan images","Play games","Edit code","Write emails","Design hardware","Run updates"]},
+        {question:"Why must data be kept safe from hackers?",correct:["Protect people","Prevent crime"],wrong:["Speed up PC","Improve graphics","Stop spills","Print better","Store files","Play videos","Install apps","Browse websites","Record audio","Scan images","Play games","Edit code","Write emails","Design hardware","Run updates"]},
+        {question:"Why must people be allowed to see their own data?",correct:["Check accuracy","Know what is stored"],wrong:["Speed up PC","Improve WiFi","Stop viruses","Print faster","Store files","Play videos","Install apps","Browse websites","Record audio","Scan images","Play games","Edit code","Write emails","Design hardware","Run updates"]},
+        {question:"Why must data be kept up to date?",correct:["Avoid mistakes","Stay correct"],wrong:["Speed up PC","Improve graphics","Stop hacking","Print better","Store files","Play videos","Install apps","Browse websites","Record audio","Scan images","Play games","Edit code","Write emails","Design hardware","Run updates"]},
+        {question:"Why must data be stored securely?",correct:["Prevent leaks","Protect privacy"],wrong:["Speed up PC","Improve WiFi","Stop viruses","Print faster","Store files","Play videos","Install apps","Browse websites","Record audio","Scan images","Play games","Edit code","Write emails","Design hardware","Run updates"]},
+        {question:"Why must companies follow data rules?",correct:["Follow the law","Protect people"],wrong:["Speed up PC","Improve graphics","Stop hacking","Print better","Store files","Play videos","Install apps","Browse websites","Record audio","Scan images","Play games","Edit code","Write emails","Design hardware","Run updates"]},
+        {question:"Why must data not be shared without permission?",correct:["Protect privacy","Follow rules"],wrong:["Speed up PC","Improve WiFi","Stop viruses","Print faster","Store files","Play videos","Install apps","Browse websites","Record audio","Scan images","Play games","Edit code","Write emails","Design hardware","Run updates"]},
+        {question:"Why must data be stored safely online?",correct:["Prevent hacking","Protect users"],wrong:["Speed up PC","Improve graphics","Stop spills","Print better","Store files","Play videos","Install apps","Browse websites","Record audio","Scan images","Play games","Edit code","Write emails","Design hardware","Run updates"]},
+        {question:"Why must companies delete data when no longer needed?",correct:["Protect privacy","Reduce risk"],wrong:["Speed up PC","Improve WiFi","Stop viruses","Print faster","Store files","Play videos","Install apps","Browse websites","Record audio","Scan images","Play games","Edit code","Write emails","Design hardware","Run updates"]}
+      ],
+
+      "Computer Misuse Act": [
+
+        {question:"What does the Computer Misuse Act protect against?",correct:["Hacking","Unauthorised access"],wrong:["Eye strain","Back pain","Spills","Slow WiFi","Broken screens","Printing errors","Low battery","Full storage","Loud fans","Old software","Weak speakers","Loose cables","Dust","Overheating","Bad posture"]},
+        {question:"What is unauthorised access?",correct:["Using a system without permission","Logging in without rights"],wrong:["Typing slowly","Printing pages","Saving files","Playing music","Browsing safely","Charging devices","Adjusting chairs","Cleaning screens","Using headphones","Writing emails","Editing photos","Scanning images","Playing games","Installing updates"]},
+        {question:"What is malware?",correct:["Harmful software","Software that damages systems"],wrong:["Healthy apps","Safe programs","Strong passwords","Clean code","Fast WiFi","Good graphics","Bright screens","New keyboards","Charged batteries","Printed pages","Scanned files","Recorded audio","Edited photos","Saved documents","Installed updates"]},
+        {question:"Why is guessing someone’s password illegal?",correct:["Breaks the law","Unauthorised access"],wrong:["Makes PC slow","Uses battery","Prints badly","Hurts eyes","Breaks keyboard","Uses storage","Plays music","Edits code","Scans files","Records sound","Designs networks","Writes emails","Runs updates","Manages RAM","Changes brightness"]},
+        {question:"What is the purpose of the Computer Misuse Act?",correct:["Stop cybercrime","Protect systems"],wrong:["Fix posture","Improve WiFi","Stop spills","Print faster","Store files","Play videos","Install apps","Browse websites","Record audio","Scan images","Play games","Edit code","Write emails","Design hardware","Run updates"]},
+        {question:"What is hacking?",correct:["Breaking into systems","Accessing without permission"],wrong:["Typing fast","Printing pages","Saving files","Playing music","Browsing safely","Charging devices","Adjusting chairs","Cleaning screens","Using headphones","Writing emails","Editing photos","Scanning images","Playing games","Installing updates"]},
+        {question:"Why is spreading malware illegal?",correct:["It harms systems","Breaks the law"],wrong:["Slows typing","Uses ink","Makes screens dim","Uses battery","Makes fans loud","Uses storage","Plays music","Edits code","Scans files","Records sound","Designs networks","Writes emails","Runs updates","Manages RAM","Changes brightness"]},
+        {question:"What is phishing?",correct:["Tricking people for information","Fake messages"],wrong:["Cleaning screens","Fixing PCs","Printing pages","Saving files","Playing music","Browsing safely","Charging devices","Adjusting chairs","Editing photos","Scanning images","Playing games","Installing updates","Designing networks","Writing emails","Managing RAM"]},
+        {question:"Why is deleting someone else’s files illegal?",correct:["Unauthorised modification","Breaks the law"],wrong:["Slows PC","Uses battery","Prints badly","Hurts eyes","Breaks keyboard","Uses storage","Plays music","Edits code","Scans files","Records sound","Designs networks","Writes emails","Runs updates","Manages RAM","Changes brightness"]},
+        {question:"What is the penalty for hacking?",correct:["Fines","Prison"],wrong:["Free WiFi","Free software","Better graphics","Faster PC","New keyboard","New mouse","Free printer","Free apps","More storage","Better speakers","New monitor","Free games","Free updates","Free cables","Free headphones"]},
+        {question:"Why must passwords be kept private?",correct:["Prevent hacking","Stay secure"],wrong:["Speed up PC","Improve WiFi","Stop viruses","Print faster","Store files","Play videos","Install apps","Browse websites","Record audio","Scan images","Play games","Edit code","Write emails","Design hardware","Run updates"]},
+        {question:"What is a strong password?",correct:["Hard to guess","Secure"],wrong:["Your name","1234","password","abc","qwerty","birthday","pet name","school name","football team","favourite food","simple words","short words","easy numbers","single letter","single digit"]},
+        {question:"Why is installing illegal software wrong?",correct:["Breaks the law","Unsafe"],wrong:["Slows PC","Uses battery","Prints badly","Hurts eyes","Breaks keyboard","Uses storage","Plays music","Edits code","Scans files","Records sound","Designs networks","Writes emails","Runs updates","Manages RAM","Changes brightness"]},
+        {question:"What is a cyber attack?",correct:["Attempt to damage systems","Online attack"],wrong:["Typing fast","Printing pages","Saving files","Playing music","Browsing safely","Charging devices","Adjusting chairs","Cleaning screens","Using headphones","Writing emails","Editing photos","Scanning images","Playing games","Installing updates"]},
+        {question:"Why must users log out when finished?",correct:["Prevent misuse","Stay secure"],wrong:["Speed up PC","Improve WiFi","Stop viruses","Print faster","Store files","Play videos","Install apps","Browse websites","Record audio","Scan images","Play games","Edit code","Write emails","Design hardware","Run updates"]}
+      ],
+
+      "Health and Safety Act": [
+        
+        {question:"What is the main purpose of the Health and Safety Act?",correct:["Keep people safe","Prevent accidents"],wrong:["Hack computers","Steal data","Delete files","Make websites","Print documents","Play games","Install apps","Browse the web","Design hardware","Write emails","Record audio","Scan images","Play music","Edit videos","Run updates"]},
+        {question:"Why must drinks be kept away from computers?",correct:["Avoid spills","Prevent damage"],wrong:["Make PC faster","Improve graphics","Stop viruses","Print better","Store files","Play videos","Install apps","Browse websites","Record audio","Scan images","Play games","Edit code","Write emails","Design hardware","Run updates"]},
+        {question:"Why should cables be tucked away?",correct:["Prevent trips","Keep area safe"],wrong:["Speed up WiFi","Make screens brighter","Stop hacking","Store data","Print faster","Play games","Install apps","Record sound","Scan files","Edit code","Design networks","Write emails","Play music","Run updates","Manage RAM"]},
+        {question:"Why should chairs be adjusted correctly?",correct:["Prevent injury","Improve posture"],wrong:["Speed up CPU","Make screen brighter","Stop hacking","Store data","Print pages","Play games","Install apps","Browse the web","Record sound","Scan files","Edit code","Write emails","Play music","Run updates","Manage RAM"]},
+        {question:"Why should students take breaks when using computers?",correct:["Avoid eye strain","Prevent tiredness"],wrong:["Speed up PC","Improve WiFi","Stop viruses","Print faster","Store files","Play videos","Install apps","Browse websites","Record audio","Scan images","Play games","Edit code","Write emails","Design hardware","Run updates"]},
+        {question:"Why must computer rooms be kept tidy?",correct:["Prevent accidents","Keep safe"],wrong:["Speed up PC","Improve WiFi","Stop viruses","Print faster","Store files","Play videos","Install apps","Browse websites","Record audio","Scan images","Play games","Edit code","Write emails","Design hardware","Run updates"]},
+        {question:"Why should monitors be at eye level?",correct:["Reduce neck strain","Improve comfort"],wrong:["Speed up PC","Improve graphics","Stop hacking","Print better","Store files","Play videos","Install apps","Browse websites","Record audio","Scan images","Play games","Edit code","Write emails","Design hardware","Run updates"]},
+        {question:"Why must heavy equipment be lifted correctly?",correct:["Avoid injury","Protect back"],wrong:["Speed up PC","Improve WiFi","Stop viruses","Print faster","Store files","Play videos","Install apps","Browse websites","Record audio","Scan images","Play games","Edit code","Write emails","Design hardware","Run updates"]},
+        {question:"Why should wires not be damaged?",correct:["Prevent shocks","Stay safe"],wrong:["Speed up PC","Improve graphics","Stop hacking","Print better","Store files","Play videos","Install apps","Browse websites","Record audio","Scan images","Play games","Edit code","Write emails","Design hardware","Run updates"]},
+        {question:"Why must ventilation be clear around computers?",correct:["Prevent overheating","Keep safe"],wrong:["Speed up WiFi","Improve graphics","Stop hacking","Print better","Store files","Play videos","Install apps","Browse websites","Record audio","Scan images","Play games","Edit code","Write emails","Design hardware","Run updates"]},
+        {question:"Why should students report broken equipment?",correct:["Prevent injury","Fix problems"],wrong:["Speed up PC","Improve WiFi","Stop viruses","Print faster","Store files","Play videos","Install apps","Browse websites","Record audio","Scan images","Play games","Edit code","Write emails","Design hardware","Run updates"]},
+        {question:"Why must chairs have back support?",correct:["Prevent back pain","Improve posture"],wrong:["Speed up PC","Improve graphics","Stop hacking","Print better","Store files","Play videos","Install apps","Browse websites","Record audio","Scan images","Play games","Edit code","Write emails","Design hardware","Run updates"]},
+        {question:"Why should screens not be too bright?",correct:["Prevent eye strain","Reduce headaches"],wrong:["Speed up PC","Improve WiFi","Stop viruses","Print faster","Store files","Play videos","Install apps","Browse websites","Record audio","Scan images","Play games","Edit code","Write emails","Design hardware","Run updates"]},
+        {question:"Why must computer rooms have good lighting?",correct:["Reduce eye strain","Improve visibility"],wrong:["Speed up PC","Improve graphics","Stop hacking","Print better","Store files","Play videos","Install apps","Browse websites","Record audio","Scan images","Play games","Edit code","Write emails","Design hardware","Run updates"]},
+        {question:"Why should students sit correctly at computers?",correct:["Prevent injury","Stay comfortable"],wrong:["Speed up PC","Improve WiFi","Stop viruses","Print faster","Store files","Play videos","Install apps","Browse websites","Record audio","Scan images","Play games","Edit code","Write emails","Design hardware","Run updates"]}
+      ]
+
+
+
   },
 
-  "KS4": {
-    "Cambridge_Nationals_IT_Level_2": {
-      "R050: IT in the Digital World": {
-        "Design Tools": {
-          "Purpose of design tools": [
-            {
-              question:"What is the purpose of a mood board?",
-              correct:["Show ideas","Give visual style"],
-              wrong:["Write code","Store files","Print documents","Play music","Edit videos","Browse websites","Make spreadsheets","Send emails","Run the OS","Install software","Manage hardware","Record audio","Draw diagrams","Scan documents","Play games","Design databases"]
-            },
-            {
-              question:"Why are design tools used before creating a product?",
-              correct:["Plan ideas","Show layout"],
-              wrong:["Fix errors","Print pages","Store data","Play videos","Install apps","Manage RAM","Control hardware","Run updates","Browse the web","Make backups","Scan files","Play music","Send messages","Record sound","Run games","Edit photos"]
-            },
-            {
-              question:"What is the purpose of a storyboard?",
-              correct:["Show sequence","Plan scenes"],
-              wrong:["Store files","Print documents","Play audio","Edit code","Manage networks","Install drivers","Run the OS","Make spreadsheets","Browse websites","Record video","Scan images","Play games","Design hardware","Write emails","Edit photos","Create backups"]
-            },
-            {
-              question:"What is the purpose of a wireframe?",
-              correct:["Show layout","Plan structure"],
-              wrong:["Play music","Store data","Print pages","Run apps","Edit videos","Browse the web","Install software","Manage RAM","Record audio","Scan documents","Play games","Design hardware","Write emails","Make spreadsheets","Edit photos","Run updates"]
-            },
-            {
-              question:"What is the purpose of a visualisation diagram?",
-              correct:["Show design","Plan appearance"],
-              wrong:["Store files","Print documents","Play videos","Install apps","Manage hardware","Run the OS","Browse websites","Record sound","Scan images","Play games","Edit code","Make spreadsheets","Write emails","Design networks","Edit photos","Create backups"]
-            },
-            {
-              question:"Why do designers use design tools?",
-              correct:["Plan ideas","Communicate designs"],
-              wrong:["Fix hardware","Install software","Play music","Print pages","Store data","Run updates","Browse the web","Record audio","Scan documents","Play games","Edit code","Make spreadsheets","Write emails","Edit photos","Design networks","Manage RAM"]
-            },
-            {
-              question:"What do design tools help identify?",
-              correct:["Client needs","Key features"],
-              wrong:["CPU speed","RAM size","Disk space","Network type","Printer ink","Monitor size","Mouse settings","Keyboard layout","Speaker volume","Battery level","Cable types","Power usage","Fan speed","GPU temperature","Screen brightness","WiFi password"]
-            },
-            {
-              question:"What is the purpose of showing layout in design tools?",
-              correct:["Plan placement","Organise content"],
-              wrong:["Play videos","Store files","Print pages","Run apps","Install software","Manage hardware","Browse websites","Record audio","Scan images","Play games","Edit code","Make spreadsheets","Write emails","Edit photos","Design networks","Run updates"]
-            },
-            {
-              question:"Why do designers use annotations on design tools?",
-              correct:["Explain ideas","Add details"],
-              wrong:["Play music","Store data","Print pages","Run apps","Edit videos","Browse the web","Install software","Manage RAM","Record audio","Scan documents","Play games","Design hardware","Write emails","Make spreadsheets","Edit photos","Run updates"]
-            },
-            {
-              question:"What is the purpose of design tools in R050?",
-              correct:["Plan products","Show ideas"],
-              wrong:["Fix errors","Install apps","Play music","Print pages","Store files","Run updates","Browse websites","Record sound","Scan images","Play games","Edit code","Make spreadsheets","Write emails","Edit photos","Design networks","Manage hardware"]
-            }
-          ]
-        }
+},
+
+"KS4": {
+  "Cambridge_Nationals_IT_Level_2": {
+    "R050: IT in the Digital World": {
+      "Design Tools": {
+        "Purpose of design tools": [
+          {question:"What is the purpose of a mood board?",correct:["Show ideas","Give visual style"],wrong:["Write code","Store files","Print documents","Play music","Edit videos","Browse websites","Make spreadsheets","Send emails","Run the OS","Install software","Manage hardware","Record audio","Draw diagrams","Scan documents","Play games","Design databases"]},
+          {question:"Why are design tools used before creating a product?",correct:["Plan ideas","Show layout"],wrong:["Fix errors","Print pages","Store data","Play videos","Install apps","Manage RAM","Control hardware","Run updates","Browse the web","Make backups","Scan files","Play music","Send messages","Record sound","Run games","Edit photos"]},
+          {question:"What is the purpose of a storyboard?",correct:["Show sequence","Plan scenes"],wrong:["Store files","Print documents","Play audio","Edit code","Manage networks","Install drivers","Run the OS","Make spreadsheets","Browse websites","Record video","Scan images","Play games","Design hardware","Write emails","Edit photos","Create backups"]},
+          {question:"What is the purpose of a wireframe?",correct:["Show layout","Plan structure"],wrong:["Play music","Store data","Print pages","Run apps","Edit videos","Browse the web","Install software","Manage RAM","Record audio","Scan documents","Play games","Design hardware","Write emails","Make spreadsheets","Edit photos","Run updates"]},
+          {question:"What is the purpose of a visualisation diagram?",correct:["Show design","Plan appearance"],wrong:["Store files","Print documents","Play videos","Install apps","Manage hardware","Run the OS","Browse websites","Record sound","Scan images","Play games","Edit code","Make spreadsheets","Write emails","Design networks","Edit photos","Create backups"]},
+          {question:"Why do designers use design tools?",correct:["Plan ideas","Communicate designs"],wrong:["Fix hardware","Install software","Play music","Print pages","Store data","Run updates","Browse the web","Record audio","Scan documents","Play games","Edit code","Make spreadsheets","Write emails","Edit photos","Design networks","Manage RAM"]},
+          {question:"What do design tools help identify?",correct:["Client needs","Key features"],wrong:["CPU speed","RAM size","Disk space","Network type","Printer ink","Monitor size","Mouse settings","Keyboard layout","Speaker volume","Battery level","Cable types","Power usage","Fan speed","GPU temperature","Screen brightness","WiFi password"]},
+          {question:"What is the purpose of showing layout in design tools?",correct:["Plan placement","Organise content"],wrong:["Play videos","Store files","Print pages","Run apps","Install software","Manage hardware","Browse websites","Record audio","Scan images","Play games","Edit code","Make spreadsheets","Write emails","Edit photos","Design networks","Run updates"]},
+          {question:"Why do designers use annotations on design tools?",correct:["Explain ideas","Add details"],wrong:["Play music","Store data","Print pages","Run apps","Edit videos","Browse the web","Install software","Manage RAM","Record audio","Scan documents","Play games","Design hardware","Write emails","Make spreadsheets","Edit photos","Run updates"]},
+          {question:"What is the purpose of design tools in R050?",correct:["Plan products","Show ideas"],wrong:["Fix errors","Install apps","Play music","Print pages","Store files","Run updates","Browse websites","Record sound","Scan images","Play games","Edit code","Make spreadsheets","Write emails","Edit photos","Design networks","Manage hardware"]}
+        ]
       }
     }
-  },
+  }
+},
 
-  "KS5": {}
-};
+
+"KS5": {}
+
+}
