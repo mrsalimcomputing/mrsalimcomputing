@@ -30,10 +30,15 @@
     <div id="buttonContainer" class="button-row"></div>
 </div>
 
+<!-- USER HEADER -->
 <script type="module" src="./headerUser.js"></script>
 
+<!-- MAIN LOGIC -->
 <script type="module">
     import { getCurrentUser } from "./userManager.js";
+    import { goBack } from "./navigation.js";
+
+    window.goBack = goBack;
 
     const user = getCurrentUser();
     window.isPlayMode = !user;
@@ -142,15 +147,10 @@
     }
 </script>
 
-<script>
-function goBack() {
-    if (document.referrer !== "") window.history.back();
-    else window.location.href = "home.html";
-}
-</script>
-
 </body>
 </html>
+
+
 
 
 
