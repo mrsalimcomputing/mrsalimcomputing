@@ -66,15 +66,15 @@ export const ks4Topics = {
                 // 1. DESIGN TOOLS
                 "Design Tools": [
                     "Types of design tools",
-                    "1.1 Types of design tools (Flowchart) ",
-                    "1.1 Types of design tools (Mind Map) ",
+                    "Types of design tools (Flowchart) ",
+                    "Types of design tools (Mind Map) ",
                     "Purpose of design tools",
-                    "1.3 Features of design tools",
-                    "1.4 Use in development"
+                    "Features of design tools",
+                    "Use in development"
                 ],
 
                 // 2. HCI
-                "2. Human Computer Interface (HCI) in everyday life": [
+                "HCI in everyday life": [
                     "2.1 Purpose of HCI",
                     "2.2 Types of interface",
                     "2.3 Factors affecting HCI design",
@@ -83,7 +83,7 @@ export const ks4Topics = {
                 ],
 
                 // 3. DATA AND TESTING
-                "3. Data and testing": [
+                "Data and testing": [
                     "3.1 Data types",
                     "3.2 Data integrity",
                     "3.3 Validation",

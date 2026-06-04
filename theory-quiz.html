@@ -1,3 +1,5 @@
+<!DOCTYPE html>
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -16,7 +18,7 @@
             <p>You will be shown a question. Select the correct answer from the options.</p>
 
             <div class="popup-buttons">
-                <button class="menu-back-btn" onclick="window.location.href='home.html'">Menu</button>
+                <button class="menu-back-btn" onclick="goBackToCorrectMenu()">Menu</button>
                 <button id="startTheoryBtn" class="menu-back-btn">Play</button>
             </div>
         </div>
@@ -30,7 +32,7 @@
             <h2 id="theoryEndScore">You scored 0 out of 0</h2>
             <p id="endAccuracyText"></p>
             <div class="popup-buttons">
-                <button class="menu-back-btn" onclick="window.location.href='home.html'">Menu</button>
+                <button class="menu-back-btn" onclick="goBackToCorrectMenu()">Menu</button>
                 <button id="playAgainTheoryBtn" class="menu-back-btn">Play Again</button>
             </div>
         </div>
@@ -84,16 +86,15 @@
 
         window.currentTopic = topic;
 
-
         function findQuestions(courseParam, unit, topic) {
-            // KS3: courseParam is "KS3"
+            // ⭐ KS3
             if (courseParam === "KS3") {
                 const courseObj = theoryData?.["KS3"];
                 const unitObj = courseObj?.[unit];
                 return unitObj?.[topic] || null;
             }
 
-            // KS4: courseParam is qualification, e.g. "Cambridge_Nationals_IT_Level_2"
+            // ⭐ KS4
             const ks4Obj = theoryData?.["KS4"];
             const qualObj = ks4Obj?.[courseParam];
             if (!qualObj) return null;
@@ -101,10 +102,10 @@
             const unitObj = qualObj?.[unit];
             if (!unitObj) return null;
 
-            // 1) Try direct topic under unit
+            // Direct topic
             if (unitObj?.[topic]) return unitObj[topic];
 
-            // 2) Try inside categories (Design Tools, etc.)
+            // Inside categories
             for (const categoryName in unitObj) {
                 const category = unitObj[categoryName];
                 if (category?.[topic]) {
@@ -124,7 +125,35 @@
         } else {
             showTheoryRules(questions);
         }
+
+        // ⭐ FIXED QUIT BUTTON (KS3 + KS4 SAFE)
+        document.getElementById("theoryQuitBtn").onclick = () => {
+            if (courseParam && courseParam.startsWith("Cambridge")) {
+                // KS4 quit → return to KS4 topic options
+                window.location.href =
+                    `ks4-topic-options.html?course=${encodeURIComponent(courseParam)}&unit=${encodeURIComponent(unit)}&topic=${encodeURIComponent(topic)}`;
+            } else {
+                // KS3 quit → return to KS3 topic options
+                window.location.href =
+                    `ks3-topic-options.html?course=KS3&unit=${encodeURIComponent(unit)}&topic=${encodeURIComponent(topic)}`;
+
+            }
+        };
+
+        // ⭐ FIXED MENU BUTTONS (KS3 + KS4 SAFE)
+        window.goBackToCorrectMenu = () => {
+            if (courseParam && courseParam.startsWith("Cambridge")) {
+                window.location.href =
+                    `ks4-topic-options.html?course=${encodeURIComponent(courseParam)}&unit=${encodeURIComponent(unit)}&topic=${encodeURIComponent(topic)}`;
+            } else {
+                window.location.href =
+                    `ks3-topic-options.html?course=KS3&unit=${encodeURIComponent(unit)}&topic=${encodeURIComponent(topic)}`;
+
+            }
+        };
     </script>
 
 </body>
+</html>
+
 

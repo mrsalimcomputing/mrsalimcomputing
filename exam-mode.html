@@ -1,3 +1,5 @@
+<!DOCTYPE html>
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -16,7 +18,7 @@
             <p>You will be shown exam-style questions. You have 30 seconds per question.</p>
 
             <div class="popup-buttons">
-                <button class="menu-back-btn" onclick="window.location.href='home.html'">Menu</button>
+                <button class="menu-back-btn" onclick="goBackToCorrectMenu()">Menu</button>
                 <button id="startExamBtn" class="menu-back-btn">Play</button>
             </div>
         </div>
@@ -30,7 +32,7 @@
             <h2 id="examEndScore">You scored 0 out of 0</h2>
 
             <div class="popup-buttons">
-                <button class="menu-back-btn" onclick="window.location.href='home.html'">Menu</button>
+                <button class="menu-back-btn" onclick="goBackToCorrectMenu()">Menu</button>
                 <button id="playAgainExamBtn" class="menu-back-btn">Play Again</button>
             </div>
         </div>
@@ -109,6 +111,32 @@
         } else {
             showExamRules(questions);
         }
+
+        // ⭐ FIXED QUIT BUTTON (KS3 + KS4 SAFE)
+        document.getElementById("examQuitBtn").onclick = () => {
+            if (course && course.startsWith("Cambridge")) {
+                // KS4 quit → return to KS4 topic options
+                window.location.href =
+                    `ks4-topic-options.html?course=${encodeURIComponent(course)}&unit=${encodeURIComponent(unit)}&topic=${encodeURIComponent(topic)}`;
+            } else {
+                // KS3 quit → return to KS3 topic options
+                window.location.href =
+                    `ks3-topic-options.html?unit=${encodeURIComponent(unit)}&topic=${encodeURIComponent(topic)}`;
+            }
+        };
+
+        // ⭐ FIXED MENU BUTTONS (KS3 + KS4 SAFE)
+        window.goBackToCorrectMenu = () => {
+            if (course && course.startsWith("Cambridge")) {
+                window.location.href =
+                    `ks4-topic-options.html?course=${encodeURIComponent(course)}&unit=${encodeURIComponent(unit)}&topic=${encodeURIComponent(topic)}`;
+            } else {
+                window.location.href =
+                    `ks3-topic-options.html?unit=${encodeURIComponent(unit)}&topic=${encodeURIComponent(topic)}`;
+            }
+        };
     </script>
 
 </body>
+</html>
+

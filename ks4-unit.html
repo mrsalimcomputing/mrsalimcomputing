@@ -34,7 +34,7 @@
     <button id="logoutBtn" class="logout-btn" style="top:15px; right:20px;">Logout</button>
 
     <!-- ============================================================
-         KS4 CONTAINER (STATIC + CENTERED LIKE KS3)
+         KS4 CONTAINER
          ============================================================ -->
     <div class="ks4-container">
 
@@ -48,11 +48,11 @@
     </div>
 
     <!-- 🔹 USER HEADER SCRIPT -->
-    <script type="module" src="js/headerUser.js"></script>
+    <script type="module" src="./headerUser.js"></script>
 
     <!-- 🔹 LOAD KS4 TOPICS -->
     <script type="module">
-        import { ks4Topics } from "./js/KS4/ks4Topics.js";
+        import { ks4Topics } from "./ks4Topics.js";
 
         const params = new URLSearchParams(window.location.search);
         const course = decodeURIComponent(params.get("course"));
@@ -65,7 +65,7 @@
 
         unitData.mainTopics.forEach(topic => {
             const btn = document.createElement("button");
-            btn.className = "ks4-btn";   // 🔥 NEW CLASS
+            btn.className = "ks4-btn";
             btn.innerText = topic;
 
             const cleanTopic = topic.replace(/^\d+(\.\d+)?\s*/, "").trim();
@@ -79,15 +79,10 @@
         });
     </script>
 
-    <!-- 🔹 BACK + LANGUAGE LOGIC -->
-    <script>
-        function goBack() {
-            if (document.referrer !== "") {
-                window.history.back();
-            } else {
-                window.location.href = "ks4.html";
-            }
-        }
+    <!-- 🔹 FIXED KS4 BACK BUTTON -->
+    <script type="module">
+        import { goBackKS4 } from "./ks4-navigation.js";
+        window.goBack = goBackKS4;
 
         function changeLanguage(lang) {
             alert("Language changed to: " + lang);
@@ -96,4 +91,5 @@
 
 </body>
 </html>
+
 

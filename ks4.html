@@ -64,15 +64,10 @@
     <!-- 🔹 USER HEADER SCRIPT -->
     <script type="module" src="js/headerUser.js"></script>
 
-    <!-- 🔹 BACK + LANGUAGE LOGIC -->
-    <script>
-        function goBack() {
-            if (document.referrer !== "") {
-                window.history.back();
-            } else {
-                window.location.href = "home.html";
-            }
-        }
+    <!-- 🔹 FIXED KS4 BACK BUTTON -->
+    <script type="module">
+        import { goBackKS4 } from "./ks4-navigation.js";
+        window.goBack = goBackKS4;
 
         function changeLanguage(lang) {
             alert("Language changed to: " + lang);
@@ -81,6 +76,7 @@
 
 </body>
 </html>
+
 
 
 
