@@ -67,17 +67,27 @@
 
         if (subtopics && subtopics.length > 0) {
 
-            subtopics.forEach(sub => {
+            subtopics.forEach((sub, index) => {
                 const btn = document.createElement("button");
                 btn.className = "ks4-btn";
-                btn.innerText = sub;
 
                 const cleanSub = sub.replace(/^\d+(\.\d+)?\s*/, "").trim();
 
-                btn.onclick = () => {
-                    window.location.href =
-                        `ks4-topic-options.html?course=${encodeURIComponent(course)}&unit=${encodeURIComponent(unit)}&topic=${encodeURIComponent(cleanSub)}`;
-                };
+                // ⭐ FIRST BUTTON = UNLOCKED ("Types of design tool")
+                if (index === 0) {
+                    btn.innerText = sub;
+                    btn.onclick = () => {
+                        window.location.href =
+                            `ks4-topic-options.html?course=${encodeURIComponent(course)}&unit=${encodeURIComponent(unit)}&topic=${encodeURIComponent(cleanSub)}`;
+                    };
+                }
+
+                // 🔒 ALL OTHER BUTTONS LOCKED
+                else {
+                    btn.classList.add("locked");
+                    btn.innerHTML = `${sub} 🔒`;
+                    btn.onclick = () => alert(`${cleanSub} is locked — Coming Soon!`);
+                }
 
                 container.appendChild(btn);
             });
@@ -102,6 +112,7 @@
 
 </body>
 </html>
+
 
 
 

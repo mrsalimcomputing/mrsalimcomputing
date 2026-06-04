@@ -63,20 +63,31 @@
         const unitData = ks4Topics[course][unit];
         const container = document.getElementById("unitButtons");
 
-        unitData.mainTopics.forEach(topic => {
+        unitData.mainTopics.forEach((topic, index) => {
             const btn = document.createElement("button");
-            btn.className = "ks4-btn";
-            btn.innerText = topic;
-
             const cleanTopic = topic.replace(/^\d+(\.\d+)?\s*/, "").trim();
 
-            btn.onclick = () => {
-                window.location.href =
-                    `ks4-topics.html?course=${encodeURIComponent(course)}&unit=${encodeURIComponent(unit)}&topic=${encodeURIComponent(cleanTopic)}`;
-            };
+            // ⭐ FIRST BUTTON UNLOCKED ("Design Tools")
+            if (index === 0) {
+                btn.className = "ks4-btn";
+                btn.innerText = topic;
+
+                btn.onclick = () => {
+                    window.location.href =
+                        `ks4-topics.html?course=${encodeURIComponent(course)}&unit=${encodeURIComponent(unit)}&topic=${encodeURIComponent(cleanTopic)}`;
+                };
+            }
+
+            // 🔒 ALL OTHER BUTTONS LOCKED
+            else {
+                btn.className = "ks4-btn locked";
+                btn.innerHTML = `${topic} 🔒`;
+                btn.onclick = () => alert(`${cleanTopic} is locked 🔒 — Coming Soon!`);
+            }
 
             container.appendChild(btn);
         });
+
     </script>
 
     <!-- 🔹 FIXED KS4 BACK BUTTON -->
@@ -91,5 +102,7 @@
 
 </body>
 </html>
+
+
 
 

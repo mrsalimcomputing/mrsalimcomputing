@@ -67,3 +67,20 @@
     transform: translate(2px, 2px);
     box-shadow: 2px 2px 0 #0F172A;
 }
+
+/* ============================================================
+   KS4 LOCKED BUTTONS
+   ============================================================ */
+.ks4-btn.locked {
+    background-color: #0a6b84; /* darker shade for locked state */
+    cursor: not-allowed;
+    opacity: 0.6;
+    box-shadow: none; /* remove raised effect */
+    transform: none; /* disable hover scaling */
+}
+
+.ks4-btn.locked:hover {
+    background-color: #0a6b84; /* keep same color on hover */
+    color: #ECFEFF; /* maintain text visibility */
+}
+

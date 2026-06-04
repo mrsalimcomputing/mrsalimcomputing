@@ -37,28 +37,29 @@
          KS4 CONTAINER (STATIC + CENTERED LIKE KS3)
          ============================================================ -->
     <div class="ks4-container">
-
         <div class="menu-screen">
             <h1 class="menu-title">KS4 Options</h1>
             <p class="menu-subtitle">Choose your qualification:</p>
 
             <div class="ks4-grid">
 
-                <button class="ks4-btn" onclick="window.location.href='ks4-ocr.html'">
-                    OCR GCSE Computer Science
+                <!-- 🔒 LOCKED GCSE BUTTON -->
+                <button class="ks4-btn locked" onclick="alert('OCR GCSE Computer Science is locked — Coming Soon!')">
+                    OCR GCSE Computer Science 🔒 Coming Soon
                 </button>
 
-                <button class="ks4-btn" onclick="window.location.href='ks4-imedia.html'">
-                    OCR Cambridge Nationals in Creative iMedia Level 2
+                <!-- 🔒 LOCKED IMEDIA BUTTON -->
+                <button class="ks4-btn locked" onclick="alert('OCR Cambridge Nationals in Creative iMedia Level 2 is locked — Coming Soon!')">
+                    OCR Cambridge Nationals in Creative iMedia Level 2 🔒 Coming Soon
                 </button>
 
+                <!-- ✅ ACTIVE IT BUTTON -->
                 <button class="ks4-btn" onclick="window.location.href='ks4-cambridge.html'">
                     OCR Cambridge Nationals in IT Level 2
                 </button>
 
             </div>
         </div>
-
     </div>
 
     <!-- 🔹 USER HEADER SCRIPT -->
@@ -76,6 +77,8 @@
 
 </body>
 </html>
+
+
 
 
 
