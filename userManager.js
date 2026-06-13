@@ -2,17 +2,22 @@
 
 const USER_KEY = "msc_currentUser";
 
-// Save user
+// ===============================
+// SAVE USER (Google / Microsoft)
+// ===============================
 export function setCurrentUser(userObj) {
+
   // Ensure school ALWAYS exists
   if (!userObj.school) {
-    userObj.school = "hfed.net"; 
+    userObj.school = "hfed.net";
   }
 
   localStorage.setItem(USER_KEY, JSON.stringify(userObj));
 }
 
-// Load user
+// ===============================
+// LOAD USER (Google / Microsoft)
+// ===============================
 export function getCurrentUser() {
   const raw = localStorage.getItem(USER_KEY);
   if (!raw) return null;
@@ -20,12 +25,12 @@ export function getCurrentUser() {
   try {
     const user = JSON.parse(raw);
 
-    // Guarantee school is never undefined
+    // Guarantee school exists
     if (!user.school) {
       user.school = "hfed.net";
     }
 
-    // Guarantee id exists (fallback for older guest accounts)
+    // Guarantee ID exists
     if (!user.id) {
       user.id = "guest-" + Date.now();
     }
@@ -36,12 +41,18 @@ export function getCurrentUser() {
   }
 }
 
-// Clear user
+// ===============================
+// CLEAR USER (Google / Microsoft ONLY)
+// ===============================
 export function clearCurrentUser() {
+  // ❗ DO NOT clear deviceID, nickname, or sessionCode
+  // These are needed for session leaderboard identity
   localStorage.removeItem(USER_KEY);
 }
 
-// Nickname generator
+// ===============================
+// GOOGLE NICKNAME GENERATOR
+// ===============================
 export function generateGoogleNickname() {
   const colors = [
     "Red", "Blue", "Green", "Yellow", "Purple", "Orange", "Silver", "Golden",

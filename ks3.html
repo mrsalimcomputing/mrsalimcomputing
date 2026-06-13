@@ -35,7 +35,7 @@
         <div id="categoryButtons" class="button-row"></div>
     </div>
 
-    <script type="module" src="js/headerUser.js"></script>
+    <script type="module" src="./headerUser.js"></script>
 
     <script type="module">
         import { ks3Topics } from "./ks3Topics.js";
@@ -64,12 +64,11 @@
         }
     </script>
 
-    <script>
-    function goBack() {
-        if (document.referrer !== "") window.history.back();
-        else window.location.href = "index.html";
-    }
+    <script type="module">
+    import { goBack } from "./navigation.js";
+    window.goBack = goBack;
     </script>
+
 
 </body>
 </html>

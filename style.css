@@ -500,16 +500,23 @@ h1#leaderboardTitle {
 }
 
 .entry {
-    background: #34D399;
-    color: #0F172A;
+    background: #34D399;              /* consistent mint green */
+    color: #0F172A;                   /* dark readable text */
     border-radius: 8px;
     border: 2px solid #0F172A;
-    padding: 10px 12px;
-    margin: 6px 0;
+    padding: 10px 14px;               /* a bit more breathing room */
+    margin: 8px 0;
     font-size: 1rem;
     font-weight: 600;
     box-shadow: 4px 4px 0 #0F172A;
     transition: all 0.25s ease;
+    display: flex;                    /* keeps text aligned */
+    align-items: center;
+    justify-content: flex-start;
+    min-height: 45px;                 /* prevents clipping */
+    overflow: visible;                /* ensures text never hides */
+    word-wrap: break-word;            /* wraps long text */
+    white-space: normal;              /* allows multi-line text */
 }
 
 .entry:hover {
@@ -592,6 +599,77 @@ h1#leaderboardTitle {
   cursor: not-allowed;
   opacity: 0.6;
 }
+
+/* ============================================================
+   join session button 
+   ============================================================ */
+
+/* ✅ Popup overlay */
+.popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(15, 23, 42, 0.7); /* dark transparent backdrop */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+}
+
+/* ✅ Popup box */
+.popup-box {
+  background: #e0faff;
+  border-radius: 12px;
+  padding: 30px 40px;          /* more internal space */
+  box-shadow: 6px 6px 0 #0F172A;
+  text-align: center;
+}
+
+/* ✅ Heading */
+.popup-box h2 {
+  margin-bottom: 20px;         /* space below title */
+  font-size: 1.6rem;
+  font-weight: 800;
+  color: #0F172A;
+}
+
+/* ✅ Input field */
+.code-input {
+  width: 80%;
+  padding: 10px;
+  margin-bottom: 18px;         /* space below input */
+  border: 2px solid #0F172A;
+  border-radius: 6px;
+  font-size: 1rem;
+}
+
+/* ✅ Join button */
+.menu-btn {
+  background: #0891B2;
+  color: #ECFEFF;
+  font-weight: 700;
+  border: 2px solid #0F172A;
+  border-radius: 6px;
+  padding: 10px 20px;
+  margin-bottom: 12px;         /* space between Join and Cancel */
+  box-shadow: 4px 4px 0 #0F172A;
+  cursor: pointer;
+}
+
+/* ✅ Cancel button */
+.menu-back-btn {
+  background: #fff;
+  color: #0F172A;
+  border: 2px solid #0F172A;
+  border-radius: 6px;
+  padding: 8px 16px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+
 
 
 /* ============================================================

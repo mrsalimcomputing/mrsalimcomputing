@@ -3,8 +3,10 @@
 // ===============================
 import { hideAllScreens } from "./navigation.js";
 import { getCurrentUser } from "./userManager.js";
-import { db } from "./firebaseConfig.js";
+import { goBack } from "./navigation.js";        // KS3
+import { goBackKS4 } from "./ks4-navigation.js"; // KS4
 
+import { db } from "./firebaseConfig.js";
 import {
   doc,
   getDoc,
@@ -13,100 +15,33 @@ import {
 
 
 // ===============================
-// UNIVERSAL SAFE TOPIC NAME
+// SAFE TOPIC NAME
 // ===============================
 function safeTopicName(raw) {
   return raw
-    .replace(/\//g, "_")
-    .replace(/\\/g, "_")
-    .replace(/ /g, "_")
-    .replace(/[^\w\-]/g, "_");
+    .trim()
+    .toLowerCase()
+    .replace(/\s+/g, "_")
+    .replace(/[^a-z0-9_]/g, "");
 }
 
 
 // ===============================
-// GO BACK ONE LEVEL
+// GET TOPIC FROM URL
 // ===============================
-function goBackToTopicOptions() {
+function getTopicFromUrl() {
   const params = new URLSearchParams(window.location.search);
-  const course = params.get("course");
-  const unit = params.get("unit");
-  const topic = params.get("topic");
+  const t = params.get("topic") || "";
+  const decoded = decodeURIComponent(t);
 
-  let page = "";
-
-  if (course.startsWith("KS3")) page = "ks3-topic-options.html";
-  else if (course.startsWith("KS4")) page = "ks4-topic-options.html";
-  else if (course.startsWith("KS5")) page = "ks5-topic-options.html";
-  else page = "ks3-topic-options.html";
-
-  window.location.href =
-    `${page}?course=${encodeURIComponent(course)}&unit=${encodeURIComponent(unit)}&topic=${encodeURIComponent(topic)}`;
+  console.log("🔍 getTopicFromUrl() →", decoded);
+  return decoded;
 }
 
 
-
 // ===============================
-// FIRESTORE SAVE FUNCTION
+// MATCHING GAME STATE
 // ===============================
-async function saveMatchingScore(topic, time, score, accuracy) {
-  const user = getCurrentUser();
-  if (!user) return;
-
-  const uid = user.id;
-  const school = user.school;
-  const date = new Date().toLocaleString();
-  const safe = safeTopicName(topic);
-
-  // ⭐ PERSONAL BEST
-  const personalRef = doc(db, "users", uid, "scores", `${safe}_matching`);
-  const snap = await getDoc(personalRef);
-
-  if (
-    !snap.exists() ||
-    time < snap.data().time ||
-    (time === snap.data().time && score > snap.data().score)
-  ) {
-    await setDoc(personalRef, {
-      topic,
-      mode: "matching",
-      time,
-      score,
-      accuracy: Number(accuracy.toFixed(2)),
-      date
-    });
-  }
-
-  // ⭐ SCHOOL LEADERBOARD
-  const schoolDocId = `${school}_${safe}_matching`;
-  const entryRef = doc(db, "schoolLeaderboards", schoolDocId, "entries", uid);
-
-  const existing = await getDoc(entryRef);
-
- // ⭐ NEW MATCHING MODE RANKING LOGIC
-// Highest score wins. If tied, fastest time wins.
-if (
-  !existing.exists() ||
-  score > existing.data().score ||
-  (score === existing.data().score && time < existing.data().time)
-){
-
-    await setDoc(entryRef, {
-      username: user.username,
-      time,
-      score,
-      accuracy: Number(accuracy.toFixed(2)),
-      date,
-      userId: uid
-    });
-  }
-}
-
-
-
-// ========================================
-// MATCHING GAME ENGINE
-// ========================================
 window.currentMatchData = window.currentMatchData || [];
 
 const matchState = {
@@ -125,20 +60,28 @@ const matchState = {
 
 
 // ===============================
-// MATCHING GAME SCORING SYSTEM
+// SCORING
 // ===============================
 let matchScore = 0;
 let matchAttempts = 0;
 let matchAccuracy = 0;
 
 function updateMatchStats() {
+  console.log("📊 updateMatchStats()", {
+    matchScore,
+    matchAttempts,
+    matchAccuracy
+  });
+
   document.getElementById("matchScore").textContent = matchScore;
   document.getElementById("matchAttempts").textContent = matchAttempts;
   document.getElementById("matchAccuracy").textContent = `${matchAccuracy.toFixed(2)}%`;
 }
 
 
+// ===============================
 // POPUP ELEMENTS
+// ===============================
 const rulesPopup = document.getElementById("matchRulesPopup");
 const endPopup = document.getElementById("matchEndPopup");
 const endTitle = document.getElementById("matchEndTitle");
@@ -148,9 +91,11 @@ const revealBtn = document.getElementById("matchRevealBtn");
 
 
 // ===============================
-// RESET STATE
+// RESET MATCH STATE
 // ===============================
 function resetMatchState() {
+  console.log("🔄 resetMatchState()");
+
   matchState.matchCards = [];
   matchState.firstPick = null;
   matchState.secondPick = null;
@@ -188,6 +133,8 @@ function resetMatchState() {
 // TIMER
 // ===============================
 function startMatchTimer() {
+  console.log("⏱ startMatchTimer()");
+
   clearInterval(matchState.matchTimer);
 
   matchState.matchTimer = setInterval(() => {
@@ -198,15 +145,210 @@ function startMatchTimer() {
 }
 
 function stopMatchTimer() {
+  console.log("⏹ stopMatchTimer()");
   clearInterval(matchState.matchTimer);
   matchState.matchTimer = null;
 }
+
+// ===============================
+// FIRESTORE SAVE FUNCTION (PERSONAL + SCHOOL)
+// ===============================
+async function saveMatchingScore(topic, time, score, accuracy) {
+  console.log("💾 saveMatchingScore() CALLED with:", { topic, time, score, accuracy });
+
+  const user = getCurrentUser();
+  console.log("🔍 getCurrentUser() →", user);
+  if (!user) {
+    console.warn("⚠️ No user, aborting saveMatchingScore()");
+    return;
+  }
+
+  const uid = user.id;
+  const school = user.school;
+  const date = new Date().toLocaleString();
+  const safe = safeTopicName(topic);
+
+  console.log("🔍 safeTopicName(topic) →", safe);
+
+  // ===============================
+  // 1️⃣ PERSONAL BEST
+  // ===============================
+  const personalRef = doc(db, "users", uid, "scores", `${safe}_matching`);
+  const personalSnap = await getDoc(personalRef);
+
+  console.log("📄 PERSONAL DOC PATH:", `users/${uid}/scores/${safe}_matching`);
+  console.log("📄 personalSnap.exists():", personalSnap.exists());
+
+  let shouldUpdatePersonal = false;
+
+  if (!personalSnap.exists()) {
+    console.log("🆕 No existing personal matching score, will create new.");
+    shouldUpdatePersonal = true;
+  } else {
+    const prev = personalSnap.data();
+    console.log("📄 Existing personal matching data:", prev);
+
+    const prevTime = Number(prev.time ?? Infinity);
+    const prevScore = Number(prev.score ?? 0);
+    const prevAccuracy = Number(prev.accuracy ?? 0);
+
+    const isBetter =
+      time < prevTime ||
+      (time === prevTime && score > prevScore) ||
+      (time === prevTime && score === prevScore && accuracy > prevAccuracy);
+
+    console.log("🔍 Personal comparison:", {
+      prevTime,
+      prevScore,
+      prevAccuracy,
+      newTime: time,
+      newScore: score,
+      newAccuracy: accuracy,
+      isBetter
+    });
+
+    if (isBetter) {
+      console.log("✅ New personal matching score is better, will update.");
+      shouldUpdatePersonal = true;
+    } else {
+      console.log("ℹ️ New personal matching score is NOT better, skipping update.");
+    }
+  }
+
+  if (shouldUpdatePersonal) {
+    await setDoc(personalRef, {
+      topic,
+      safeTopic: safe,
+      mode: "matching",
+      time,
+      score,
+      accuracy: Number(accuracy.toFixed(2)),
+      date,
+      username: user.username,
+      nickname: user.nickname || user.username || "Guest",
+      updatedAt: Date.now()
+    }, { merge: true });
+
+    console.log("✅ PERSONAL MATCHING SCORE SAVED/UPDATED.");
+  }
+
+  // ===============================
+  // 2️⃣ SESSION MODE LEADERBOARD (FIXED FIELD NAMES)
+// ===============================
+  const sessionCode = localStorage.getItem("sessionCode");
+  const deviceID = localStorage.getItem("deviceID");
+  const nickname = localStorage.getItem("nickname") || user.username || "Guest";
+
+  console.log("🟣 SESSION DEBUG:", { sessionCode, deviceID, nickname });
+
+  if (sessionCode && deviceID) {
+    console.log("📄 SESSION PLAYER PATH:", `sessions/${sessionCode}/players/${deviceID}`);
+
+    await setDoc(doc(db, "sessions", sessionCode, "players", deviceID), {
+      deviceID,
+      nickname,
+      topic,
+      safeTopic: safe,
+      // use same field names as leaderboard expects
+      time,
+      score,
+      accuracy: Number(accuracy.toFixed(2)),
+      lastUpdated: Date.now()
+    }, { merge: true });
+
+    console.log("✅ SESSION MATCHING SCORE SAVED:", nickname, score, accuracy, time);
+  } else {
+    console.log("⚠️ No sessionCode/deviceID found, skipping session leaderboard.");
+  }
+
+  // ===============================
+  // 3️⃣ SCHOOL LEADERBOARD
+  // ===============================
+  if (!school) {
+    console.log("⚠️ No school on user, skipping school leaderboard.");
+    return;
+  }
+
+  const schoolDocId = `${school}_${safe}_matching`;
+  const entryRef = doc(db, "schoolLeaderboards", schoolDocId, "entries", uid);
+
+  console.log("📄 SCHOOL ENTRY PATH:", `schoolLeaderboards/${schoolDocId}/entries/${uid}`);
+
+  const existing = await getDoc(entryRef);
+  console.log("📄 existing school entry exists:", existing.exists());
+
+  let shouldUpdateSchool = false;
+
+  if (!existing.exists()) {
+    console.log("🆕 No existing school matching entry, will create new.");
+    shouldUpdateSchool = true;
+  } else {
+    const prev = existing.data();
+    console.log("📄 Existing school matching data:", prev);
+
+    const prevTime = Number(prev.time ?? Infinity);
+    const prevScore = Number(prev.score ?? 0);
+    const prevAccuracy = Number(prev.accuracy ?? 0);
+
+    const isBetter =
+      time < prevTime ||
+      (time === prevTime && score > prevScore) ||
+      (time === prevTime && score === prevScore && accuracy > prevAccuracy);
+
+    console.log("🔍 School comparison:", {
+      prevTime,
+      prevScore,
+      prevAccuracy,
+      newTime: time,
+      newScore: score,
+      newAccuracy: accuracy,
+      isBetter
+    });
+
+    if (isBetter) {
+      console.log("✅ New school matching score is better, will update.");
+      shouldUpdateSchool = true;
+    } else {
+      console.log("ℹ️ New school matching score is NOT better, skipping update.");
+    }
+  }
+
+  if (shouldUpdateSchool) {
+    await setDoc(entryRef, {
+      username: user.username,
+      nickname: user.nickname || user.username || "Guest",
+      time,
+      score,
+      accuracy: Number(accuracy.toFixed(2)),
+      date,
+      userId: uid,
+      topic,
+      safeTopic: safe,
+      mode: "matching",
+      updatedAt: Date.now()
+    }, { merge: true });
+
+    console.log("✅ SCHOOL MATCHING SCORE SAVED/UPDATED.");
+  }
+}
+
+
 
 
 // ===============================
 // END GAME
 // ===============================
 function endMatchGame() {
+
+  console.log("SESSION DEBUG:", {
+  sessionCode: localStorage.getItem("sessionCode"),
+  deviceID: localStorage.getItem("deviceID"),
+  nickname: localStorage.getItem("nickname")
+});
+
+
+  console.log("🏁 endMatchGame() CALLED");
+
   matchState.gameActive = false;
   clearInterval(matchState.matchTimer);
 
@@ -219,8 +361,11 @@ function endMatchGame() {
   document.getElementById("matchEndAccuracy").textContent =
     `Accuracy: ${matchAccuracy.toFixed(2)}%`;
 
-  const topic = window.currentTopic;
-  saveMatchingScore(topic, matchState.matchTime, matchScore, matchAccuracy);
+  const topic = getTopicFromUrl();
+  console.log("🔍 endMatchGame() topic:", topic);
+
+  saveMatchingScore(topic, matchState.matchTime, matchScore, matchAccuracy)
+    .catch(err => console.error("❌ Error in saveMatchingScore:", err));
 
   endPopup.style.display = "flex";
 }
@@ -230,20 +375,36 @@ function endMatchGame() {
 // REVEAL CARD
 // ===============================
 function revealCard(box) {
-  if (!matchState.gameActive) return;
-  if (matchState.boardLocked) return;
-  if (matchState.revealActive) return;
+  if (!matchState.gameActive) {
+    console.log("⛔ revealCard() ignored: game not active");
+    return;
+  }
+  if (matchState.boardLocked) {
+    console.log("⛔ revealCard() ignored: board locked");
+    return;
+  }
+  if (matchState.revealActive) {
+    console.log("⛔ revealCard() ignored: revealActive");
+    return;
+  }
 
   const index = Number(box.dataset.index);
   const card = matchState.matchCards[index];
-  if (!card) return;
+  if (!card) {
+    console.warn("⚠️ revealCard(): no card at index", index);
+    return;
+  }
 
-  if (matchState.firstPick === box) return;
+  if (matchState.firstPick === box) {
+    console.log("ℹ️ Same card clicked again, ignoring.");
+    return;
+  }
 
   box.textContent = card.text;
 
   if (!matchState.firstPick) {
     matchState.firstPick = box;
+    console.log("🃏 First pick set:", index, card);
     return;
   }
 
@@ -268,6 +429,13 @@ function revealCard(box) {
   matchAccuracy = (matchScore / matchAttempts) * 100;
   updateMatchStats();
 
+  console.log("🎯 Match attempt:", {
+    isMatch,
+    matchScore,
+    matchAttempts,
+    matchAccuracy
+  });
+
   if (isMatch) {
     matchState.firstPick.style.background = "#2ecc71";
     matchState.secondPick.style.background = "#2ecc71";
@@ -277,15 +445,20 @@ function revealCard(box) {
 
     matchState.matchesFound++;
 
+    console.log("✅ Match found. Total matches:", matchState.matchesFound);
+
     matchState.firstPick = null;
     matchState.secondPick = null;
     matchState.boardLocked = false;
 
     if (matchState.matchesFound === matchState.totalPairs) {
+      console.log("🏆 All pairs matched!");
       endMatchGame();
     }
 
   } else {
+    console.log("❌ Not a match, flipping back in 800ms");
+
     setTimeout(() => {
       if (matchState.firstPick) matchState.firstPick.textContent = "";
       if (matchState.secondPick) matchState.secondPick.textContent = "";
@@ -303,6 +476,8 @@ function revealCard(box) {
 // BUILD CARDS
 // ===============================
 function buildMatchCardsFromData(data) {
+  console.log("🧩 buildMatchCardsFromData() with", data?.length, "pairs");
+
   matchState.matchCards = [];
 
   const shuffled = [...data].sort(() => Math.random() - 0.5);
@@ -316,6 +491,8 @@ function buildMatchCardsFromData(data) {
   matchState.matchCards.sort(() => Math.random() - 0.5);
 
   matchState.totalPairs = 10;
+
+  console.log("🧩 matchCards built:", matchState.matchCards);
 }
 
 
@@ -323,8 +500,13 @@ function buildMatchCardsFromData(data) {
 // RENDER GRID FACE UP
 // ===============================
 function renderMatchGridFaceUp() {
+  console.log("🖼 renderMatchGridFaceUp()");
+
   const grid = document.getElementById("matchGrid");
-  if (!grid) return;
+  if (!grid) {
+    console.error("❌ renderMatchGridFaceUp(): #matchGrid not found");
+    return;
+  }
 
   grid.innerHTML = "";
 
@@ -342,6 +524,8 @@ function renderMatchGridFaceUp() {
 // FLIP DOWN + ACTIVATE
 // ===============================
 function flipGridFaceDownAndActivate() {
+  console.log("🔄 flipGridFaceDownAndActivate()");
+
   const boxes = document.querySelectorAll(".match-box");
 
   boxes.forEach(box => {
@@ -357,10 +541,18 @@ function flipGridFaceDownAndActivate() {
 
 // ===============================
 // REVEAL ALL CARDS (3 SECONDS)
-// –===============================
+// ===============================
 function revealAllCards() {
-  if (!matchState.gameActive) return;
-  if (matchState.revealActive) return;
+  console.log("👀 revealAllCards() CALLED");
+
+  if (!matchState.gameActive) {
+    console.log("⛔ revealAllCards(): game not active");
+    return;
+  }
+  if (matchState.revealActive) {
+    console.log("⛔ revealAllCards(): already revealing");
+    return;
+  }
 
   matchState.revealActive = true;
   matchState.boardLocked = true;
@@ -420,9 +612,10 @@ function revealAllCards() {
 // START MATCH COUNTDOWN
 // ===============================
 export function startMatchCountdown(data = window.currentMatchData) {
+  console.log("⏳ startMatchCountdown() CALLED");
 
   if (!data || !Array.isArray(data) || data.length === 0) {
-    console.error("No match data found");
+    console.error("❌ No match data found for countdown");
     return;
   }
 
@@ -456,7 +649,6 @@ export function startMatchCountdown(data = window.currentMatchData) {
   let timeLeft = 5;
 
   matchState.countdownInterval = setInterval(() => {
-
     timeLeft--;
     overlay.textContent = timeLeft.toString();
 
@@ -467,7 +659,6 @@ export function startMatchCountdown(data = window.currentMatchData) {
       overlay.remove();
       flipGridFaceDownAndActivate();
     }
-
   }, 1000);
 }
 
@@ -476,6 +667,7 @@ export function startMatchCountdown(data = window.currentMatchData) {
 // SHOW RULES
 // ===============================
 export function showMatchRules() {
+  console.log("📘 showMatchRules()");
   resetMatchState();
   hideAllScreens();
   document.getElementById("matchGameScreen").style.display = "block";
@@ -487,6 +679,7 @@ export function showMatchRules() {
 // START GAME DIRECTLY
 // ===============================
 export function startMatchGame() {
+  console.log("▶️ startMatchGame()");
   startMatchCountdown(window.currentMatchData);
 }
 
@@ -495,31 +688,57 @@ export function startMatchGame() {
 // BUTTON EVENTS
 // ===============================
 if (startBtn) {
-  startBtn.onclick = () => startMatchCountdown(window.currentMatchData);
+  startBtn.onclick = () => {
+    console.log("🟢 Start button clicked");
+    startMatchCountdown(window.currentMatchData);
+  };
 }
 
 if (playAgainBtn) {
   playAgainBtn.onclick = () => {
+    console.log("🔁 Play Again clicked");
     endPopup.style.display = "none";
     startMatchCountdown(window.currentMatchData);
   };
 }
 
 if (revealBtn) {
-  revealBtn.onclick = () => revealAllCards();
+  revealBtn.onclick = () => {
+    console.log("👀 Reveal button clicked");
+    revealAllCards();
+  };
 }
 
 
 // ===============================
-// QUIT BUTTON (FIXED)
-//===============================
+// QUIT BUTTON (MATCHING MODE)
+// — behaves EXACTLY like theory engine
+// ===============================
 const quitBtn = document.getElementById("matchQuitBtn");
+
 if (quitBtn) {
   quitBtn.onclick = () => {
+    console.log("🚪 Quit button clicked in matching mode");
+
     stopMatchTimer();
-    goBackToTopicOptions();
+
+    const params = new URLSearchParams(window.location.search);
+    const course = params.get("course");
+
+    console.log("🔍 Quit course param:", course);
+
+    if (course && course.startsWith("KS4")) {
+      console.log("↩️ Using goBackKS4()");
+      goBackKS4();
+    } else {
+      console.log("↩️ Using goBack()");
+      goBack();
+    }
   };
 }
+
+console.log("✅ Matching Engine Loaded Successfully");
+
 
 
 

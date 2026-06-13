@@ -3,7 +3,6 @@
 // ===============================
 import { getCurrentUser } from "./userManager.js";
 import { db } from "./firebaseConfig.js";
-
 import {
   doc,
   getDoc,
@@ -12,86 +11,121 @@ import {
 
 
 // ===============================
-// UNIVERSAL SAFE TOPIC NAME
+// SAFE TOPIC NAME
 // ===============================
-function safeTopicName(raw) {
-  return raw
-    .replace(/\//g, "_")
-    .replace(/\\/g, "_")
-    .replace(/ /g, "_")
-    .replace(/[^\w\-]/g, "_");
+function safeTopicName(topic) {
+  return topic
+    .trim()
+    .toLowerCase()
+    .replace(/\s+/g, "_")
+    .replace(/[^a-z0-9_]/g, "");
 }
 
 
 // ===============================
-// GO BACK ONE LEVEL (TOPIC OPTIONS PAGE)
+// GO BACK
 // ===============================
 function goBackToTopicOptions() {
   const params = new URLSearchParams(window.location.search);
-  const course = params.get("course");
-  const unit = params.get("unit");
-  const topic = params.get("topic");
+  const course = params.get("course") || "KS3";
+  const unit = params.get("unit") || "";
+  const topic = params.get("topic") || "";
 
   let page = "";
-
   if (course.startsWith("KS3")) page = "ks3-topic-options.html";
   else if (course.startsWith("KS4")) page = "ks4-topic-options.html";
   else if (course.startsWith("KS5")) page = "ks5-topic-options.html";
-  else page = "ks3-topic-options.html"; // fallback
+  else page = "ks3-topic-options.html";
 
   window.location.href =
     `${page}?course=${encodeURIComponent(course)}&unit=${encodeURIComponent(unit)}&topic=${encodeURIComponent(topic)}`;
 }
 
 
-
 // ===============================
-// FIRESTORE SAVE FUNCTION (LIFETIME TOTALS)
+// SAVE EXAM SCORE (FIXED)
 // ===============================
-async function saveExamScore(topic, correct, wrong) {
+export async function saveExamScore(totalCorrect, totalWrong) {
   const user = getCurrentUser();
   if (!user) return;
 
-  const uid = user.id;
-  const school = user.school;
-  const date = new Date().toLocaleString();
+  const params = new URLSearchParams(window.location.search);
+  const topic = decodeURIComponent(params.get("topic") || "");
   const safe = safeTopicName(topic);
+  const uid = user.id;
+  const date = new Date().toLocaleString();
 
-  // ⭐ PERSONAL LIFETIME TOTALS
-  let lifetimeCorrect = correct;
-  let lifetimeWrong = wrong;
+  const sessionCode = localStorage.getItem("sessionCode");
+  const deviceID = localStorage.getItem("deviceID");
+  const nickname = localStorage.getItem("nickname") || user.username || "Guest";
 
+  const netScore = totalCorrect - totalWrong;
+
+  // PERSONAL SCORE
   const personalRef = doc(db, "users", uid, "scores", `${safe}_exam`);
-  const snap = await getDoc(personalRef);
+  const personalSnap = await getDoc(personalRef);
 
-  if (snap.exists()) {
-    lifetimeCorrect += snap.data().totalCorrect || 0;
-    lifetimeWrong += snap.data().totalWrong || 0;
+  let lifetimeCorrect = totalCorrect;
+  let lifetimeWrong = totalWrong;
+
+  if (personalSnap.exists()) {
+    const prev = personalSnap.data();
+    lifetimeCorrect += prev.totalCorrect || 0;
+    lifetimeWrong += prev.totalWrong || 0;
   }
 
   const lifetimeNet = lifetimeCorrect - lifetimeWrong;
 
   await setDoc(personalRef, {
+    username: user.username,
+    nickname,
     topic,
+    safeTopic: safe,
     mode: "exam",
     totalCorrect: lifetimeCorrect,
     totalWrong: lifetimeWrong,
     netScore: lifetimeNet,
-    date
+    date,
+    updatedAt: Date.now()
   });
 
-  // ⭐ SCHOOL LEADERBOARD
+  // SESSION MODE
+  if (sessionCode && deviceID) {
+    const playerRef = doc(db, "sessions", sessionCode, "players", deviceID);
+    await setDoc(playerRef, {
+      deviceID,
+      nickname,
+      topic,
+      safeTopic: safe,
+      examNet: lifetimeNet,
+      examCorrect: lifetimeCorrect,
+      examWrong: lifetimeWrong,
+      lastUpdated: Date.now()
+    }, { merge: true });
+
+    return;
+  }
+
+  // SCHOOL LEADERBOARD
+  const school = user.school;
+  if (!school) return;
+
   const schoolDocId = `${school}_${safe}_exam`;
   const entryRef = doc(db, "schoolLeaderboards", schoolDocId, "entries", uid);
+  const existing = await getDoc(entryRef);
+  const prevNet = existing.exists() ? existing.data().netScore ?? -9999 : -9999;
 
-  await setDoc(entryRef, {
-    username: user.username,
-    correct: lifetimeCorrect,
-    wrong: lifetimeWrong,
-    netScore: lifetimeNet,
-    date,
-    userId: uid
-  });
+  if (!existing.exists() || lifetimeNet > prevNet) {
+    await setDoc(entryRef, {
+      username: user.username,
+      totalCorrect: lifetimeCorrect,
+      totalWrong: lifetimeWrong,
+      netScore: lifetimeNet,
+      date,
+      userId: uid,
+      topic
+    });
+  }
 }
 
 
@@ -110,7 +144,8 @@ export const examMode = {
   lockInput: false
 };
 
-// DOM elements
+
+// DOM
 const rulesPopup = document.getElementById("examRulesPopup");
 const endPopup = document.getElementById("examEndPopup");
 const endScoreText = document.getElementById("examEndScore");
@@ -249,28 +284,28 @@ function endExam() {
   clearInterval(examMode.timer);
 
   for (let i = 0; i < 4; i++) {
-    document.getElementById("answer" + i).disabled = true;
+    const btn = document.getElementById("answer" + i);
+    if (btn) btn.disabled = true;
   }
 
   const netScore = examMode.score - examMode.wrong;
   endScoreText.textContent =
     `You scored ${examMode.score} out of ${examMode.questions.length} (Net: ${netScore})`;
 
-  const topic = window.examTopic || "Unknown";
-  saveExamScore(topic, examMode.score, examMode.wrong);
+  saveExamScore(examMode.score, examMode.wrong);
 
   endPopup.style.display = "flex";
 }
 
 
 // ===============================
-// QUIT BUTTON (FIXED)
+// QUIT BUTTON
 // ===============================
 if (quitBtn) {
   quitBtn.onclick = () => {
     examMode.active = false;
     clearInterval(examMode.timer);
-    goBackToTopicOptions();   // ⭐ FIXED: goes one level back
+    goBackToTopicOptions();
   };
 }
 
@@ -282,20 +317,23 @@ function flashExamCorrect() {
   const box = document.getElementById("questionText");
   if (!box) return;
   box.style.background = "#c8ffcc";
-  setTimeout(() => box.style.background = "#ffffff", 150);
+  setTimeout(() => {
+    box.style.background = "#ffffff";
+  }, 150);
 }
 
 function flashExamWrong() {
   const box = document.getElementById("questionText");
   if (!box) return;
   box.style.background = "#ffcccc";
-  setTimeout(() => box.style.background = "#ffffff", 150);
+  setTimeout(() => {
+    box.style.background = "#ffffff";
+  }, 150);
 }
 
 
 // ===============================
 // BUTTON EVENTS
 // ===============================
-startBtn.onclick = () => startExam();
-playAgainBtn.onclick = () => startExam();
-
+if (startBtn) startBtn.onclick = () => startExam();
+if (playAgainBtn) playAgainBtn.onclick = () => startExam();

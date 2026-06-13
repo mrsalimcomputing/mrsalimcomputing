@@ -68,7 +68,9 @@
             const cleanTopic = topic.replace(/^\d+(\.\d+)?\s*/, "").trim();
 
             // ⭐ FIRST BUTTON UNLOCKED ("Design Tools")
-            if (index === 0) {
+            if (
+          topic === "Design Tools" ||
+          topic === "Data and testing" ){
                 btn.className = "ks4-btn";
                 btn.innerText = topic;
 

@@ -40,9 +40,22 @@
 
     window.goBack = goBack;
 
+    // -----------------------------
+    // TRUE PLAY MODE DETECTION
+    // -----------------------------
+    const isPlayMode = localStorage.getItem("isPlayMode") === "true";
     const user = getCurrentUser();
-    window.isPlayMode = !user;
+    const isSessionUser = !!localStorage.getItem("sessionCode");
 
+    // Leaderboard allowed for:
+    // - Google/Microsoft users
+    // - Session users
+    // - NOT play mode
+    const showLeaderboard = (!isPlayMode && (user || isSessionUser));
+
+    // -----------------------------
+    // URL PARAMS
+    // -----------------------------
     const params = new URLSearchParams(window.location.search);
 
     let course = params.get("course");
@@ -63,11 +76,23 @@
     if (!topic) topicTitleEl.innerText = "No topic selected";
     else topicTitleEl.innerText = topic;
 
+    // -----------------------------
+    // BUTTON CREATOR
+    // -----------------------------
     function addButton(label, url) {
         const btn = document.createElement("button");
         btn.className = "menu-btn";
         btn.innerText = label;
         btn.onclick = () => window.location.href = url;
+        container.appendChild(btn);
+    }
+
+    // 🔒 LOCKED MATCHING BUTTON
+    function addLockedMatchingButton() {
+        const btn = document.createElement("button");
+        btn.className = "menu-btn locked";
+        btn.innerText = "Matching Game 🔒";
+        btn.onclick = () => alert("Matching Mode is locked — Coming Soon!");
         container.appendChild(btn);
     }
 
@@ -87,6 +112,9 @@
         "storage devices"
     ];
 
+    // -----------------------------
+    // TOPIC LOGIC
+    // -----------------------------
     if (binaryTopics.includes(t)) {
 
         addButton(
@@ -94,7 +122,10 @@
             `binary-quiz.html?course=${encodeURIComponent(course)}&unit=${encodeURIComponent(unit)}&topic=${encodeURIComponent(topic)}`
         );
 
-        if (!window.isPlayMode) {
+        // 🔒 Matching locked
+        addLockedMatchingButton();
+
+        if (showLeaderboard) {
             addButton(
                 "Leaderboard",
                 `leaderboard.html?course=${encodeURIComponent(course)}&unit=${encodeURIComponent(unit)}&topic=${encodeURIComponent(topic)}`
@@ -104,12 +135,10 @@
 
     else if (matchingOnlyTopics.includes(t)) {
 
-        addButton(
-            "Matching Game",
-            `matching-game.html?course=${encodeURIComponent(course)}&unit=${encodeURIComponent(unit)}&topic=${encodeURIComponent(topic)}`
-        );
+        // 🔒 Matching locked
+        addLockedMatchingButton();
 
-        if (!window.isPlayMode) {
+        if (showLeaderboard) {
             addButton(
                 "Leaderboard",
                 `leaderboard.html?course=${encodeURIComponent(course)}&unit=${encodeURIComponent(unit)}&topic=${encodeURIComponent(topic)}`
@@ -124,17 +153,15 @@
             `theory-quiz.html?course=${encodeURIComponent(course)}&unit=${encodeURIComponent(unit)}&topic=${encodeURIComponent(topic)}`
         );
 
-        addButton(
-            "Matching Game",
-            `matching-game.html?course=${encodeURIComponent(course)}&unit=${encodeURIComponent(unit)}&topic=${encodeURIComponent(topic)}`
-        );
+        // 🔒 Matching locked
+        addLockedMatchingButton();
 
         addButton(
             "Exam Mode",
             `exam-mode.html?course=${encodeURIComponent(course)}&unit=${encodeURIComponent(unit)}&topic=${encodeURIComponent(topic)}`
         );
 
-        if (!window.isPlayMode) {
+        if (showLeaderboard) {
             addButton(
                 "Leaderboard",
                 `leaderboard.html?course=${encodeURIComponent(course)}&unit=${encodeURIComponent(unit)}&topic=${encodeURIComponent(topic)}`
@@ -149,9 +176,3 @@
 
 </body>
 </html>
-
-
-
-
-
-

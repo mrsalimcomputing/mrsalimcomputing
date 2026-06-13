@@ -3,6 +3,8 @@
 // ===============================
 import { hideAllScreens } from "./navigation.js";
 import { getCurrentUser } from "./userManager.js";
+import { goBack } from "./navigation.js";      
+import { goBackKS4 } from "./ks4-navigation.js";
 
 import { db } from "./firebaseConfig.js";
 import {
@@ -13,85 +15,146 @@ import {
 
 
 // ===============================
-// UNIVERSAL SAFE TOPIC NAME
+// SAFE TOPIC NAME
 // ===============================
-function safeTopicName(raw) {
-  return raw
-    .replace(/\//g, "_")
-    .replace(/\\/g, "_")
-    .replace(/ /g, "_")
-    .replace(/[^\w\-]/g, "_");
+function safeTopicName(topic) {
+  return topic.trim().toLowerCase().replace(/\s+/g, "_").replace(/[^a-z0-9_]/g, "");
 }
 
 
 // ===============================
-// GO BACK ONE LEVEL (TOPIC OPTIONS PAGE)
+// GET TOPIC FROM URL
 // ===============================
-function goBackToTopicOptions() {
+function getTopicFromUrl() {
   const params = new URLSearchParams(window.location.search);
-  const course = params.get("course");
-  const unit = params.get("unit");
-  const topic = params.get("topic");
-
-  let page = "";
-
-  if (course.startsWith("KS3")) page = "ks3-topic-options.html";
-  else if (course.startsWith("KS4")) page = "ks4-topic-options.html";
-  else if (course.startsWith("KS5")) page = "ks5-topic-options.html";
-  else page = "ks3-topic-options.html"; // fallback
-
-  window.location.href =
-    `${page}?course=${encodeURIComponent(course)}&unit=${encodeURIComponent(unit)}&topic=${encodeURIComponent(topic)}`;
+  return decodeURIComponent(params.get("topic") || "");
 }
 
 
-
 // ===============================
-// FIRESTORE SAVE FUNCTION
+// SAVE THEORY SCORE (CLEAN VERSION)
 // ===============================
-export async function saveTheoryScore(topic, score, accuracy) {
+export async function saveTheoryScore(score, accuracy) {
   const user = getCurrentUser();
   if (!user) return;
 
-  const uid = user.id;
-  const school = user.school;
-  const date = new Date().toLocaleString();
+  const params = new URLSearchParams(window.location.search);
+  const topic = decodeURIComponent(params.get("topic") || "");
   const safe = safeTopicName(topic);
 
-  // ⭐ PERSONAL BEST
-  const personalDocRef = doc(db, "users", uid, "scores", `${safe}_theory`);
-  const personalSnap = await getDoc(personalDocRef);
+  const uid = user.id;
+  const date = new Date().toLocaleString();
 
-  if (!personalSnap.exists() || score > personalSnap.data().score) {
-    await setDoc(personalDocRef, {
-      topic,
-      mode: "theory",
-      score,
-      accuracy,
-      date
-    });
+  const sessionCode = localStorage.getItem("sessionCode");
+  const deviceID = localStorage.getItem("deviceID");
+  const nickname = localStorage.getItem("nickname") || user.username || "Guest";
+
+  // ============================================================
+  // 1) PERSONAL BEST
+  // ============================================================
+  const personalDocId = `${safe}_theory`;
+  const personalRef = doc(db, "users", uid, "scores", personalDocId);
+  const personalSnap = await getDoc(personalRef);
+
+  let bestScore = score;
+  let bestAccuracy = accuracy;
+
+  if (personalSnap.exists()) {
+    const prev = personalSnap.data();
+    const prevScore = prev.score ?? 0;
+    const prevAccuracy = prev.accuracy ?? 0;
+
+    if (prevScore > bestScore) {
+      bestScore = prevScore;
+      bestAccuracy = prevAccuracy;
+    }
   }
 
-  // ⭐ SCHOOL LEADERBOARD
+  await setDoc(personalRef, {
+    username: user.username,
+    nickname,
+    topic,
+    safeTopic: safe,
+    mode: "theory",
+    score: bestScore,
+    accuracy: bestAccuracy,
+    date,
+    updatedAt: Date.now()
+  }, { merge: true });
+
+  // ============================================================
+  // 2) SESSION MODE LEADERBOARD
+  // ============================================================
+  if (sessionCode && deviceID) {
+    const playerRef = doc(db, "sessions", sessionCode, "players", deviceID);
+    const existingSnap = await getDoc(playerRef);
+
+    let shouldUpdate = false;
+
+    if (existingSnap.exists()) {
+      const prev = existingSnap.data();
+      const prevScore = prev.theoryScore ?? 0;
+      const prevAccuracy = prev.theoryAccuracy ?? 0;
+
+      if (score > prevScore || (score === prevScore && accuracy > prevAccuracy)) {
+        shouldUpdate = true;
+      }
+    } else {
+      shouldUpdate = true;
+    }
+
+    if (shouldUpdate) {
+      await setDoc(playerRef, {
+        deviceID,
+        nickname,
+        topic,
+        safeTopic: safe,
+        theoryScore: score,
+        theoryAccuracy: accuracy,
+        lastUpdated: Date.now()
+      }, { merge: true });
+
+      const topicRef = doc(db, "sessions", sessionCode, "players", deviceID, "topics", safe);
+      await setDoc(topicRef, {
+        topic,
+        safeTopic: safe,
+        theoryScore: score,
+        theoryAccuracy: accuracy,
+        updatedAt: Date.now()
+      }, { merge: true });
+    }
+
+    return;
+  }
+
+  // ============================================================
+  // 3) SCHOOL LEADERBOARD (NON-SESSION USERS)
+  // ============================================================
+  const school = user.school;
+  if (!school) return;
+
   const schoolDocId = `${school}_${safe}_theory`;
   const entryRef = doc(db, "schoolLeaderboards", schoolDocId, "entries", uid);
-
   const existing = await getDoc(entryRef);
 
-  if (!existing.exists() || score > existing.data().score) {
+  const prevScore = existing.exists() ? existing.data().score ?? 0 : 0;
+  const prevAccuracy = existing.exists() ? existing.data().accuracy ?? 0 : 0;
+
+  if (!existing.exists() || bestScore > prevScore || bestAccuracy > prevAccuracy) {
     await setDoc(entryRef, {
       username: user.username,
-      score,
-      accuracy,
+      score: bestScore,
+      accuracy: bestAccuracy,
       date,
-      userId: uid
+      userId: uid,
+      topic
     });
   }
 }
 
 
 // ===============================
-// THEORY QUIZ ENGINE
+// THEORY QUIZ ENGINE STATE
 // ===============================
 let currentQuestionIndex = 0;
 let shuffledQuestions = [];
@@ -104,22 +167,44 @@ let lockInput = false;
 let questionsAttempted = 0;
 let accuracy = 0;
 
-// DOM elements
-const rulesPopup = document.getElementById("theoryRulesPopup");
-const endPopup = document.getElementById("theoryEndPopup");
-const endScoreText = document.getElementById("theoryEndScore");
-const endAccuracyText = document.getElementById("endAccuracyText");
-const startBtn = document.getElementById("startTheoryBtn");
-const playAgainBtn = document.getElementById("playAgainTheoryBtn");
-const quitBtn = document.getElementById("theoryQuitBtn");
 
+// ===============================
+// DOM ELEMENTS
+// ===============================
+let rulesPopup, endPopup, endScoreText, endAccuracyText;
+
+document.addEventListener("DOMContentLoaded", () => {
+  rulesPopup = document.getElementById("theoryRulesPopup");
+  endPopup = document.getElementById("theoryEndPopup");
+  endScoreText = document.getElementById("theoryEndScore");
+  endAccuracyText = document.getElementById("endAccuracyText");
+
+  const startBtn = document.getElementById("startTheoryBtn");
+  const playAgainBtn = document.getElementById("playAgainTheoryBtn");
+  const quitBtn = document.getElementById("theoryQuitBtn");
+
+  if (startBtn) startBtn.onclick = () => startTheoryQuiz();
+  if (playAgainBtn) playAgainBtn.onclick = () => startTheoryQuiz();
+
+  if (quitBtn) {
+    quitBtn.onclick = () => {
+      clearInterval(theoryTimer);
+
+      const params = new URLSearchParams(window.location.search);
+      const course = params.get("course");
+
+      if (course && course.startsWith("KS4")) goBackKS4();
+      else goBack();
+    };
+  }
+});
 
 // ===============================
 // SHOW RULES
 // ===============================
 export function showTheoryRules(questions) {
   storedQuestions = questions;
-  rulesPopup.style.display = "flex";
+  if (rulesPopup) rulesPopup.style.display = "flex";
 }
 
 
@@ -142,15 +227,21 @@ function startTheoryTimer() {
 
 
 // ===============================
-// START QUIZ
+// START QUIZ (CLEAN, NO DUPLICATE LISTENERS)
 // ===============================
 export function startTheoryQuiz(questions = storedQuestions) {
 
-  rulesPopup.style.display = "none";
-  endPopup.style.display = "none";
+  if (!questions || questions.length === 0) {
+    alert("No questions available for this topic.");
+    return;
+  }
 
+  // RESET UI
+  if (rulesPopup) rulesPopup.style.display = "none";
+  if (endPopup) endPopup.style.display = "none";
   hideAllScreens();
 
+  // RESET STATE
   currentQuestionIndex = 0;
   theoryScore = 0;
   theoryTimeLeft = 60;
@@ -165,6 +256,7 @@ export function startTheoryQuiz(questions = storedQuestions) {
   document.getElementById("theoryScore").textContent = theoryScore;
   document.getElementById("theoryTime").textContent = theoryTimeLeft;
 
+  // START QUIZ
   startTheoryTimer();
   document.getElementById("theoryQuizScreen").style.display = "block";
 
@@ -176,17 +268,16 @@ export function startTheoryQuiz(questions = storedQuestions) {
 // LOAD QUESTION
 // ===============================
 function loadTheoryQuestion() {
+  const q = shuffledQuestions[currentQuestionIndex];
+  if (!q || !q.correct || !q.wrong) return;
 
   lockInput = false;
 
-  const q = shuffledQuestions[currentQuestionIndex];
-
   const correct = q.correct[Math.floor(Math.random() * q.correct.length)];
+  const wrongShuffled = q.wrong.sort(() => Math.random() - 0.5);
+  const selectedWrong = wrongShuffled.slice(0, Math.min(8, wrongShuffled.length));
 
-  let wrongShuffled = q.wrong.sort(() => Math.random() - 0.5);
-  let selectedWrong = wrongShuffled.slice(0, Math.min(8, wrongShuffled.length));
-
-  let answers = [...selectedWrong, correct].sort(() => Math.random() - 0.5);
+  const answers = [...selectedWrong, correct].sort(() => Math.random() - 0.5);
 
   document.getElementById("theoryQuestionBox").textContent = q.question;
 
@@ -203,7 +294,6 @@ function loadTheoryQuestion() {
 // CHECK ANSWER
 // ===============================
 function checkTheoryAnswer(selected, correct) {
-
   if (lockInput) return;
   lockInput = true;
 
@@ -215,22 +305,21 @@ function checkTheoryAnswer(selected, correct) {
   questionsAttempted++;
 
   if (isCorrect) {
-    theoryScore += 1;
+    theoryScore++;
     flashTheoryCorrect();
   } else {
     theoryScore = Math.max(0, theoryScore - 1);
     flashTheoryWrong();
   }
 
-  accuracy = (theoryScore / questionsAttempted) * 100;
+  accuracy = (questionsAttempted > 0)
+    ? (theoryScore / questionsAttempted) * 100
+    : 0;
 
   updateStatsBar();
 
   currentQuestionIndex++;
-
-  if (currentQuestionIndex >= shuffledQuestions.length) {
-    currentQuestionIndex = 0;
-  }
+  if (currentQuestionIndex >= shuffledQuestions.length) currentQuestionIndex = 0;
 
   loadTheoryQuestion();
 }
@@ -240,16 +329,14 @@ function checkTheoryAnswer(selected, correct) {
 // END QUIZ
 // ===============================
 function endTheoryQuiz() {
-
   clearInterval(theoryTimer);
 
-  endScoreText.textContent = `Final Score: ${theoryScore}`;
-  endAccuracyText.textContent = `Accuracy: ${accuracy.toFixed(0)}%`;
+  if (endScoreText) endScoreText.textContent = `Final Score: ${theoryScore}`;
+  if (endAccuracyText) endAccuracyText.textContent = `Accuracy: ${accuracy.toFixed(0)}%`;
 
-  const topic = window.currentTopic;
-  saveTheoryScore(topic, theoryScore, accuracy);
+  saveTheoryScore(theoryScore, accuracy);
 
-  endPopup.style.display = "flex";
+  if (endPopup) endPopup.style.display = "flex";
 }
 
 
@@ -301,17 +388,7 @@ function flashTheoryWrong() {
 }
 
 
-// ===============================
-// BUTTON EVENTS
-// ===============================
-startBtn.onclick = () => startTheoryQuiz();
-playAgainBtn.onclick = () => startTheoryQuiz();
 
-if (quitBtn) {
-  quitBtn.onclick = () => {
-    clearInterval(theoryTimer);
-    goBackToTopicOptions();   // ⭐ FIXED: goes one level back
-  };
-}
+
 
 

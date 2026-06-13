@@ -54,11 +54,11 @@ export const ks4Topics = {
 
             mainTopics: [
                 "Design Tools",
-                "2. Human Computer Interface (HCI) in everyday life",
-                "3. Data and testing",
-                "4. Cyber-security and legislation",
-                "5. Digital communications",
-                "6. Internet of Everything (IoE)"
+                "HCI in everyday life",
+                "Data and testing",
+                "Cyber-security and legislation",
+                "Digital communications",
+                "Internet of Everything (IoE)"
             ],
 
             subtopics: {
@@ -75,45 +75,45 @@ export const ks4Topics = {
 
                 // 2. HCI
                 "HCI in everyday life": [
-                    "2.1 Purpose of HCI",
-                    "2.2 Types of interface",
-                    "2.3 Factors affecting HCI design",
-                    "2.4 Accessibility features",
-                    "2.5 Display types"
+                    "Purpose of HCI",
+                    "Types of interface",
+                    "Factors affecting HCI design",
+                    "Accessibility features",
+                    "Display types"
                 ],
 
                 // 3. DATA AND TESTING
                 "Data and testing": [
-                    "3.1 Data types",
-                    "3.2 Data integrity",
-                    "3.3 Validation",
-                    "3.4 Verification",
-                    "3.5 Testing"
+                    "Data types",
+                    "Data and Information",
+                    "Data Validation",
+                    "Data Verification",
+                    "Testing"
                 ],
 
                 // 4. CYBER SECURITY
-                "4. Cyber-security and legislation": [
-                    "4.1 Physical security",
-                    "4.2 Logical security",
-                    "4.3 Threats",
-                    "4.4 Legislation"
+                "Cyber-security and legislation": [
+                    "Physical security",
+                    "Logical security",
+                    "Threats",
+                    "Legislation"
                 ],
 
                 // 5. DIGITAL COMMUNICATIONS
-                "5. Digital communications": [
-                    "5.1 Communication methods",
-                    "5.2 Communication protocols",
-                    "5.3 Types of networks",
-                    "5.4 Factors affecting communication",
-                    "5.5 Internet usage"
+                "Digital communications": [
+                    "Communication methods",
+                    "Communication protocols",
+                    "Types of networks",
+                    "Factors affecting communication",
+                    "Internet usage"
                 ],
 
                 // 6. INTERNET OF EVERYTHING
-                "6. Internet of Everything (IoE)": [
-                    "6.1 What is IoE",
-                    "6.2 Devices and systems",
-                    "6.3 Benefits",
-                    "6.4 Risks"
+                "Internet of Everything (IoE)": [
+                    "What is IoE",
+                    "Devices and systems",
+                    "Benefits",
+                    "Risks"
                 ],
 
             }

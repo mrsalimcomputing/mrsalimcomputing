@@ -1,104 +1,85 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <!-- ⭐ NEW TITLE -->
-    <title>Learn with Mr Salim : Computing</title>
-
-    <!-- MAIN STYLES -->
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="animations.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Learn with Mr Salim : Computing</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="animations.css" />
 </head>
 
 <body>
+  <!-- WELCOME BANNER -->
+  <div id="userWelcome" class="welcome-banner"></div>
 
-    <!-- ========================= -->
-    <!-- WELCOME USER BANNER       -->
-    <!-- ========================= -->
-    <div id="userWelcome" class="welcome-banner">
-        <!-- Filled by JS -->
-    </div>
+  <!-- MOTIVATIONAL QUOTE -->
+  <div class="quote-banner">
+    “Every click is progress — keep learning, keep growing.”
+  </div>
 
-    <!-- ========================= -->
-    <!-- MOTIVATIONAL QUOTE        -->
-    <!-- ========================= -->
-    <div class="quote-banner">
-        “Every click is progress — keep learning, keep growing.”
-    </div>
+  <!-- LANGUAGE SELECTOR -->
+  <div class="language-selector">
+    <select id="languageSelect" onchange="changeLanguage(this.value)">
+      <option value="en">English</option>
+      <option value="fr">Français</option>
+      <option value="es">Español</option>
+      <option value="ar">العربية</option>
+    </select>
+  </div>
 
-    <!-- ========================= -->
-    <!-- LANGUAGE SELECTOR         -->
-    <!-- ========================= -->
-    <div class="language-selector">
-        <select id="languageSelect" onchange="changeLanguage(this.value)">
-            <option value="en">English</option>
-            <option value="fr">Français</option>
-            <option value="es">Español</option>
-            <option value="ar">العربية</option>
-        </select>
-    </div>
+  <!-- LOGOUT BUTTON -->
+  <button id="logoutBtn" class="logout-btn">Logout</button>
 
-    <!-- ========================= -->
-    <!-- LOGOUT BUTTON             -->
-    <!-- ========================= -->
-    <button id="logoutBtn" class="logout-btn">Logout</button>
-
-    <!-- ========================= -->
-    <!-- FIREBASE AUTH (MUST LOAD FIRST) -->
-    <!-- ========================= -->
-    <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
-        import { getAuth } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
-        import { app } from "./firebaseConfig.js";
-
-        const auth = getAuth(app);
-        window.auth = auth;
-    </script>
-
-    <!-- ========================= -->
-    <!-- LOGIN CHECK (AFTER AUTH) -->
-    <!-- ========================= -->
-    <script type="module">
-        import { getCurrentUser } from "./userManager.js";
-
-        const user = getCurrentUser();
-        window.isPlayMode = !user;
-    </script>
-
-    <!-- ========================= -->
-    <!-- MAIN MENU                 -->
-    <!-- ========================= -->
-    <div id="menuScreen" class="menu-screen">
-        <h1 class="menu-title">Learn with Mr Salim</h1>
-        <p class="menu-subtitle">Computing made fun, fast, and interactive.</p>
+  <!-- MAIN MENU -->
+  <div id="menuScreen" class="menu-screen">
+    <h1 class="menu-title">Learn with Mr Salim</h1>
+    <p class="menu-subtitle">Computing made fun, fast, and interactive.</p>
 
     <div class="button-row">
-        <button class="menu-btn" onclick="window.location.href='ks3.html'">KS3</button>
-        <button class="menu-btn" onclick="window.location.href='ks4.html'">KS4</button>
-        <button class="menu-btn locked"onclick="alert('KS5 is locked — Coming Soon!')">KS5 🔒 Coming Soon</button>
+      <button class="menu-btn" onclick="window.location.href='ks3.html'">KS3</button>
+      <button class="menu-btn locked" onclick="alert('KS4 is locked — Coming Soon!')">
+        KS4 🔒 Coming Soon
+      </button>
+      <button class="menu-btn locked" onclick="alert('KS5 is locked — Coming Soon!')">
+        KS5 🔒 Coming Soon
+      </button>
     </div>
+  </div>
 
-    </div>
+  <!-- LANGUAGE SWITCH -->
+  <script>
+    function changeLanguage(lang) {
+      alert("Language changed to: " + lang);
+    }
+  </script>
 
-    <!-- ========================= -->
-    <!-- LANGUAGE SWITCH LOGIC     -->
-    <!-- ========================= -->
-    <script>
-        function changeLanguage(lang) {
-            alert("Language changed to: " + lang);
-            // Future: load translations dynamically here
-        }
-    </script>
+  <!-- USER LOGIC -->
+  <script type="module">
+    import { getCurrentUser } from "./userManager.js";
 
-    <!-- ========================= -->
-    <!-- MAIN SCRIPTS (LOAD LAST) -->
-    <!-- ========================= -->
-    <script type="module" src="./firebaseConfig.js"></script>
-    <script type="module" src="./main.js"></script>
-    <script type="module" src="./headerUser.js"></script>
+    const user = getCurrentUser();
+    const isPlayMode = localStorage.getItem("isPlayMode") === "true";
+    const banner = document.getElementById("userWelcome");
 
+    if (isPlayMode) {
+      banner.textContent = "Welcome, Guest";
+    } else if (user) {
+      banner.textContent = `Welcome, ${user.username}`;
+    } else {
+      banner.textContent = "Welcome, Guest";
+    }
+
+    // Logout clears everything
+    document.getElementById("logoutBtn").onclick = () => {
+      localStorage.clear();
+      window.location.href = "index.html";
+    };
+  </script>
+
+  <!-- LOAD FIREBASE -->
+  <script type="module" src="./firebaseConfig.js"></script>
+  <script type="module" src="./main.js"></script>
+  <script type="module" src="./headerUser.js"></script>
 </body>
 </html>
 
