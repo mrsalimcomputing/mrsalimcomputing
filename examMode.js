@@ -23,6 +23,25 @@ function safeTopicName(topic) {
 
 
 // ===============================
+// UPDATE SESSION TOPIC
+// ===============================
+async function updateSessionTopic(safe, topic) {
+  const sessionCode = localStorage.getItem("sessionCode");
+  const deviceID = localStorage.getItem("deviceID");
+  if (!sessionCode || !deviceID) return;
+
+  const playerRef = doc(db, "sessions", sessionCode, "players", deviceID);
+
+  await setDoc(playerRef, {
+    safeTopic: safe,
+    topic: topic
+  }, { merge: true });
+
+  console.log("✅ updateSessionTopic → safeTopic set to:", safe);
+}
+
+
+// ===============================
 // GO BACK
 // ===============================
 function goBackToTopicOptions() {
@@ -43,11 +62,16 @@ function goBackToTopicOptions() {
 
 
 // ===============================
-// SAVE EXAM SCORE (FIXED)
+// SAVE EXAM SCORE (FINAL FIXED VERSION)
 // ===============================
 export async function saveExamScore(totalCorrect, totalWrong) {
+  console.log("🔍 saveExamScore() START — totalCorrect:", totalCorrect, "totalWrong:", totalWrong);
+
   const user = getCurrentUser();
-  if (!user) return;
+  if (!user) {
+    console.warn("❌ saveExamScore aborted — no current user");
+    return;
+  }
 
   const params = new URLSearchParams(window.location.search);
   const topic = decodeURIComponent(params.get("topic") || "");
@@ -61,20 +85,41 @@ export async function saveExamScore(totalCorrect, totalWrong) {
 
   const netScore = totalCorrect - totalWrong;
 
-  // PERSONAL SCORE
+  console.log("🧩 Context — uid:", uid,
+    "| topic:", topic,
+    "| safe:", safe,
+    "| sessionCode:", sessionCode,
+    "| deviceID:", deviceID,
+    "| nickname:", nickname,
+    "| school:", user.school,
+    "| netScore:", netScore
+  );
+
+  // ============================================================
+  // 1) PERSONAL SCORE
+  // ============================================================
   const personalRef = doc(db, "users", uid, "scores", `${safe}_exam`);
+  console.log("📄 Personal ref path:", personalRef.path);
+
   const personalSnap = await getDoc(personalRef);
+  console.log("📄 Personal doc exists:", personalSnap.exists(), "data:", personalSnap.exists() ? personalSnap.data() : null);
 
   let lifetimeCorrect = totalCorrect;
   let lifetimeWrong = totalWrong;
 
   if (personalSnap.exists()) {
     const prev = personalSnap.data();
-    lifetimeCorrect += prev.totalCorrect || 0;
-    lifetimeWrong += prev.totalWrong || 0;
+    const prevCorrect = prev.totalCorrect || 0;
+    const prevWrong = prev.totalWrong || 0;
+
+    console.log("📄 Previous lifetime — correct:", prevCorrect, "wrong:", prevWrong);
+
+    lifetimeCorrect += prevCorrect;
+    lifetimeWrong += prevWrong;
   }
 
   const lifetimeNet = lifetimeCorrect - lifetimeWrong;
+  console.log("🧮 Lifetime totals — correct:", lifetimeCorrect, "wrong:", lifetimeWrong, "net:", lifetimeNet);
 
   await setDoc(personalRef, {
     username: user.username,
@@ -89,43 +134,105 @@ export async function saveExamScore(totalCorrect, totalWrong) {
     updatedAt: Date.now()
   });
 
-  // SESSION MODE
+  console.log("✅ Personal exam score saved:", {
+    path: personalRef.path,
+    totalCorrect: lifetimeCorrect,
+    totalWrong: lifetimeWrong,
+    netScore: lifetimeNet
+  });
+
+  // ============================================================
+  // 2) SESSION MODE (PLAYER + TOPIC DOCS)
+  // ============================================================
   if (sessionCode && deviceID) {
     const playerRef = doc(db, "sessions", sessionCode, "players", deviceID);
-    await setDoc(playerRef, {
-      deviceID,
-      nickname,
-      topic,
-      safeTopic: safe,
+    const topicRef = doc(db, "sessions", sessionCode, "players", deviceID, "topics", safe);
+
+    console.log("📄 Session player ref:", playerRef.path);
+    console.log("📄 Session topic ref:", topicRef.path);
+
+    await Promise.all([
+      setDoc(playerRef, {
+        deviceID,
+        nickname,
+        topic,
+        safeTopic: safe,
+        examNet: lifetimeNet,
+        examCorrect: lifetimeCorrect,
+        examWrong: lifetimeWrong,
+        lastUpdated: Date.now()
+      }, { merge: true }),
+
+      setDoc(topicRef, {
+        topic,
+        safeTopic: safe,
+        examNet: lifetimeNet,
+        examCorrect: lifetimeCorrect,
+        examWrong: lifetimeWrong,
+        updatedAt: Date.now()
+      }, { merge: true })
+    ]);
+
+    console.log("✅ Session exam score saved:", {
+      playerPath: playerRef.path,
+      topicPath: topicRef.path,
       examNet: lifetimeNet,
       examCorrect: lifetimeCorrect,
-      examWrong: lifetimeWrong,
-      lastUpdated: Date.now()
-    }, { merge: true });
+      examWrong: lifetimeWrong
+    });
+  } else {
+    console.warn("⚠️ Skipping SESSION save — missing sessionCode or deviceID", {
+      sessionCode,
+      deviceID
+    });
+  }
 
+  // ============================================================
+  // 3) SCHOOL / SESSION LEADERBOARD
+  // ============================================================
+  const school = user.school;
+  console.log("🏫 School value:", school);
+
+  if (!school) {
+    console.warn("⚠️ No school value — skipping school leaderboard update");
+    console.log("🎯 saveExamScore() END (no school)");
     return;
   }
 
-  // SCHOOL LEADERBOARD
-  const school = user.school;
-  if (!school) return;
-
   const schoolDocId = `${school}_${safe}_exam`;
   const entryRef = doc(db, "schoolLeaderboards", schoolDocId, "entries", uid);
+
+  console.log("📄 School leaderboard entry path:", entryRef.path);
+
   const existing = await getDoc(entryRef);
-  const prevNet = existing.exists() ? existing.data().netScore ?? -9999 : -9999;
+  console.log("📄 Existing school entry exists:", existing.exists(), "data:", existing.exists() ? existing.data() : null);
+
+  const prevNet = existing.exists() ? (existing.data().netScore ?? -9999) : -9999;
+  console.log("🧮 Previous net on leaderboard:", prevNet, "| new lifetimeNet:", lifetimeNet);
 
   if (!existing.exists() || lifetimeNet > prevNet) {
     await setDoc(entryRef, {
       username: user.username,
+      nickname,
       totalCorrect: lifetimeCorrect,
       totalWrong: lifetimeWrong,
       netScore: lifetimeNet,
       date,
       userId: uid,
-      topic
+      topic,
+      safeTopic: safe,
+      mode: "exam"
     });
+
+    console.log("✅ School leaderboard updated:", {
+      path: entryRef.path,
+      netScore: lifetimeNet
+    });
+  } else {
+    console.log("⏩ School leaderboard NOT updated — existing net is higher or equal");
   }
+
+  console.log("🎯 saveExamScore() END");
 }
 
 
@@ -145,10 +252,13 @@ export const examMode = {
 };
 
 
-// DOM
+// ===============================
+// DOM ELEMENTS
+// ===============================
 const rulesPopup = document.getElementById("examRulesPopup");
 const endPopup = document.getElementById("examEndPopup");
 const endScoreText = document.getElementById("examEndScore");
+
 const startBtn = document.getElementById("startExamBtn");
 const playAgainBtn = document.getElementById("playAgainExamBtn");
 const quitBtn = document.getElementById("examQuitBtn");
@@ -162,7 +272,12 @@ const timerDisplay = document.getElementById("timer");
 // ===============================
 export function showExamRules(questions) {
   examMode.fullQuestions = Array.isArray(questions) ? questions : [];
-  rulesPopup.style.display = "flex";
+
+  const topic = decodeURIComponent(new URLSearchParams(window.location.search).get("topic") || "");
+  const safe = safeTopicName(topic);
+  updateSessionTopic(safe, topic); // ⭐ ensures leaderboard filtering works
+
+  if (rulesPopup) rulesPopup.style.display = "flex";
 }
 
 
@@ -337,3 +452,4 @@ function flashExamWrong() {
 // ===============================
 if (startBtn) startBtn.onclick = () => startExam();
 if (playAgainBtn) playAgainBtn.onclick = () => startExam();
+

@@ -3,7 +3,7 @@
 // ===============================
 import { hideAllScreens } from "./navigation.js";
 import { getCurrentUser } from "./userManager.js";
-import { goBack } from "./navigation.js";      
+import { goBack } from "./navigation.js";
 import { goBackKS4 } from "./ks4-navigation.js";
 
 import { db } from "./firebaseConfig.js";
@@ -12,6 +12,21 @@ import {
   setDoc,
   getDoc
 } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+
+async function updateSessionTopic(safe, topic) {
+  const sessionCode = localStorage.getItem("sessionCode");
+  const deviceID = localStorage.getItem("deviceID");
+  if (!sessionCode || !deviceID) return;
+
+  const playerRef = doc(db, "sessions", sessionCode, "players", deviceID);
+
+  await setDoc(playerRef, {
+    safeTopic: safe,
+    topic: topic
+  }, { merge: true });
+
+  console.log("✅ updateSessionTopic → safeTopic set to:", safe);
+}
 
 
 // ===============================
@@ -28,128 +43,6 @@ function safeTopicName(topic) {
 function getTopicFromUrl() {
   const params = new URLSearchParams(window.location.search);
   return decodeURIComponent(params.get("topic") || "");
-}
-
-
-// ===============================
-// SAVE THEORY SCORE (CLEAN VERSION)
-// ===============================
-export async function saveTheoryScore(score, accuracy) {
-  const user = getCurrentUser();
-  if (!user) return;
-
-  const params = new URLSearchParams(window.location.search);
-  const topic = decodeURIComponent(params.get("topic") || "");
-  const safe = safeTopicName(topic);
-
-  const uid = user.id;
-  const date = new Date().toLocaleString();
-
-  const sessionCode = localStorage.getItem("sessionCode");
-  const deviceID = localStorage.getItem("deviceID");
-  const nickname = localStorage.getItem("nickname") || user.username || "Guest";
-
-  // ============================================================
-  // 1) PERSONAL BEST
-  // ============================================================
-  const personalDocId = `${safe}_theory`;
-  const personalRef = doc(db, "users", uid, "scores", personalDocId);
-  const personalSnap = await getDoc(personalRef);
-
-  let bestScore = score;
-  let bestAccuracy = accuracy;
-
-  if (personalSnap.exists()) {
-    const prev = personalSnap.data();
-    const prevScore = prev.score ?? 0;
-    const prevAccuracy = prev.accuracy ?? 0;
-
-    if (prevScore > bestScore) {
-      bestScore = prevScore;
-      bestAccuracy = prevAccuracy;
-    }
-  }
-
-  await setDoc(personalRef, {
-    username: user.username,
-    nickname,
-    topic,
-    safeTopic: safe,
-    mode: "theory",
-    score: bestScore,
-    accuracy: bestAccuracy,
-    date,
-    updatedAt: Date.now()
-  }, { merge: true });
-
-  // ============================================================
-  // 2) SESSION MODE LEADERBOARD
-  // ============================================================
-  if (sessionCode && deviceID) {
-    const playerRef = doc(db, "sessions", sessionCode, "players", deviceID);
-    const existingSnap = await getDoc(playerRef);
-
-    let shouldUpdate = false;
-
-    if (existingSnap.exists()) {
-      const prev = existingSnap.data();
-      const prevScore = prev.theoryScore ?? 0;
-      const prevAccuracy = prev.theoryAccuracy ?? 0;
-
-      if (score > prevScore || (score === prevScore && accuracy > prevAccuracy)) {
-        shouldUpdate = true;
-      }
-    } else {
-      shouldUpdate = true;
-    }
-
-    if (shouldUpdate) {
-      await setDoc(playerRef, {
-        deviceID,
-        nickname,
-        topic,
-        safeTopic: safe,
-        theoryScore: score,
-        theoryAccuracy: accuracy,
-        lastUpdated: Date.now()
-      }, { merge: true });
-
-      const topicRef = doc(db, "sessions", sessionCode, "players", deviceID, "topics", safe);
-      await setDoc(topicRef, {
-        topic,
-        safeTopic: safe,
-        theoryScore: score,
-        theoryAccuracy: accuracy,
-        updatedAt: Date.now()
-      }, { merge: true });
-    }
-
-    return;
-  }
-
-  // ============================================================
-  // 3) SCHOOL LEADERBOARD (NON-SESSION USERS)
-  // ============================================================
-  const school = user.school;
-  if (!school) return;
-
-  const schoolDocId = `${school}_${safe}_theory`;
-  const entryRef = doc(db, "schoolLeaderboards", schoolDocId, "entries", uid);
-  const existing = await getDoc(entryRef);
-
-  const prevScore = existing.exists() ? existing.data().score ?? 0 : 0;
-  const prevAccuracy = existing.exists() ? existing.data().accuracy ?? 0 : 0;
-
-  if (!existing.exists() || bestScore > prevScore || bestAccuracy > prevAccuracy) {
-    await setDoc(entryRef, {
-      username: user.username,
-      score: bestScore,
-      accuracy: bestAccuracy,
-      date,
-      userId: uid,
-      topic
-    });
-  }
 }
 
 
@@ -193,17 +86,206 @@ document.addEventListener("DOMContentLoaded", () => {
       const params = new URLSearchParams(window.location.search);
       const course = params.get("course");
 
-      if (course && course.startsWith("KS4")) goBackKS4();
-      else goBack();
+      if (course && course.startsWith("KS4")) {
+        goBackKS4();
+      } else {
+        goBack();
+      }
     };
   }
 });
+
+
+// ===============================
+// SAVE THEORY SCORE (FINAL, FIXED + SAFEGUARD)
+// ===============================
+export async function saveTheoryScore(score, accuracy) {
+  console.log("🔍 saveTheoryScore() START — score:", score, "accuracy:", accuracy);
+
+  const user = getCurrentUser();
+  if (!user) {
+    console.warn("❌ No current user found — aborting saveTheoryScore");
+    return;
+  }
+
+  const params = new URLSearchParams(window.location.search);
+  const topic = decodeURIComponent(params.get("topic") || "");
+  const safe = safeTopicName(topic);
+
+  const uid = user.id;
+  const date = new Date().toLocaleString();
+
+  const sessionCode = localStorage.getItem("sessionCode");
+  const deviceID = localStorage.getItem("deviceID");
+  const nickname = localStorage.getItem("nickname") || user.username || "Guest";
+
+  console.log("🧩 Context — uid:", uid, "sessionCode:", sessionCode, "deviceID:", deviceID, "school:", user.school);
+
+  // ============================================================
+  // 1) PERSONAL BEST
+  // ============================================================
+  const personalDocId = `${safe}_theory`;
+  const personalRef = doc(db, "users", uid, "scores", personalDocId);
+  const personalSnap = await getDoc(personalRef);
+  console.log("📄 Checking personalRef:", personalRef.path, "exists:", personalSnap.exists());
+
+  let bestScore = score;
+  let bestAccuracy = accuracy;
+
+  if (personalSnap.exists()) {
+    const prev = personalSnap.data();
+    console.log("📄 Previous personal score:", prev);
+    const prevScore = prev.score ?? 0;
+    const prevAccuracy = prev.accuracy ?? 0;
+
+    if (prevScore > bestScore) {
+      bestScore = prevScore;
+      bestAccuracy = prevAccuracy;
+      console.log("⚠️ Keeping previous personal best:", bestScore, bestAccuracy);
+    }
+  }
+
+  await setDoc(personalRef, {
+    username: user.username,
+    nickname,
+    topic,
+    safeTopic: safe,
+    mode: "theory",
+    score: bestScore,
+    accuracy: bestAccuracy,
+    date,
+    updatedAt: Date.now()
+  }, { merge: true });
+
+  console.log("✅ Personal best saved:", bestScore, bestAccuracy);
+
+  // ============================================================
+  // 2) SESSION MODE LEADERBOARD (PLAYER + TOPIC DOCS)
+  // ============================================================
+  if (sessionCode && deviceID) {
+    const playerRef = doc(db, "sessions", sessionCode, "players", deviceID);
+    const existingSnap = await getDoc(playerRef);
+    console.log("📄 Checking playerRef:", playerRef.path, "exists:", existingSnap.exists());
+
+    let shouldUpdate = false;
+
+    if (existingSnap.exists()) {
+      const prev = existingSnap.data();
+      console.log("📄 Previous session player data:", prev);
+      const prevScore = prev.theoryScore ?? 0;
+      const prevAccuracy = prev.theoryAccuracy ?? 0;
+
+      if (score > prevScore || (score === prevScore && accuracy > prevAccuracy)) {
+        shouldUpdate = true;
+        console.log("🔁 Updating session player — better score detected");
+      } else {
+        console.log("⏩ Skipping update — previous score is better or equal");
+      }
+    } else {
+      shouldUpdate = true;
+      console.log("🆕 Creating new session player doc");
+    }
+
+    if (shouldUpdate) {
+      await Promise.all([
+        setDoc(playerRef, {
+          deviceID,
+          nickname,
+          topic,
+          safeTopic: safe,
+          theoryScore: score,
+          theoryAccuracy: accuracy,
+          lastUpdated: Date.now()
+        }, { merge: true }),
+
+        setDoc(doc(db, "sessions", sessionCode, "players", deviceID, "topics", safe), {
+          topic,
+          safeTopic: safe,
+          theoryScore: score,
+          theoryAccuracy: accuracy,
+          updatedAt: Date.now()
+        }, { merge: true })
+      ]);
+
+      console.log("✅ SESSION THEORY SCORE SAVED:", nickname, score, accuracy);
+    }
+  } else {
+    console.warn("⚠️ Missing sessionCode or deviceID — skipping session leaderboard update");
+  }
+
+  // ============================================================
+  // 3) SCHOOL / SESSION LEADERBOARD (Your School / Session Top 5)
+  // ============================================================
+  const school = user.school; // For session users: "SESSION_54321"
+  console.log("🏫 School value:", school);
+  if (school) {
+    const schoolDocId = `${school}_${safe}_theory`;
+    const entryRef = doc(db, "schoolLeaderboards", schoolDocId, "entries", uid);
+    const existing = await getDoc(entryRef);
+    console.log("📄 Checking school leaderboard entry:", entryRef.path, "exists:", existing.exists());
+
+    const prevScore = existing.exists() ? existing.data().score ?? 0 : 0;
+    const prevAccuracy = existing.exists() ? existing.data().accuracy ?? 0 : 0;
+
+    if (!existing.exists() || bestScore > prevScore || bestAccuracy > prevAccuracy) {
+      await setDoc(entryRef, {
+        username: user.username,
+        nickname,
+        score: bestScore,
+        accuracy: bestAccuracy,
+        date,
+        userId: uid,
+        topic,
+        safeTopic: safe,
+        mode: "theory"
+      }, { merge: true });
+
+      console.log("✅ SCHOOL LEADERBOARD UPDATED:", nickname, bestScore, bestAccuracy);
+    } else {
+      console.log("⏩ School leaderboard not updated — previous entry is better");
+    }
+  } else {
+    console.warn("⚠️ No school value found — skipping school leaderboard update");
+  }
+
+  // ⭐ SAFEGUARD: short delay before leaderboard read
+  await new Promise(resolve => setTimeout(resolve, 500));
+  console.log("⏳ Delay complete — ready for leaderboard read");
+
+  // ============================================================
+  // 4) UPDATE SESSION PLAYER DOC SO SESSION TOP 5 SHOWS CORRECT SCORE
+  // ============================================================
+  if (sessionCode && deviceID) {
+    const playerRef = doc(db, "sessions", sessionCode, "players", deviceID);
+    await setDoc(playerRef, {
+      theoryScore: score,
+      theoryAccuracy: accuracy,
+      safeTopic: safe,
+      topic: topic,
+      lastUpdated: Date.now()
+    }, { merge: true });
+
+    console.log("✅ Session player updated for leaderboard:", nickname, score, accuracy);
+  }
+
+  console.log("🎯 saveTheoryScore() END *********************");
+}
+
+
+
 
 // ===============================
 // SHOW RULES
 // ===============================
 export function showTheoryRules(questions) {
+
   storedQuestions = questions;
+
+  const topic = getTopicFromUrl();
+  const safe = safeTopicName(topic);
+
+  updateSessionTopic(safe, topic);   // ⭐ REQUIRED FIX
+
   if (rulesPopup) rulesPopup.style.display = "flex";
 }
 
@@ -227,21 +309,18 @@ function startTheoryTimer() {
 
 
 // ===============================
-// START QUIZ (CLEAN, NO DUPLICATE LISTENERS)
+// START QUIZ
 // ===============================
 export function startTheoryQuiz(questions = storedQuestions) {
-
   if (!questions || questions.length === 0) {
     alert("No questions available for this topic.");
     return;
   }
 
-  // RESET UI
   if (rulesPopup) rulesPopup.style.display = "none";
   if (endPopup) endPopup.style.display = "none";
   hideAllScreens();
 
-  // RESET STATE
   currentQuestionIndex = 0;
   theoryScore = 0;
   theoryTimeLeft = 60;
@@ -256,7 +335,6 @@ export function startTheoryQuiz(questions = storedQuestions) {
   document.getElementById("theoryScore").textContent = theoryScore;
   document.getElementById("theoryTime").textContent = theoryTimeLeft;
 
-  // START QUIZ
   startTheoryTimer();
   document.getElementById("theoryQuizScreen").style.display = "block";
 

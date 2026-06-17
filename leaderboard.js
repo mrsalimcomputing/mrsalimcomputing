@@ -17,6 +17,11 @@ import {
 import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
 
 
+console.log("SESSION DEBUG — sessionCode:", localStorage.getItem("sessionCode"));
+console.log("SESSION DEBUG — deviceID:", localStorage.getItem("deviceID"));
+console.log("SESSION DEBUG — nickname:", localStorage.getItem("nickname"));
+
+
 // =========================
 // URL PARAMETERS
 // =========================
@@ -29,7 +34,7 @@ const currentUserForTitle = getCurrentUser();
 
 const titleEl = document.getElementById("leaderboardTitle");
 if (titleEl) {
-  if (sessionCodeForTitle && (!currentUserForTitle || currentUserForTitle.school?.startsWith("session-"))) {
+  if (sessionCodeForTitle && (!currentUserForTitle || currentUserForTitle.school?.startsWith("SESSION_"))) {
     titleEl.innerText = topic
       ? `${topic} — Session ${sessionCodeForTitle} Leaderboard`
       : `Session ${sessionCodeForTitle} — Leaderboard`;
@@ -46,7 +51,7 @@ if (titleEl) {
 
 
 // =========================
-/* SAFE TOPIC NAME */
+// SAFE TOPIC NAME
 // =========================
 function safeTopicName(topic) {
   return topic
@@ -55,7 +60,6 @@ function safeTopicName(topic) {
     .replace(/\s+/g, "_")
     .replace(/[^a-z0-9_]/g, "");
 }
-
 
 
 // =========================
@@ -90,7 +94,6 @@ function personalScoreDocId(topic, mode) {
   return `${safeTopicName(topic)}_${mode}`;
 }
 
-
 function schoolLeaderboardDocId(school, topic, mode) {
   const safe = safeTopicName(topic);
   return `${school}_${safe}_${mode}`;
@@ -98,91 +101,118 @@ function schoolLeaderboardDocId(school, topic, mode) {
 
 
 // =========================
-// LOAD PERSONAL SCORES (FIXED + LOGS)
+// LOAD PERSONAL SCORES (SESSION-AWARE + LOGS)
 // =========================
 async function loadPersonalScores(currentUser, topic, mode) {
-  console.log("🔍 loadPersonalScores() started for:", topic, "mode:", mode);
+  console.log("🔍 loadPersonalScores() START — topic:", topic, "mode:", mode);
 
   if (!currentUser) {
-    console.warn("⚠️ No currentUser provided.");
+    console.warn("⚠️ loadPersonalScores(): no currentUser");
     return [];
   }
 
-  // ⭐ LOG RAW TOPIC
-  console.log("🔍 RAW TOPIC:", topic);
-
-  // ⭐ LOG SAFE TOPIC
   const safe = safeTopicName(topic);
-  console.log("🔍 safeTopicName(topic):", safe);
+  const sessionCode = localStorage.getItem("sessionCode");
+  const deviceID = localStorage.getItem("deviceID");
 
-  // ⭐ LOG DOC ID
-  const docId = personalScoreDocId(topic, mode);
-  console.log("📄 personalScoreDocId() returned:", docId);
+  console.log("🧩 loadPersonalScores context:", {
+    uid: currentUser.id,
+    school: currentUser.school,
+    sessionCode,
+    deviceID,
+    safe
+  });
 
-  const uid = currentUser.id;
+  let docRef;
+  let sourceType = "";
 
-  // ⭐ LOG FULL PATH
-  const fullPath = `users/${uid}/scores/${docId}`;
-  console.log("📄 Checking Firestore path:", fullPath);
+  // SESSION USER → read from sessions/{sessionCode}/players/{deviceID}/topics/{safe}
+  if (sessionCode && deviceID && currentUser.school?.startsWith("SESSION_")) {
+    docRef = doc(db, "sessions", sessionCode, "players", deviceID, "topics", safe);
+    sourceType = "sessionTopic";
+  } else {
+    // SCHOOL / NORMAL USER → read from users/{uid}/scores/{safe_mode}
+    const docId = personalScoreDocId(topic, mode);
+    docRef = doc(db, "users", currentUser.id, "scores", docId);
+    sourceType = "userScores";
+  }
 
-  const docRef = doc(db, "users", uid, "scores", docId);
+  console.log("📄 loadPersonalScores docRef.path:", docRef.path, "sourceType:", sourceType);
+
   const snap = await getDoc(docRef);
-
-  // ⭐ LOG SNAP EXISTS
-  console.log("📄 snap.exists():", snap.exists());
+  console.log("📄 loadPersonalScores snap.exists():", snap.exists());
 
   if (!snap.exists()) {
-    console.warn("⚠️ No personal score document found for:", currentUser.username || currentUser.nickname);
+    console.warn("⚠️ loadPersonalScores(): no personal doc found at", docRef.path);
     return [];
   }
 
   const data = snap.data();
-  console.log("✅ Personal score document found:", data);
+  console.log("✅ loadPersonalScores raw data:", data);
 
-  // ⭐ LOG USER MATCH CHECK
-  const matchesUser =
-    (data.username || data.nickname) === currentUser.username ||
-    data.nickname === currentUser.nickname;
+  // Normalise for EXAM so formatter always has totalCorrect, totalWrong, netScore
+  if (mode === "exam") {
+    const correct = Number(data.totalCorrect ?? data.examCorrect ?? 0);
+    const wrong = Number(data.totalWrong ?? data.examWrong ?? 0);
+    const net = Number(data.netScore ?? data.examNet ?? (correct - wrong));
 
-  console.log("🔍 matchesUser:", matchesUser);
+    const normalised = {
+      ...data,
+      totalCorrect: correct,
+      totalWrong: wrong,
+      netScore: net
+    };
 
-  if (matchesUser) {
-    console.log("✅ Personal score matches current user:", currentUser.username || currentUser.nickname);
-    return [data];
+    console.log("🧮 loadPersonalScores normalised EXAM data:", normalised);
+    return [normalised];
   }
 
-  console.warn("⚠️ Personal score document exists but does not match current user.");
-  return [];
+  // For theory / matching / binary, raw data is fine
+  return [data];
 }
 
 
-
-
 // =========================
-// LOAD SCHOOL EXAM LEADERBOARD (TOP 5)
+// LOAD SCHOOL EXAM LEADERBOARD (TOP 5, FIXED + LOGS)
 // =========================
 async function loadSchoolExam(currentUser, topic) {
+  if (!currentUser || !currentUser.school) {
+    console.warn("⚠️ loadSchoolExam(): no currentUser or no school");
+    return [];
+  }
+
   const school = currentUser.school;
   const docId = schoolLeaderboardDocId(school, topic, "exam");
   const entriesRef = collection(db, "schoolLeaderboards", docId, "entries");
 
-  const q = query(entriesRef, orderBy("", "desc"), limit(5));
+  console.log("🔍 loadSchoolExam() — path:", `schoolLeaderboards/${docId}/entries`);
+
+  const q = query(entriesRef, orderBy("netScore", "desc"), limit(5));
 
   const snap = await getDocs(q);
-  return snap.docs.map(d => d.data());
+  const rows = snap.docs.map(d => d.data());
+
+  console.log("✅ loadSchoolExam() rows:", rows);
+  return rows;
 }
 
+
 // =========================
-// LOAD SCHOOL LEADERBOARD (TOP 5)
+// LOAD SCHOOL LEADERBOARD (TOP 5, ALL MODES)
 // =========================
 async function loadSchoolLeaderboard(currentUser, topic, mode) {
+  console.log("🔍 loadSchoolLeaderboard() START — mode:", mode, "topic:", topic);
 
-  // ⭐ Prevent crash if currentUser is null (session users)
-  if (!currentUser || !currentUser.school) return [];
+  if (!currentUser || !currentUser.school) {
+    console.warn("⚠️ loadSchoolLeaderboard(): no currentUser or no school");
+    return [];
+  }
 
   const school = currentUser.school;
   const docId = schoolLeaderboardDocId(school, topic, mode);
   const entriesRef = collection(db, "schoolLeaderboards", docId, "entries");
+
+  console.log("🔍 loadSchoolLeaderboard() path:", `schoolLeaderboards/${docId}/entries`);
 
   let q;
 
@@ -193,8 +223,7 @@ async function loadSchoolLeaderboard(currentUser, topic, mode) {
       orderBy("accuracy", "desc"),
       limit(5)
     );
-  }
-  else if (mode === "matching") {
+  } else if (mode === "matching") {
     q = query(
       entriesRef,
       orderBy("time", "asc"),
@@ -202,8 +231,7 @@ async function loadSchoolLeaderboard(currentUser, topic, mode) {
       orderBy("accuracy", "desc"),
       limit(5)
     );
-  }
-  else if (
+  } else if (
     mode === "btd" || mode === "btd_easy" ||
     mode === "dtb" || mode === "dtb_easy" ||
     mode === "ba"  || mode === "ba_easy"
@@ -214,131 +242,116 @@ async function loadSchoolLeaderboard(currentUser, topic, mode) {
       orderBy("accuracy", "desc"),
       limit(5)
     );
-  }
-  else {
+  } else if (mode === "exam") {
+    // Fallback if called here
+    q = query(
+      entriesRef,
+      orderBy("netScore", "desc"),
+      limit(5)
+    );
+  } else {
+    console.warn("⚠️ loadSchoolLeaderboard(): unsupported mode", mode);
     return [];
   }
 
   const snap = await getDocs(q);
-  return snap.docs.map(d => d.data());
+  const rows = snap.docs.map(d => d.data());
+
+  console.log("✅ loadSchoolLeaderboard() rows:", rows);
+  return rows;
 }
 
 // =========================
-// SESSION MODE LEADERBOARD (BEST SCORE ONLY)
+// SESSION MODE LEADERBOARD (TOPIC-BASED, CORRECT VERSION + LOGS)
 // =========================
 async function loadSessionLeaderboard(topic, mode) {
   const sessionCode = localStorage.getItem("sessionCode");
-  if (!sessionCode) return [];
-
-  const playersRef = collection(db, "sessions", sessionCode, "players");
-  const snap = await getDocs(playersRef);
+  if (!sessionCode) {
+    console.warn("⚠️ loadSessionLeaderboard(): no sessionCode");
+    return [];
+  }
 
   const safe = safeTopicName(topic);
-  const playerMap = {}; // ⭐ store best attempt per deviceID
+  console.log("🔍 loadSessionLeaderboard() START — sessionCode:", sessionCode, "topic:", topic, "safe:", safe, "mode:", mode);
 
-  snap.forEach(docSnap => {
-    const data = docSnap.data();
-    const dataSafe = data.safeTopic || safeTopicName(data.topic || "");
+  const playersRef = collection(db, "sessions", sessionCode, "players");
+  const playersSnap = await getDocs(playersRef);
 
-    // Only include players for this topic
-    if (dataSafe.toLowerCase() !== safe.toLowerCase()) return;
+  console.log("📄 loadSessionLeaderboard() players count:", playersSnap.size);
 
-    const id = data.deviceID;
-    if (!id) return;
+  const results = [];
 
-    // If first time seeing this player → store
-    if (!playerMap[id]) {
-      playerMap[id] = data;
-      return;
+  for (const playerDoc of playersSnap.docs) {
+    const player = playerDoc.data();
+    const deviceID = player.deviceID;
+    if (!deviceID) {
+      console.warn("⚠️ Player without deviceID, skipping:", playerDoc.id);
+      continue;
     }
 
-    // Compare with existing best
-    const prev = playerMap[id];
+    const topicRef = doc(db, "sessions", sessionCode, "players", deviceID, "topics", safe);
+    const topicSnap = await getDoc(topicRef);
 
-    if (mode === "theory") {
-      const prevScore = prev.theoryScore ?? 0;
-      const newScore = data.theoryScore ?? 0;
+    console.log("📄 Checking topic doc for deviceID:", deviceID, "exists:", topicSnap.exists());
 
-      const prevAcc = prev.theoryAccuracy ?? 0;
-      const newAcc = data.theoryAccuracy ?? 0;
+    if (!topicSnap.exists()) continue;
 
-      // Keep only better score (or equal score but better accuracy)
-      if (newScore > prevScore || (newScore === prevScore && newAcc > prevAcc)) {
-        playerMap[id] = data;
-      }
-    }
+    const t = topicSnap.data();
 
-    else if (mode === "matching") {
-      const prevScore = prev.matchScore ?? 0;
-      const newScore = data.matchScore ?? 0;
+    const entry = {
+      nickname: player.nickname,
+      deviceID,
+      ...t
+    };
 
-      if (newScore > prevScore) {
-        playerMap[id] = data;
-      }
-    }
-
-    else if (mode === "exam") {
-      const prevNet = Number(prev.examNet) || 0;
-      const newNet = Number(data.examNet) || 0;
-
-      if (newNet > prevNet) {
-        playerMap[id] = data;
-      }
-    }
-
-    else {
-      // Binary modes use theoryScore
-      const prevScore = prev.theoryScore ?? 0;
-      const newScore = data.theoryScore ?? 0;
-
-      if (newScore > prevScore) {
-        playerMap[id] = data;
-      }
-    }
-  });
-
-  // Convert map → array
-  const players = Object.values(playerMap);
-
-  // Sort final list
-  if (mode === "theory") {
-    return players
-      .sort((a, b) => b.theoryScore - a.theoryScore || b.theoryAccuracy - a.theoryAccuracy)
-      .slice(0, 5);
+    results.push(entry);
   }
 
-  if (mode === "matching") {
-    return players
-      .sort((a, b) => b.matchScore - a.matchScore)
-      .slice(0, 5);
-  }
+  console.log("📊 loadSessionLeaderboard() raw results:", results);
 
-  if (mode === "exam") {
-    return players
-      .sort((a, b) => Number(b.examNet) - Number(a.examNet))
-      .slice(0, 5);
-  }
+// ===== SORTING & TOP 5 FILTER =====
+let sorted = [];
 
-  // Binary modes
-  return players
-    .sort((a, b) => b.theoryScore - a.theoryScore)
-    .slice(0, 5);
+if (mode === "theory") {
+  sorted = results
+    .filter(p => typeof (p.theoryScore ?? p.score) === "number")
+    .sort((a, b) =>
+      (b.theoryScore ?? b.score ?? 0) - (a.theoryScore ?? a.score ?? 0) ||
+      (b.theoryAccuracy ?? b.accuracy ?? 0) - (a.theoryAccuracy ?? a.accuracy ?? 0)
+    );
 }
 
+else if (mode === "matching") {
+  sorted = results
+    .filter(p => typeof (p.matchScore ?? p.score) === "number")
+    .sort((a, b) => (b.matchScore ?? b.score ?? 0) - (a.matchScore ?? a.score ?? 0));
+}
 
+else if (mode === "exam") {
+  sorted = results
+    .filter(p => typeof (p.examNet ?? p.netScore) === "number")
+    .sort((a, b) => (Number(b.examNet ?? b.netScore ?? 0) - Number(a.examNet ?? a.netScore ?? 0)));
+}
 
+const top5 = sorted.slice(0, 5);
 
+console.log("📊 loadSessionLeaderboard() FINAL TOP 5:", top5);
+return top5;
+
+}
 
 
 // =========================
 // RENDER TOP 5
 // =========================
 function renderTop5(containerId, entries, formatFn) {
-  
   console.log("🖥 renderTop5() for:", containerId, "entries:", entries);
 
   const container = document.getElementById(containerId);
-  if (!container) return;
+  if (!container) {
+    console.warn("⚠️ renderTop5(): container not found:", containerId);
+    return;
+  }
 
   container.innerHTML = "";
 
@@ -356,28 +369,25 @@ function renderTop5(containerId, entries, formatFn) {
 }
 
 
-
-
 // =========================
-// MODE RENDERERS
+// MODE RENDERERS — THEORY
 // =========================
 async function showTheory(currentUser, isSessionUser) {
   const params = new URLSearchParams(window.location.search);
   const topic = decodeURIComponent(params.get("topic") || "");
-  console.log("🔍 showTheory() started for topic:", topic);
+  console.log("🔍 showTheory() START — topic:", topic, "isSessionUser:", isSessionUser);
   console.log("🔍 currentUser:", currentUser);
-  console.log("🔍 isSessionUser:", isSessionUser);
 
   const personal = await loadPersonalScores(currentUser, topic, "theory");
-  console.log("✅ personal scores loaded:", personal);
+  console.log("✅ showTheory() personal:", personal);
 
   let schoolOrSession;
   if (isSessionUser) {
     schoolOrSession = await loadSessionLeaderboard(topic, "theory");
-    console.log("✅ session leaderboard loaded:", schoolOrSession);
+    console.log("✅ showTheory() session leaderboard:", schoolOrSession);
   } else {
     schoolOrSession = await loadSchoolLeaderboard(currentUser, topic, "theory");
-    console.log("✅ school leaderboard loaded:", schoolOrSession);
+    console.log("✅ showTheory() school leaderboard:", schoolOrSession);
   }
 
   renderTop5("theoryPersonal", personal, e =>
@@ -388,16 +398,13 @@ async function showTheory(currentUser, isSessionUser) {
     `${e.nickname || e.username} — Score: ${e.theoryScore ?? e.score ?? 0}, Accuracy: ${(e.theoryAccuracy ?? e.accuracy ?? 0).toFixed(0)}%`
   );
 
-  console.log("✅ renderTop5 called for theoryPersonal and theorySchool");
+  console.log("✅ showTheory() END");
 }
 
 
-
-
-
-
-
-
+// =========================
+// MODE RENDERERS — MATCHING
+// =========================
 async function showMatching(currentUser, isSessionUser) {
   console.log("🔵 showMatching() START");
 
@@ -405,11 +412,9 @@ async function showMatching(currentUser, isSessionUser) {
   const topic = decodeURIComponent(params.get("topic") || "");
   console.log("🔍 Topic:", topic);
 
-  // PERSONAL BEST
   const personal = await loadPersonalScores(currentUser, topic, "matching");
   console.log("📄 Personal matching scores:", personal);
 
-  // SCHOOL OR SESSION
   let schoolOrSession = null;
   if (isSessionUser) {
     console.log("🟣 Loading SESSION matching leaderboard");
@@ -421,14 +426,12 @@ async function showMatching(currentUser, isSessionUser) {
 
   console.log("📄 School/Session matching scores:", schoolOrSession);
 
-  // PERSONAL RENDER
   renderTop5("matchingPersonal", personal, e =>
-    `Time: ${Number(e.time).toFixed(2)}s, Score: ${e.score}, Accuracy: ${Number(e.accuracy).toFixed(2)}%, Date: ${e.date}`
+    `Time: ${Number(e.time ?? e.matchTime ?? 0).toFixed(2)}s, Score: ${e.score ?? e.matchScore ?? 0}, Accuracy: ${Number(e.accuracy ?? e.matchAccuracy ?? 0).toFixed(2)}%, Date: ${e.date ?? ""}`
   );
 
-  // SCHOOL / SESSION RENDER
   renderTop5("matchingSchool", schoolOrSession, e =>
-    `${e.nickname || e.username} — Time: ${Number(e.time).toFixed(2)}s, Score: ${e.score}, Accuracy: ${Number(e.accuracy).toFixed(2)}%`
+    `${e.nickname || e.username} — Time: ${Number(e.time ?? e.matchTime ?? 0).toFixed(2)}s, Score: ${e.score ?? e.matchScore ?? 0}, Accuracy: ${Number(e.accuracy ?? e.matchAccuracy ?? 0).toFixed(2)}%`
   );
 
   console.log("🔵 showMatching() END");
@@ -436,51 +439,37 @@ async function showMatching(currentUser, isSessionUser) {
 
 
 // =========================
-// EXAM MODE RENDERER (FIXED)
-// =========================
-// =========================
-// EXAM MODE RENDERER (DEBUG VERSION)
+// EXAM MODE RENDERER (SESSION + SCHOOL, FIXED + LOGS)
 // =========================
 async function showExam(currentUser, isSessionUser) {
-
   console.log("========== SHOW EXAM START ==========");
   console.log("Current User:", currentUser);
-  console.log("Topic:", topic);
+  console.log("Topic (global param):", topic);
   console.log("Is Session User:", isSessionUser);
 
-  // ---------------------------
-  // LOAD PERSONAL SCORES
-  // ---------------------------
   const personal = await loadPersonalScores(currentUser, topic, "exam");
   console.log("RAW PERSONAL EXAM DATA:", personal);
 
-  // ---------------------------
-  // LOAD SCHOOL OR SESSION
-  // ---------------------------
   let schoolOrSession = null;
 
   if (isSessionUser) {
-    console.log("Loading SESSION leaderboard...");
+    console.log("Loading SESSION exam leaderboard...");
     schoolOrSession = await loadSessionLeaderboard(topic, "exam");
   } else {
-    console.log("Loading SCHOOL leaderboard...");
+    console.log("Loading SCHOOL exam leaderboard...");
     schoolOrSession = await loadSchoolExam(currentUser, topic);
   }
 
-  console.log("RAW SCHOOL/SESSION DATA:", schoolOrSession);
+  console.log("RAW SCHOOL/SESSION EXAM DATA:", schoolOrSession);
 
-  // ---------------------------
-  // PERSONAL BEST RENDER
-  // ---------------------------
+  // PERSONAL BEST
   console.log("---- PERSONAL BEST RENDER ----");
-
   renderTop5("examPersonal", personal, e => {
-
     console.log("PERSONAL ENTRY BEFORE FORMAT:", e);
 
-    const correct = Number(e.totalCorrect);
-    const wrong = Number(e.totalWrong);
-    const net = Number(e.netScore);
+    const correct = Number(e.totalCorrect ?? e.examCorrect ?? 0);
+    const wrong = Number(e.totalWrong ?? e.examWrong ?? 0);
+    const net = Number(e.netScore ?? e.examNet ?? (correct - wrong));
 
     console.log("PERSONAL FIELDS:", { correct, wrong, net });
 
@@ -488,21 +477,17 @@ async function showExam(currentUser, isSessionUser) {
       console.warn("⚠ PERSONAL SCORE HAS INVALID NUMBERS:", e);
     }
 
-    return `Correct: ${correct}, Wrong: ${wrong}, Net: ${net}, Date: ${e.date}`;
+    return `Correct: ${correct}, Wrong: ${wrong}, Net: ${net}, Date: ${e.date ?? ""}`;
   });
 
-  // ---------------------------
-  // SCHOOL / SESSION RENDER
-  // ---------------------------
+  // SCHOOL / SESSION TOP 5
   console.log("---- SCHOOL / SESSION RENDER ----");
-
   renderTop5("examSchool", schoolOrSession, e => {
-
     console.log("SCHOOL/SESSION ENTRY BEFORE FORMAT:", e);
 
     const correct = Number(e.totalCorrect ?? e.examCorrect ?? 0);
     const wrong = Number(e.totalWrong ?? e.examWrong ?? 0);
-    const net = Number(e.netScore ?? e.examNet ?? 0);
+    const net = Number(e.netScore ?? e.examNet ?? (correct - wrong));
 
     console.log("SCHOOL/SESSION FIELDS:", { correct, wrong, net });
 
@@ -517,13 +502,12 @@ async function showExam(currentUser, isSessionUser) {
 }
 
 
-
-
-
 // =========================
 // BINARY MODES
 // =========================
 async function showBinaryMode(currentUser, mode, personalId, schoolId, isSessionUser) {
+  console.log("🔍 showBinaryMode() START — mode:", mode, "topic:", topic, "isSessionUser:", isSessionUser);
+
   const personal = await loadPersonalScores(currentUser, topic, mode);
 
   let schoolOrSession = null;
@@ -533,39 +517,26 @@ async function showBinaryMode(currentUser, mode, personalId, schoolId, isSession
     schoolOrSession = await loadSchoolLeaderboard(currentUser, topic, mode);
   }
 
+  console.log("📄 showBinaryMode() personal:", personal);
+  console.log("📄 showBinaryMode() schoolOrSession:", schoolOrSession);
+
   renderTop5(personalId, personal, e =>
-    `Score: ${e.score}, Accuracy: ${Number(e.accuracy).toFixed(2)}%, Date: ${e.date}`
+    `Score: ${e.score ?? 0}, Accuracy: ${Number(e.accuracy ?? 0).toFixed(2)}%, Date: ${e.date ?? ""}`
   );
 
   renderTop5(schoolId, schoolOrSession, e =>
-    `${e.nickname || e.username} — Score: ${e.theoryScore ?? e.score}, Accuracy: ${Number(e.theoryAccuracy ?? e.accuracy ?? 0).toFixed(2)}%`
+    `${e.nickname || e.username} — Score: ${e.theoryScore ?? e.score ?? 0}, Accuracy: ${Number(e.theoryAccuracy ?? e.accuracy ?? 0).toFixed(2)}%`
   );
+
+  console.log("🔍 showBinaryMode() END — mode:", mode);
 }
 
 
 // =========================
-// DETECT AVAILABLE MODES (SCHOOL MODE ONLY)
-// =========================
-// =========================
 // AVAILABLE MODES (BY USER / TOPIC)
 // =========================
 function getAvailableModes(currentUser, topic) {
-  // ✅ If no user or no school, just allow all modes
-  if (!currentUser || !currentUser.school) {
-    return [
-      "theory",
-      "matching",
-      "exam",
-      "btd",
-      "btd_easy",
-      "dtb",
-      "dtb_easy",
-      "ba",
-      "ba_easy"
-    ];
-  }
-
-  // ✅ If you later want per‑school/per‑topic logic, add it here.
+  // Right now: allow all modes; hook for future restrictions
   return [
     "theory",
     "matching",
@@ -579,19 +550,11 @@ function getAvailableModes(currentUser, topic) {
   ];
 }
 
-
-
-// =========================
-// INIT LEADERBOARDS
-// =========================
 // =========================
 // INIT LEADERBOARDS (FINAL + LOGS)
 // =========================
-// =========================
-// INIT LEADERBOARDS (FIXED)
-// =========================
 async function initLeaderboards(currentUser, sessionCode, isSessionUser) {
-  // 🔍 Recalculate session info
+  // Recalculate session info from localStorage
   sessionCode = localStorage.getItem("sessionCode");
   isSessionUser = !!sessionCode;
 
@@ -632,22 +595,20 @@ async function initLeaderboards(currentUser, sessionCode, isSessionUser) {
     if (el) el.style.display = "none";
   });
 
-  // =========================
   // Determine topic and valid modes
-  // =========================
   const params = new URLSearchParams(window.location.search);
-  const topic = decodeURIComponent(params.get("topic") || "").toLowerCase();
-  console.log("🔍 Topic:", topic);
+  const rawTopic = decodeURIComponent(params.get("topic") || "");
+  const topicLower = rawTopic.toLowerCase();
+  console.log("🔍 initLeaderboards() topic:", rawTopic, "(lower:", topicLower, ")");
 
-  // Map topics to their valid modes
   const topicModes = {
     "variables and values": ["theory", "matching", "exam"],
     "data types": ["theory", "matching", "exam"],
     "binary": ["btd", "btd_easy", "dtb", "dtb_easy", "ba", "ba_easy"]
   };
 
-  const validModes = topicModes[topic] || ["theory", "matching", "exam"];
-  console.log("🔍 Valid modes for topic:", validModes);
+  const validModes = topicModes[topicLower] || ["theory", "matching", "exam"];
+  console.log("🔍 initLeaderboards() validModes:", validModes);
 
   // =========================
   // SESSION MODE
@@ -656,58 +617,66 @@ async function initLeaderboards(currentUser, sessionCode, isSessionUser) {
     console.log("🔵 SESSION MODE ACTIVE");
     if (loadingDiv && container) container.removeChild(loadingDiv);
 
-    // Show only relevant modes for this topic
     if (validModes.includes("theory")) {
       console.log("➡ Showing THEORY (session)");
-      document.getElementById("theorySection").style.display = "block";
+      const sec = document.getElementById("theorySection");
+      if (sec) sec.style.display = "block";
       await showTheory(currentUser, true);
     }
 
     if (validModes.includes("matching")) {
       console.log("➡ Showing MATCHING (session)");
-      document.getElementById("matchingSection").style.display = "block";
+      const sec = document.getElementById("matchingSection");
+      if (sec) sec.style.display = "block";
       await showMatching(currentUser, true);
     }
 
     if (validModes.includes("exam")) {
       console.log("➡ Showing EXAM (session)");
-      document.getElementById("examSection").style.display = "block";
+      const sec = document.getElementById("examSection");
+      if (sec) sec.style.display = "block";
       await showExam(currentUser, true);
     }
 
     if (validModes.includes("btd")) {
       console.log("➡ Showing BTD (session)");
-      document.getElementById("btdSection").style.display = "block";
+      const sec = document.getElementById("btdSection");
+      if (sec) sec.style.display = "block";
       await showBinaryMode(currentUser, "btd", "btdPersonal", "btdSchool", true);
     }
 
     if (validModes.includes("btd_easy")) {
       console.log("➡ Showing BTD EASY (session)");
-      document.getElementById("btdEasySection").style.display = "block";
+      const sec = document.getElementById("btdEasySection");
+      if (sec) sec.style.display = "block";
       await showBinaryMode(currentUser, "btd_easy", "btdEasyPersonal", "btdEasySchool", true);
     }
 
     if (validModes.includes("dtb")) {
       console.log("➡ Showing DTB (session)");
-      document.getElementById("dtbSection").style.display = "block";
+      const sec = document.getElementById("dtbSection");
+      if (sec) sec.style.display = "block";
       await showBinaryMode(currentUser, "dtb", "dtbPersonal", "dtbSchool", true);
     }
 
     if (validModes.includes("dtb_easy")) {
       console.log("➡ Showing DTB EASY (session)");
-      document.getElementById("dtbEasySection").style.display = "block";
+      const sec = document.getElementById("dtbEasySection");
+      if (sec) sec.style.display = "block";
       await showBinaryMode(currentUser, "dtb_easy", "dtbEasyPersonal", "dtbEasySchool", true);
     }
 
     if (validModes.includes("ba")) {
       console.log("➡ Showing BA (session)");
-      document.getElementById("baSection").style.display = "block";
+      const sec = document.getElementById("baSection");
+      if (sec) sec.style.display = "block";
       await showBinaryMode(currentUser, "ba", "baPersonal", "baSchool", true);
     }
 
     if (validModes.includes("ba_easy")) {
       console.log("➡ Showing BA EASY (session)");
-      document.getElementById("baEasySection").style.display = "block";
+      const sec = document.getElementById("baEasySection");
+      if (sec) sec.style.display = "block";
       await showBinaryMode(currentUser, "ba_easy", "baEasyPersonal", "baEasySchool", true);
     }
 
@@ -723,57 +692,67 @@ async function initLeaderboards(currentUser, sessionCode, isSessionUser) {
 
   if (validModes.includes("theory")) {
     console.log("➡ Showing THEORY (school)");
-    document.getElementById("theorySection").style.display = "block";
+    const sec = document.getElementById("theorySection");
+    if (sec) sec.style.display = "block";
     await showTheory(currentUser, false);
   }
 
   if (validModes.includes("matching")) {
     console.log("➡ Showing MATCHING (school)");
-    document.getElementById("matchingSection").style.display = "block";
+    const sec = document.getElementById("matchingSection");
+    if (sec) sec.style.display = "block";
     await showMatching(currentUser, false);
   }
 
   if (validModes.includes("exam")) {
     console.log("➡ Showing EXAM (school)");
-    document.getElementById("examSection").style.display = "block";
+    const sec = document.getElementById("examSection");
+    if (sec) sec.style.display = "block";
     await showExam(currentUser, false);
   }
 
   if (validModes.includes("btd")) {
     console.log("➡ Showing BTD (school)");
-    document.getElementById("btdSection").style.display = "block";
+    const sec = document.getElementById("btdSection");
+    if (sec) sec.style.display = "block";
     await showBinaryMode(currentUser, "btd", "btdPersonal", "btdSchool", false);
   }
 
   if (validModes.includes("btd_easy")) {
     console.log("➡ Showing BTD EASY (school)");
-    document.getElementById("btdEasySection").style.display = "block";
+    const sec = document.getElementById("btdEasySection");
+    if (sec) sec.style.display = "block";
     await showBinaryMode(currentUser, "btd_easy", "btdEasyPersonal", "btdEasySchool", false);
   }
 
   if (validModes.includes("dtb")) {
     console.log("➡ Showing DTB (school)");
-    document.getElementById("dtbSection").style.display = "block";
+    const sec = document.getElementById("dtbSection");
+    if (sec) sec.style.display = "block";
     await showBinaryMode(currentUser, "dtb", "dtbPersonal", "dtbSchool", false);
   }
 
   if (validModes.includes("dtb_easy")) {
     console.log("➡ Showing DTB EASY (school)");
-    document.getElementById("dtbEasySection").style.display = "block";
+    const sec = document.getElementById("dtbEasySection");
+    if (sec) sec.style.display = "block";
     await showBinaryMode(currentUser, "dtb_easy", "dtbEasyPersonal", "dtbEasySchool", false);
   }
 
   if (validModes.includes("ba")) {
     console.log("➡ Showing BA (school)");
-    document.getElementById("baSection").style.display = "block";
+    const sec = document.getElementById("baSection");
+    if (sec) sec.style.display = "block";
     await showBinaryMode(currentUser, "ba", "baPersonal", "baSchool", false);
   }
 
   if (validModes.includes("ba_easy")) {
     console.log("➡ Showing BA EASY (school)");
-    document.getElementById("baEasySection").style.display = "block";
+    const sec = document.getElementById("baEasySection");
+    if (sec) sec.style.display = "block";
     await showBinaryMode(currentUser, "ba_easy", "baEasyPersonal", "baEasySchool", false);
   }
 
   console.log("🟢 SCHOOL MODE COMPLETE");
 }
+
