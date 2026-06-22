@@ -253,7 +253,41 @@ export const theoryData = {
           {question:"What design tool is used to map out navigation through an application?",correct:["Flowchart","FLOWCHART"],wrong:["Mood board","Mind map","High fidelity wireframe","Low fidelity wireframe","Visualisation diagram","Flechart","Flowchartt","PIE chart","Mood bord","Mind mape","Visualisation digram","MICROSOFT POWERPOINT","Microsoft Word","Moodboard","Minde map"]},
           {question:"What design tool is used to brainstorm features for a new product?",correct:["Mind map","MIND MAP"],wrong:["MOODBOARD","Flowchart","High fidelity wireframe","Low fidelity wireframe","Visualisation diagram","Mind mape","Mindmap","Minde map","Mood bord","MICROSOFT EXCEL","Visualisation digram","High fidelity wirefram","Low fidelity wirefram","Microsoft powerpoint","Microsoft word"]},
        ]
+      },
+
+      "Data and testing": {
+        "Data types": [
+          {question:"What is a string?",correct:["Text data","Sequence of characters"],wrong:["Number data","Boolean data","List data","Image data","Audio data","Video data","Date data","Time data","Currency data","Email data","URL data","File path data","JSON data","XML data","CSV data"]},
+          {question:"What is an integer?",correct:["Whole number","Number without decimal"],wrong:["Decimal number","Text string","Boolean value","List of items","Image file","Audio clip","Video file","Date value","Time value","Currency amount","Email address","URL link","File path string","JSON object"]},
+          {question:"What is a float?",correct:["Decimal number","Number with decimal"],wrong:["Whole number","Text string","Boolean value","List of items","Image file","Audio clip","Video file","Date value","Time value","Currency amount","Email address","URL link","File path string"]},
+          {question:"What is a boolean?",correct:["True or false","Binary value"],wrong:["Whole number","Decimal number","Text string","List of items","Image file","Audio clip","Video file","Date value","Time value","Currency amount","Email address","URL link","File path string"]},
+          {question:"What is a list?",correct:["Collection of items","Ordered data"],wrong:["Single item","Text string","Whole number","Decimal number","Boolean value","Image file","Audio clip","Video file","Date value","Time value","Currency amount","Email address","URL link","File path string"]},
+          {question:"What is an array?",correct:["Collection of items","Indexed data"],wrong:["Single item","Text string","Whole number","Decimal number","Boolean value","Image file","Audio clip","Video file","Date value","Time value","Currency amount","Email address","URL link","File path string"]},
+          {question:"What is a dictionary?",correct:["Key-value pairs","Associative array"],wrong:["Single item","Text string","Whole number","Decimal number","Boolean value","Image file","Audio clip","Video file","Date value","Time value","Currency amount","Email address","URL link"]},
+          {question:"What is a tuple?",correct:["Immutable collection","Fixed data"],wrong:["Mutable collection","Text string","Whole number","Decimal number","Boolean value","Image file","Audio clip","Video file","Date value","Time value","Currency amount","Email address"]},
+          {question:"What is a set?",correct:["Unique items","Unordered collection"],wrong:["Duplicate items","Text string","Whole number","Decimal number","Boolean value","Image file","Audio clip","Video file","Date value","Time value","Currency amount"]},
+          {question:"What is a date?",correct:["Calendar date","Specific day"],wrong:["Time of day","Text string","Whole number","Decimal number","Boolean value","Image file","Audio clip","Video file","Currency amount"]},
+          {question:"What is a time?",correct:["Clock time","Specific moment"],wrong:["Calendar date","Text string","Whole number","Decimal number","Boolean value","Image file","Audio clip","Video file"]}     
+        ],
+
+        "Data and information": [
+
+          {question:"What is data?",correct:["Raw facts","Unprocessed facts"],wrong:["Finished report","Useful information","A database","A network","A printer","A spreadsheet","A website","An application","A password","An email","A chart","A graph","A CPU","A monitor","A keyboard","A scanner"]},
+          {question:"What is information?",correct:["Processed data","Meaningful data"],wrong:["Raw facts","Random numbers","A database","A printer","A network","A website","A password","An application","A scanner","A keyboard","A monitor","A CPU","A graph","A chart","An email","A file"]},
+          {question:"Which is an example of data?",correct:["Test scores","Names"],wrong:["A report","A summary","A conclusion","A presentation","A website","A printer","A network","A monitor","A keyboard","A scanner","A CPU","A graph","A chart","An email","A folder","A password"]},
+          {question:"Which is an example of information?",correct:["Exam report","Sales summary"],wrong:["Marks","Numbers","Names","Dates","Passwords","Email addresses","Phone numbers","Postcodes","Usernames","File names","Product codes","Serial numbers","ID numbers","Temperatures","Measurements","Scores"]},
+          {question:"What happens when data is processed?",correct:["Becomes information","Gains meaning"],wrong:["Gets deleted","Becomes hardware","Turns into software","Creates a network","Prints documents","Stores files","Runs programs","Creates passwords","Formats disks","Scans images","Plays music","Sends emails","Browses websites","Installs apps","Creates hardware","Runs updates"]},
+          {question:"Why is information useful?",correct:["Supports decisions","Provides meaning"],wrong:["Prints documents","Stores files","Runs software","Creates hardware","Installs apps","Plays music","Sends emails","Scans images","Creates passwords","Formats disks","Runs updates","Controls networks","Changes hardware","Edits photos","Records sound","Creates websites"]},
+          {question:"Which is data rather than information?",correct:["Daily temperatures","Customer ages"],wrong:["Weather report","Customer summary","Sales report","News article","Presentation slide","Printed chart","Completed graph","Website page","Email message","User guide","Leaflet","Poster","Brochure","Report card","Newsletter","Magazine"]},
+          {question:"Which is information rather than data?",correct:["Weather forecast","Attendance report"],wrong:["Rainfall figures","Student names","Dates","Marks","Temperatures","Postcodes","Passwords","Usernames","Measurements","Phone numbers","Serial numbers","Product codes","ID numbers","File names","Scores","Times"]},
+          {question:"Why is data collected?",correct:["For processing","For analysis"],wrong:["To print pages","To play music","To browse websites","To install software","To manage hardware","To edit photos","To create networks","To run games","To record audio","To scan images","To send emails","To format disks","To change settings","To update software","To repair devices","To create passwords"]},
+          {question:"What is needed to turn data into information?",correct:["Processing","Analysis"],wrong:["Printing","Scanning","Installing","Browsing","Gaming","Recording","Formatting","Updating","Repairing","Connecting","Uploading","Downloading","Sharing","Copying","Deleting","Restarting"]}
+        
+        ]        
+
+
       }
+
     }
   }
 },
