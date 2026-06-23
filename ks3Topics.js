@@ -36,6 +36,8 @@ export const ks3Topics = {
     "Programming": [
         "Spot the Mistake (Python)",
         "State the Output (If/Else)",
+        "State the Output (For Loop)",
+        "State the Output (While Loop)",
         "Scratch",
         "Data Types",
         "Variables and Values",
