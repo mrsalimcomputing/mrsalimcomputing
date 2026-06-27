@@ -1,20 +1,23 @@
 /* ============================================================
-   KS4 PAGE — ISOLATED LAYOUT
+   KS4 PAGE — MATCH KS3 HEIGHT + CENTERING
    ============================================================ */
 
 .ks4-container {
+    position: absolute;
+    top: 0;
+    left: 0;
     width: 100%;
-    min-height: 100vh;
-    padding-top: 120px; /* matches KS3 spacing */
+    height: 100vh;
     display: flex;
     flex-direction: column;
     align-items: center;
-    overflow: hidden;
+    justify-content: flex-start; /* keep top alignment like KS3 */
+    padding-top: 80px; /* lowered from 120px for better vertical balance */
 }
 
 /* Title + Subtitle */
 .ks4-container .menu-title {
-    font-size: 3rem;
+    font-size: 3.8rem;
     font-weight: 900;
     color: #ECFEFF;
     text-shadow: 0 4px 10px rgba(0,0,0,0.4);
@@ -22,24 +25,25 @@
 }
 
 .ks4-container .menu-subtitle {
-    font-size: 1.3rem;
+    font-size: 1.4rem;
     color: #34D399;
     margin-bottom: 25px;
 }
 
 /* ============================================================
-   KS4 GRID
+   KS4 GRID — CENTERED LIKE KS3
    ============================================================ */
 .ks4-grid {
     display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    gap: 12px;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
     width: 90%;
-    max-width: 1200px;
+    max-width: 900px;
+    margin-top: 20px;
 }
 
 /* ============================================================
-   KS4 BUTTONS
+   KS4 BUTTONS — MATCH KS3 STYLE
    ============================================================ */
 .ks4-btn {
     background: #0891B2;
@@ -52,15 +56,16 @@
     transition: 0.25s ease;
 
     width: 100%;
-    height: 55px;
-    font-size: 0.9rem;
+    height: 60px;
+    font-size: 1rem;
     padding: 10px;
 }
 
 .ks4-btn:hover {
     background: #34D399;
     color: #0F172A;
-    transform: scale(1.05);
+    transform: translate(-2px, -2px);
+    box-shadow: 6px 6px 0 #0F172A;
 }
 
 .ks4-btn:active {
@@ -68,19 +73,40 @@
     box-shadow: 2px 2px 0 #0F172A;
 }
 
-/* ============================================================
-   KS4 LOCKED BUTTONS
-   ============================================================ */
+/* Locked buttons */
 .ks4-btn.locked {
-    background-color: #0a6b84; /* darker shade for locked state */
+    background-color: #0a6b84;
     cursor: not-allowed;
     opacity: 0.6;
-    box-shadow: none; /* remove raised effect */
-    transform: none; /* disable hover scaling */
+    box-shadow: none;
+    transform: none;
 }
 
 .ks4-btn.locked:hover {
-    background-color: #0a6b84; /* keep same color on hover */
-    color: #ECFEFF; /* maintain text visibility */
+    background-color: #0a6b84;
+    color: #ECFEFF;
+}
+
+/* ============================================================
+   RESPONSIVE — MOBILE FRIENDLY
+   ============================================================ */
+@media (max-width: 900px) {
+    .ks4-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 14px;
+    }
+
+    .ks4-btn {
+        height: 55px;
+        font-size: 0.9rem;
+    }
+
+    .ks4-container .menu-title {
+        font-size: 2.8rem;
+    }
+
+    .ks4-container .menu-subtitle {
+        font-size: 1.2rem;
+    }
 }
 

@@ -34,14 +34,12 @@ export const ks3Topics = {
     ],
 
     "Programming": [
-        "Spot the Mistake (Python)",
         "State the Output (If/Else)",
         "State the Output (For Loop)",
         "State the Output (While Loop)",
         "Scratch",
         "Data Types",
         "Variables and Values",
-        "Iteration Loops",
         "Lists / Arrays",
         "Debugging and Syntax",
         "Maths / Arithmetic",
@@ -78,13 +76,25 @@ export const ks3Topics = {
     ],
 
     "Boolean Logic & Binary": [
-    "binary to denary",
-    "binary to denary (easy)",
-    "denary to binary",
-    "denary to binary (easy)",
-    "logic gates (AND, OR, NOT)",
-    "binary addition",
-    "binary addition (easy)"
+        "binary to denary",
+        "binary to denary (easy)",
+        "denary to binary",
+        "denary to binary (easy)",
+        "logic gates (AND, OR, NOT)",
+        "binary addition",
+        "binary addition (easy)"
+    ],
+
+    "Networks": [
+        "Network Devices (Router, Switch, WAP)",
+        "LAN and WAN",
+        "Network Topologies",
+        "Wired vs Wireless Networks",
+        "Internet, Web and Cloud",
+        "IP Addresses",
+        "MAC Addresses",
+        "Network Protocols",
+        "Bandwidth and Types of Cables",
     ]
 
 };
