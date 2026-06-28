@@ -59,12 +59,12 @@ console.log("🆕 NEW DEVICE ID GENERATED:", deviceID);
 // ===============================
 function generateNickname() {
   const countries = [
-    "USA","Canada","Mexico","Australia","Iraq","Iran","Japan","Jordan","South Korea",
-    "Qatar","Saudi Arabia","Uzbekistan","Algeria","Cabo Verde","DR Congo","Ivory Coast",
-    "Egypt","Ghana","Morocco","Senegal","South Africa","Tunisia","Curaçao","Haiti",
-    "Panama","Argentina","Brazil","Colombia","Ecuador","Paraguay","Uruguay","New Zealand",
-    "Austria","Belgium","Bosnia and Herzegovina","Croatia","Czechia","England","France",
-    "Germany","Netherlands","Norway","Portugal","Scotland","Spain","Sweden","Switzerland","Turkey"
+    "USA","Canada","Mexico","Australia","Japan",
+    "Algeria","Cabo Verde","DR Congo","Ivory Coast",
+    "Egypt","Ghana","Morocco","Senegal","South Africa",
+    "Argentina","Brazil","Colombia","Ecuador","Paraguay",
+    "Austria","Belgium","Bosnia and Herzegovina","Croatia","England","France",
+    "Germany","Netherlands","Norway","Portugal","Spain","Sweden","Switzerland"
   ];
 
   const country = countries[Math.floor(Math.random() * countries.length)];
