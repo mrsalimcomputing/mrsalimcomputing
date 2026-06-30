@@ -10,7 +10,8 @@ import { db } from "./firebaseConfig.js";
 import {
   doc,
   setDoc,
-  getDoc
+  getDoc,
+  runTransaction
 } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 
 async function updateSessionTopic(safe, topic) {
