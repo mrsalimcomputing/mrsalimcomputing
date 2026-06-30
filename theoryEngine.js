@@ -159,59 +159,56 @@ export async function saveTheoryScore(score, accuracy) {
 
   console.log("✅ Personal best saved:", bestScore, bestAccuracy);
 
-  // ============================================================
-  // 2) SESSION MODE LEADERBOARD (PLAYER + TOPIC DOCS)
-  // ============================================================
-  if (sessionCode && deviceID) {
-    const playerRef = doc(db, "sessions", sessionCode, "players", deviceID);
-    const existingSnap = await getDoc(playerRef);
-    console.log("📄 Checking playerRef:", playerRef.path, "exists:", existingSnap.exists());
+ // ============================================================
+// 2) SESSION MODE LEADERBOARD (PLAYER + TOPIC DOCS) — FIXED WITH TRANSACTION
+// ============================================================
+if (sessionCode && deviceID) {
+  const playerRef = doc(db, "sessions", sessionCode, "players", deviceID);
+  const topicRef = doc(db, "sessions", sessionCode, "players", deviceID, "topics", safe);
 
-    let shouldUpdate = false;
+  console.log("🔒 Running Firestore TRANSACTION for session theory score...");
 
-    if (existingSnap.exists()) {
-      const prev = existingSnap.data();
-      console.log("📄 Previous session player data:", prev);
-      const prevScore = prev.theoryScore ?? 0;
-      const prevAccuracy = prev.theoryAccuracy ?? 0;
+  await runTransaction(db, async (tx) => {
+    const playerSnap = await tx.get(playerRef);
 
-      if (score > prevScore || (score === prevScore && accuracy > prevAccuracy)) {
-        shouldUpdate = true;
-        console.log("🔁 Updating session player — better score detected");
-      } else {
-        console.log("⏩ Skipping update — previous score is better or equal");
-      }
+    let prevScore = 0;
+    let prevAccuracy = 0;
+
+    if (playerSnap.exists()) {
+      const prev = playerSnap.data();
+      prevScore = prev.theoryScore ?? 0;
+      prevAccuracy = prev.theoryAccuracy ?? 0;
+      console.log("📄 Transaction read — prevScore:", prevScore, "prevAccuracy:", prevAccuracy);
+    }
+
+    // Only update if new score is higher
+    if (score > prevScore || (score === prevScore && accuracy > prevAccuracy)) {
+      console.log("🔁 Transaction: updating session score to:", score, accuracy);
+
+      tx.set(playerRef, {
+        deviceID,
+        nickname,
+        topic,
+        safeTopic: safe,
+        theoryScore: score,
+        theoryAccuracy: accuracy,
+        lastUpdated: Date.now()
+      }, { merge: true });
+
+      tx.set(topicRef, {
+        topic,
+        safeTopic: safe,
+        theoryScore: score,
+        theoryAccuracy: accuracy,
+        updatedAt: Date.now()
+      }, { merge: true });
     } else {
-      shouldUpdate = true;
-      console.log("🆕 Creating new session player doc");
+      console.log("⏩ Transaction: lower score ignored:", score, accuracy);
     }
+  });
 
-    if (shouldUpdate) {
-      await Promise.all([
-        setDoc(playerRef, {
-          deviceID,
-          nickname,
-          topic,
-          safeTopic: safe,
-          theoryScore: score,
-          theoryAccuracy: accuracy,
-          lastUpdated: Date.now()
-        }, { merge: true }),
-
-        setDoc(doc(db, "sessions", sessionCode, "players", deviceID, "topics", safe), {
-          topic,
-          safeTopic: safe,
-          theoryScore: score,
-          theoryAccuracy: accuracy,
-          updatedAt: Date.now()
-        }, { merge: true })
-      ]);
-
-      console.log("✅ SESSION THEORY SCORE SAVED:", nickname, score, accuracy);
-    }
-  } else {
-    console.warn("⚠️ Missing sessionCode or deviceID — skipping session leaderboard update");
-  }
+  console.log("✅ Transaction complete — session leaderboard protected");
+}
 
   // ============================================================
   // 3) SCHOOL / SESSION LEADERBOARD (Your School / Session Top 5)

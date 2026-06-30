@@ -127,8 +127,18 @@ export const theoryData = {
         {question:"What is printed: if 0 == 1: print('Equal') else: print('Not Equal')?",correct:["Not Equal","It prints Not Equal"],wrong:["Equal","Error","True","False","0 == 1","Undefined","Nothing","Both","Loops","Stops","Null","Crash","0","1"]},
         {question:"What is printed: if 9 < 20: print('OK') else: print('NO')?",correct:["OK","It prints OK"],wrong:["NO","Error","True","False","9 < 20","Undefined","Nothing","Both","Loops","Stops","Null","Crash","9","20"]},
         {question:"What is printed: if 2 == 3: print('Yes') else: print('No')?",correct:["No","It prints No"],wrong:["Yes","Error","True","False","2 == 3","Undefined","Nothing","Both","Loops","Stops","Null","Crash","2","3"]},
-        {question:"What is printed: if 11 > 1: print('Go') else: print('Stop')?",correct:["Go","It prints Go"],wrong:["Stop","Error","True","False","11 > 1","Undefined","Nothing","Both","Loops","Stops","Null","Crash","11","1"]}
-    ],
+        {question:"What is printed: if 11 > 1: print('Go') else: print('Stop')?",correct:["Go","It prints Go"],wrong:["Stop","Error","True","False","11 > 1","Undefined","Nothing","Both","Loops","Stops","Null","Crash","11","1"]},
+        {question:"What is the output of: if 125 > 78: print('Winner') else: print('Loser')?",correct:["Winner","It prints Winner"],wrong:["Loser","Error","True","False","125 > 78","78 > 125","Maybe","Undefined","Nothing","Both","Loops","Crashes","WinnerLoser","Prints twice","Stops"]},
+        {question:"What is the output of: if 250 == 300: print('Equal') else: print('Not Equal')?",correct:["Not Equal","It prints Not Equal"],wrong:["Equal","Error","True","False","250 == 300","Undefined","Nothing","Both","Loops","Stops","It prints Equal","Prints 300","Null","Crash","Maybe"]},
+        {question:"What is the output of: if 450 < 100: print('Small') else: print('Large')?",correct:["Large","It prints Large"],wrong:["Small","Error","True","False","450 < 100","Undefined","Nothing","Both","Loops","Stops","It prints small","Prints 100","Null","Crash","Tiny"]},
+        {question:"What is printed: if 999 == 999: print('Correct') else: print('Wrong')?",correct:["Correct","It prints Correct"],wrong:["Wrong","Error","True","False","999 == 999","Undefined","Nothing","Both","Loops","Stops","Null","It prints Wrong","999","0"]},
+        {question:"What is printed: if 175 > 900: print('High') else: print('Low')?",correct:["Low","It prints Low"],wrong:["High","Error","True","False","175 > 900","Undefined","Nothing","It prints High","Loops","Stops","Null","Crash","175","900"]},
+        {question:"What is printed: if 620 == 620: print('Match') else: print('No Match')?",correct:["Match","It prints Match"],wrong:["No Match","Error","True","False","620 == 620","Undefined","Nothing","Both","It print No Match","Stops","Null","Crash","620","621"]},
+        {question:"What is printed: if 120 < 45: print('Yes') else: print('No')?",correct:["No","It prints No"],wrong:["Yes","Error","True","False","120 < 45","Undefined","Ja","Both","Loops","Stops","Null","It prints yes","120","45"]},
+        {question:"What is printed: if 830 > 215: print('Bigger') else: print('Smaller')?",correct:["Bigger","It prints Bigger"],wrong:["Smaller","Error","True","False","830 > 215","Undefined","Prints smaller","Both","Loops","Stops","Null","Crash","It prints smaller","215"]},
+        {question:"What is printed: if 1000 == 999: print('Equal') else: print('Not Equal')?",correct:["Not Equal","It prints Not Equal"],wrong:["Equal","Error","True","False","1000 == 999","Equal will be printed","Nothing","Both","Loops","Stops","Null","Crash","1000","It prints Equal"]},
+        {question:"What is printed: if 345 < 678: print('Success') else: print('Fail')?",correct:["Success","It prints Success"],wrong:["Fail","Error","True","False","345 < 678","Undefined","Nothing","Both","Loops","Stops","It prints fail","Crash","345","678"]}
+        ],
 
     "Sequence, Selection, Iteration": [
 
