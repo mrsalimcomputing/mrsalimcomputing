@@ -182,8 +182,8 @@ if (sessionCode && deviceID) {
     }
 
     // Only update if new score is higher
-    if (score > prevScore || (score === prevScore && accuracy > prevAccuracy)) {
-      console.log("🔁 Transaction: updating session score to:", score, accuracy);
+  if (!playerSnap.exists() || score > prevScore || (score === prevScore && accuracy > prevAccuracy)) {
+    console.log("🔁 Transaction: creating or updating session score to:", score, accuracy);
 
       tx.set(playerRef, {
         deviceID,
