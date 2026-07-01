@@ -262,7 +262,7 @@ async function loadSchoolLeaderboard(currentUser, topic, mode) {
 }
 
 // =========================
-// SESSION MODE LEADERBOARD (TOPIC-BASED, CORRECT VERSION + LOGS)
+// SESSION MODE LEADERBOARD (TOPIC-BASED, FIXED VERSION + LOGS)
 // =========================
 async function loadSessionLeaderboard(topic, mode) {
   const sessionCode = localStorage.getItem("sessionCode");
@@ -289,56 +289,71 @@ async function loadSessionLeaderboard(topic, mode) {
       continue;
     }
 
+    // Try to read topic doc, but DO NOT require it
     const topicRef = doc(db, "sessions", sessionCode, "players", deviceID, "topics", safe);
     const topicSnap = await getDoc(topicRef);
 
-    console.log("📄 Checking topic doc for deviceID:", deviceID, "exists:", topicSnap.exists());
+    const t = topicSnap.exists() ? topicSnap.data() : {};
 
-    if (!topicSnap.exists()) continue;
+    // Prefer topic doc values, fallback to player doc
+    const theoryScore     = t.theoryScore     ?? player.theoryScore     ?? 0;
+    const theoryAccuracy  = t.theoryAccuracy  ?? player.theoryAccuracy  ?? 0;
+    const matchScore      = t.matchScore      ?? player.matchScore      ?? 0;
+    const examNet         = t.examNet         ?? player.examNet         ?? 0;
 
-    const t = topicSnap.data();
-
+    // Build entry
     const entry = {
       nickname: player.nickname,
       deviceID,
-      ...t
+      theoryScore,
+      theoryAccuracy,
+      matchScore,
+      examNet
     };
 
-    results.push(entry);
+    // Only include players with a real score
+    if (mode === "theory" && theoryScore > 0) {
+      results.push(entry);
+    }
+
+    if (mode === "matching" && matchScore > 0) {
+      results.push(entry);
+    }
+
+    if (mode === "exam" && examNet > 0) {
+      results.push(entry);
+    }
   }
 
   console.log("📊 loadSessionLeaderboard() raw results:", results);
 
-// ===== SORTING & TOP 5 FILTER =====
-let sorted = [];
+  // ===== SORTING & TOP 5 FILTER =====
+  let sorted = [];
 
-if (mode === "theory") {
-  sorted = results
-    .filter(p => typeof (p.theoryScore ?? p.score) === "number")
-    .sort((a, b) =>
-      (b.theoryScore ?? b.score ?? 0) - (a.theoryScore ?? a.score ?? 0) ||
-      (b.theoryAccuracy ?? b.accuracy ?? 0) - (a.theoryAccuracy ?? a.accuracy ?? 0)
-    );
+  if (mode === "theory") {
+    sorted = results
+      .sort((a, b) =>
+        (b.theoryScore ?? 0) - (a.theoryScore ?? 0) ||
+        (b.theoryAccuracy ?? 0) - (a.theoryAccuracy ?? 0)
+      );
+  }
+
+  else if (mode === "matching") {
+    sorted = results
+      .sort((a, b) => (b.matchScore ?? 0) - (a.matchScore ?? 0));
+  }
+
+  else if (mode === "exam") {
+    sorted = results
+      .sort((a, b) => Number(b.examNet ?? 0) - Number(a.examNet ?? 0));
+  }
+
+  const top5 = sorted.slice(0, 5);
+
+  console.log("📊 loadSessionLeaderboard() FINAL TOP 5:", top5);
+  return top5;
 }
 
-else if (mode === "matching") {
-  sorted = results
-    .filter(p => typeof (p.matchScore ?? p.score) === "number")
-    .sort((a, b) => (b.matchScore ?? b.score ?? 0) - (a.matchScore ?? a.score ?? 0));
-}
-
-else if (mode === "exam") {
-  sorted = results
-    .filter(p => typeof (p.examNet ?? p.netScore) === "number")
-    .sort((a, b) => (Number(b.examNet ?? b.netScore ?? 0) - Number(a.examNet ?? a.netScore ?? 0)));
-}
-
-const top5 = sorted.slice(0, 5);
-
-console.log("📊 loadSessionLeaderboard() FINAL TOP 5:", top5);
-return top5;
-
-}
 
 
 // =========================
