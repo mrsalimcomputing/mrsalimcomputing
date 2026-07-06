@@ -133,7 +133,7 @@ export const theoryData = {
         {question:"What does print(54 / 6) output?",correct:["9.0","9"],wrong:["546","54 / 6","Error","0","6","8","54","1","True","False","A string","Null","90","The number 12","324"]},
         {question:"What does print(100 / 10) output?",correct:["10.0","10"],wrong:["10010","100 / 10","Error","0","100","1","20","True","False","A string","Null","1000","The number 5","110"]},
         {question:"What does print(27 / 9) output?",correct:["3.0","3"],wrong:["279","27 / 9","Error","0","9","6","27","1","True","False","A string","Null","30","The number 18","243"]},
-        {question:"What does print(13 + 9) output?",correct:["22","The number 22"],wrong:["139","13 + 9","Error","0","21","23","4","1","True","False","A string","Null","220","The number 13","18"]},
+        {question:"What does print(13 + 9) output?",correct:["22","The Number 22"],wrong:["139","13 + 9","Error","0","21","23","4","1","True","False","A string","Null","220","The number 13","18"]},
         {question:"What does print(27 + 15) output?",correct:["42","The number 42"],wrong:["2715","27 + 15","Error","0","32","41","43","1","True","False","A string","Null","420","The number 12","12"]},
         {question:"What does print(48 + 17) output?",correct:["65","The number 65"],wrong:["4817","48 + 17","Error","0","55","64","66","1","True","False","A string","Null","650","The number 17","31"]},
         {question:"What does print(99 + 1) output?",correct:["100","The number 100"],wrong:["991","99 + 1","Error","0","99","101","10","1","True","False","A string","Null","1000","The number 9","90"]},
