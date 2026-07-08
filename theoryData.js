@@ -165,8 +165,13 @@ export const theoryData = {
         {question:"What is printed: if 120 < 45: print('Yes') else: print('No')?",correct:["No","It prints No"],wrong:["Yes","Error","True","False","120 < 45","Undefined","Ja","Both","Loops","Stops","Null","It prints yes","120","45"]},
         {question:"What is printed: if 830 > 215: print('Bigger') else: print('Smaller')?",correct:["Bigger","It prints Bigger"],wrong:["Smaller","Error","True","False","830 > 215","Undefined","Prints smaller","Both","Loops","Stops","Null","Crash","It prints smaller","215"]},
         {question:"What is printed: if 1000 == 999: print('Equal') else: print('Not Equal')?",correct:["Not Equal","It prints Not Equal"],wrong:["Equal","Error","True","False","1000 == 999","Equal will be printed","Nothing","Both","Loops","Stops","Null","Crash","1000","It prints Equal"]},
-        {question:"What is printed: if 345 < 678: print('Success') else: print('Fail')?",correct:["Success","It prints Success"],wrong:["Fail","Error","True","False","345 < 678","Undefined","Nothing","Both","Loops","Stops","It prints fail","Crash","345","678"]}
-        ],
+        {question:"What is printed: if 345 < 678: print('Success') else: print('Fail')?",correct:["Success","It prints Success"],wrong:["Fail","Error","True","False","345 < 678","Undefined","Nothing","Both","Loops","Stops","It prints fail","Crash","345","678"]},
+        {question:"What is printed: if 45 >= 45: print('Pass') else: print('Fail')?",correct:["Pass","It prints Pass"],wrong:["Fail","Error","True","False","45 >= 45","Undefined","Nothing","Both","Loops","Stops","Null","Crash","45","46"]},
+        {question:"What is printed: if 18 <= 12: print('Small') else: print('Large')?",correct:["Large","It prints Large"],wrong:["Small","Error","True","False","18 <= 12","Undefined","Nothing","Both","Loops","Stops","Null","Crash","18","12"]},
+        {question:"What is printed: if 99 != 100: print('Different') else: print('Same')?",correct:["Different","It prints Different"],wrong:["Same","Error","True","False","99 != 100","Undefined","Nothing","Both","Loops","Stops","Null","Crash","99","100"]},
+        {question:"What is printed: if 250 != 250: print('Wrong') else: print('Correct')?",correct:["Correct","It prints Correct"],wrong:["Wrong","Error","True","False","250 != 250","Undefined","Nothing","Both","Loops","Stops","Null","Crash","250","251"]},
+        {question:"What is printed: if 75 <= 80: print('Allowed') else: print('Denied')?",correct:["Allowed","It prints Allowed"],wrong:["Denied","Error","True","False","75 <= 80","Undefined","Nothing","Both","Loops","Stops","Null","Crash","75","80"]}        
+      ],
 
     "Sequence, Selection, Iteration": [
 
