@@ -74,30 +74,107 @@
         btn.className = "menu-btn";
         btn.innerText = topic;
 
-        if (
-          topic === "Data Types" ||
-          topic === "Variables and Values" ||
-          topic === "Health and Safety Act" ||
-          topic === "Computer Misuse Act" ||
-          topic === "Data Protection Act" ||
-          topic === "Scratch" ||
-          topic === "Maths / Arithmetic" ||
-          topic === "State the Output (If/Else)" ||
-          topic === "State the Output (For Loop)" ||
-          topic === "State the Output (While Loop)" ||
-          topic === "Sequence, Selection, Iteration" ||
-          topic === "Bandwidth and Types of Cables" 
-        ) {
-          btn.onclick = () => {
+
+    const unlockedTopics = [
+        // Laws & Regulations
+        "Health and Safety Act",
+        "Computer Misuse Act",
+        "Data Protection Act",
+
+        // Digital Artefacts & Design
+        "Copyright and Licensing Basics",
+
+        // Spreadsheets
+        "Data Analysis",
+        "Formulas",
+        "Functions",
+
+        // Algorithms & Flowcharts
+        "Algorithms",
+        "Flowcharts",
+        "Sorting Algorithm (Bubble Sort)",
+        "Sorting Algorithm (Insertion Sort)",
+        "Searching Algorithm (Linear Search)",
+        "Searching Algorithm (Binary Search)",
+        "Comparing Algorithm Efficiency",
+
+        // Computational Thinking
+        "Decomposition",
+        "Abstraction",
+        "Pattern Recognition",
+        "Algorithmic Thinking",
+
+        // Programming
+        "State the Output (If/Else)",
+        "State the Output (For Loop)",
+        "State the Output (While Loop)",
+        "Scratch",
+        "Data Types",
+        "Variables and Values",
+        "Lists / Arrays",
+        "Debugging and Syntax",
+        "Maths / Arithmetic",
+        "Sequence, Selection, Iteration",
+
+        // Developing for the Web
+        "HTML",
+        "CSS",
+        "JavaScript",
+
+        // CyberSecurity + Online Safety
+        "DoS",
+        "DDoS",
+        "Hacking",
+        "Script Kiddies",
+        "Password Strength",
+        "Types of Malware",
+        "Phishing",
+        "Cyberbullying & Online Conduct",
+        "LAN and WAN",
+        "Emails (CC, BCC, Subject Line)",
+
+        // Computer Systems
+        "Hardware Components",
+        "Input/Output Devices",
+        "Software (System vs Application)",
+        "Storage Devices",
+
+        // Boolean Logic & Binary
+        "binary to denary",
+        "binary to denary (easy)",
+        "denary to binary",
+        "denary to binary (easy)",
+        "logic gates (AND, OR, NOT)",
+        "binary addition",
+        "binary addition (easy)",
+
+        // Networks
+        "Network Devices (Router, Switch, WAP)",
+        "LAN and WAN",
+        "Network Topologies",
+        "Wired vs Wireless Networks",
+        "Internet, Web and Cloud",
+        "IP Addresses",
+        "MAC Addresses",
+        "Network Protocols",
+        "Bandwidth and Types of Cables"
+    ];
+
+
+    if (unlockedTopics.includes(topic)) {
+        // 🔓 Unlocked — clickable
+        btn.onclick = () => {
             console.log(`➡️ KS3 → topic options for: ${topic}`);
             window.location.href =
-              `ks3-topic-options.html?course=${encodeURIComponent(course)}&unit=${encodeURIComponent(unit)}&topic=${encodeURIComponent(topic)}`;
-          };
-        } else {
-          btn.classList.add("locked");
-          btn.innerHTML = `${topic} <span style="font-weight:700;">🔒</span>`;
-          btn.onclick = () => alert(`${topic} is locked — Coming Soon!`);
-        }
+                `ks3-topic-options.html?course=${encodeURIComponent(course)}&unit=${encodeURIComponent(unit)}&topic=${encodeURIComponent(topic)}`;
+        };
+    } else {
+        // 🔒 Locked
+        btn.classList.add("locked");
+        btn.innerHTML = `${topic} <span style="font-weight:700;">🔒</span>`;
+        btn.onclick = () => alert(`${topic} is locked — Coming Soon!`);
+    }
+
 
         container.appendChild(btn);
       });

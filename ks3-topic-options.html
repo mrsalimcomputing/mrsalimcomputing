@@ -35,41 +35,53 @@
 
 <!-- MAIN LOGIC -->
 <script type="module">
+    // Import functions from your modules
     import { getCurrentUser } from "./userManager.js";
     import { goBack } from "./navigation.js";
 
+    // Make goBack() available globally for the Back button
     window.goBack = goBack;
 
     // -----------------------------
     // TRUE PLAY MODE DETECTION
     // -----------------------------
+    // Play Mode = when a student is playing without logging in or joining a session
     const isPlayMode = localStorage.getItem("isPlayMode") === "true";
+
+    // Logged-in user (Google/Microsoft) OR session user
     const user = getCurrentUser();
+
+    // Session user = someone who joined using a session code
     const isSessionUser = !!localStorage.getItem("sessionCode");
 
-    // Leaderboard allowed for:
-    // - Google/Microsoft users
-    // - Session users
-    // - NOT play mode
+    // Leaderboard should show ONLY IF:
+    // - NOT in play mode
+    // - AND user is logged in OR joined a session
     const showLeaderboard = (!isPlayMode && (user || isSessionUser));
 
     // -----------------------------
     // URL PARAMS
     // -----------------------------
+    // Read ?course=KS3&unit=Programming&topic=Data Types from the URL
     const params = new URLSearchParams(window.location.search);
 
     let course = params.get("course");
     let unit   = params.get("unit");
     let topic  = params.get("topic");
 
+    // Legacy support: older pages used ?category= instead of ?unit=
     const legacyCategory = params.get("category");
+
+    // If old category system is used, convert it to new format
     if (!course && legacyCategory) course = "KS3";
     if (!unit && legacyCategory) unit = legacyCategory;
 
+    // Decode URL text safely
     course = course ? decodeURIComponent(course) : null;
     unit   = unit   ? decodeURIComponent(unit)   : null;
     topic  = topic  ? decodeURIComponent(topic)  : null;
 
+    // Update page title with the topic name
     const topicTitleEl = document.getElementById("topicTitle");
     const container = document.getElementById("buttonContainer");
 
@@ -79,6 +91,7 @@
     // -----------------------------
     // BUTTON CREATOR
     // -----------------------------
+    // Creates a normal clickable button
     function addButton(label, url) {
         const btn = document.createElement("button");
         btn.className = "menu-btn";
@@ -87,17 +100,24 @@
         container.appendChild(btn);
     }
 
-    // 🔒 LOCKED MATCHING BUTTON
-    function addLockedMatchingButton() {
-        const btn = document.createElement("button");
-        btn.className = "menu-btn locked";
-        btn.innerText = "Matching Game 🔒";
-        btn.onclick = () => alert("Matching Mode is locked — Coming Soon!");
-        container.appendChild(btn);
-    }
+        // 🔓 UNLOCKED MATCHING BUTTON
+        function addMatchingButton() {
+            const btn = document.createElement("button");
+            btn.className = "menu-btn";
+            btn.innerText = "Matching Game";
+            btn.onclick = () => {
+                window.location.href =
+                    `matching-game.html?course=${encodeURIComponent(course)}&unit=${encodeURIComponent(unit)}&topic=${encodeURIComponent(topic)}`;
+            };
+            container.appendChild(btn);
+        }
 
+
+
+    // Lowercase version of topic for easy comparison
     const t = (topic || "").toLowerCase();
 
+    // Topics that ONLY have Binary Quiz (no theory, no exam)
     const binaryTopics = [
         "binary to denary",
         "binary to denary (easy)",
@@ -107,6 +127,7 @@
         "binary addition (easy)"
     ];
 
+    // Topics that ONLY have Matching mode (but you locked matching anyway)
     const matchingOnlyTopics = [
         "input/output devices",
         "storage devices"
@@ -115,6 +136,7 @@
     // -----------------------------
     // TOPIC LOGIC
     // -----------------------------
+    // CASE 1: Binary topics → Only Binary Quiz + Leaderboard
     if (binaryTopics.includes(t)) {
 
         addButton(
@@ -122,8 +144,6 @@
             `binary-quiz.html?course=${encodeURIComponent(course)}&unit=${encodeURIComponent(unit)}&topic=${encodeURIComponent(topic)}`
         );
 
-        // 🔒 Matching locked
-        addLockedMatchingButton();
 
         if (showLeaderboard) {
             addButton(
@@ -133,10 +153,11 @@
         }
     }
 
+    // CASE 2: Matching-only topics → Only Matching (locked) + Leaderboard
     else if (matchingOnlyTopics.includes(t)) {
 
-        // 🔒 Matching locked
-        addLockedMatchingButton();
+        // Matching is locked
+        addMatchingButton();
 
         if (showLeaderboard) {
             addButton(
@@ -146,21 +167,25 @@
         }
     }
 
+    // CASE 3: All other topics → Theory + Exam + Matching (locked) + Leaderboard
     else {
 
+        // Theory Quiz button
         addButton(
             "Theory Quiz",
             `theory-quiz.html?course=${encodeURIComponent(course)}&unit=${encodeURIComponent(unit)}&topic=${encodeURIComponent(topic)}`
         );
 
-        // 🔒 Matching locked
-        addLockedMatchingButton();
+        // Matching still locked
+        addMatchingButton();
 
+        // Exam Mode button
         addButton(
             "Exam Mode",
             `exam-mode.html?course=${encodeURIComponent(course)}&unit=${encodeURIComponent(unit)}&topic=${encodeURIComponent(topic)}`
         );
 
+        // Leaderboard button (if allowed)
         if (showLeaderboard) {
             addButton(
                 "Leaderboard",
@@ -169,10 +194,12 @@
         }
     }
 
+    // Language dropdown handler
     function changeLanguage(lang) {
         alert("Language changed to: " + lang);
     }
 </script>
+
 
 </body>
 </html>

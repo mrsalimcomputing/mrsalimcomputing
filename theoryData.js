@@ -49,7 +49,7 @@ export const theoryData = {
       ]
     },
 
-    "Programming": {
+    Programming: {
 
       "Data Types": [
 
@@ -231,7 +231,28 @@ export const theoryData = {
       {question:"What does range(2) mean?",correct:["Has a range from 0 to 1","Will repeat something 2 times"],wrong:["Has a range from 1 to 2","Will repeat something 1 time","Has a range from 0 to 2","Will repeat forever","Starts at 2","Only prints 2","Nothing","Error","Range 1 to 1","Range 2 to 2","Repeats 3 times","Repeats once","Prints 0","Prints 1","Range 2 to 0"]},
       {question:"What does range(15) mean?",correct:["Has a range from 0 to 14","Will repeat something 15 times"],wrong:["Has a range from 1 to 15","Will repeat something 14 times","Has a range from 0 to 15","Will repeat forever","Starts at 15","Only prints 15","Nothing","Error","Range 1 to 14","Range 2 to 15","Repeats 13 times","Repeats once","Prints 0","Prints 14","Range 15 to 0"]},
       {question:"What does range(20) mean?",correct:["Has a range from 0 to 19","Will repeat something 20 times"],wrong:["Has a range from 1 to 20","Will repeat something 19 times","Has a range from 0 to 20","Will repeat forever","Starts at 20","Only prints 20","Nothing","Error","Range 1 to 19","Range 2 to 20","Repeats 18 times","Repeats once","Prints 0","Prints 19","Range 20 to 0"]}
-    ]
+    ],
+
+    "Debugging and Syntax": [
+      {question:"What error happens if you forget a closing quote?",correct:["SyntaxError","syntax error"],wrong:["NameError","TypeError","ValueError","IndentationError","RuntimeError","QuoteError","Crash","LoopError","Null","True","False","Undefined","MissingBracket","PrintError","DataError","BracketError","Stop"]},
+      {question:"What error happens if you write: print(Hello)?",correct:["NameError","name error"],wrong:["SyntaxError","TypeError","ValueError","IndentationError","RuntimeError","Crash","LoopError","MissingQuote","Null","True","False","Undefined","PrintError","StringError","DataError","VariableError","Stop"]},
+      {question:"What error happens if you forget a colon in an if statement?",correct:["SyntaxError","syntax error"],wrong:["NameError","TypeError","ValueError","IndentationError","RuntimeError","Crash","LoopError","ColonError","Null","True","False","Undefined","IfError","PrintError","DataError","Stop","BracketError"]},
+      {question:"What does debugging mean?",correct:["Finding and fixing errors","Fixing mistakes"],wrong:["Adding errors","Deleting code","Running code faster","Making code longer","Changing colours","Saving project","Installing Python","Restarting computer","Copying code","Making loops","Creating variables","Adding comments","Randomising output","Stopping program","Null","True","False"]},
+      {question:"What is a syntax error?",correct:["Breaking language rules","Incorrect code structure"],wrong:["A correct program","A slow program","A virus","A loop","A variable","A sprite","A sound","A function","A list","A print statement","A comment","A number","A string","A boolean","A crash","Null","True"]},
+      {question:"Which line has a syntax error: print('Hi'?",correct:["Missing closing bracket","Missing )"],wrong:["Missing print","Too many brackets","Wrong spelling","Missing colon","Missing comma","Extra quote","Extra number","Wrong indent","Wrong variable","Wrong type","Crash","Loop","Null","True","False","Stop"]},
+      {question:"What error happens if you write: 5 = x?",correct:["SyntaxError","syntax error"],wrong:["NameError","TypeError","ValueError","IndentationError","RuntimeError","AssignmentError","Crash","LoopError","Null","True","False","Undefined","NumberError","VariableError","Stop","PrintError"]},
+      {question:"What does an IndentationError mean?",correct:["Code not lined up correctly","Wrong indentation"],wrong:["Wrong variable","Wrong number","Missing quote","Missing bracket","SyntaxError","NameError","TypeError","ValueError","Crash","LoopError","Null","True","False","Undefined","PrintError","Stop","BracketError"]}
+      ],
+
+    "Lists / Arrays": [
+      {question:"What is a list in Python?",correct:["A collection of items","A group of values"],wrong:["A single number","A string","A boolean","A loop","A function","A sprite","A variable","A dictionary","A tuple","A comment","A print statement","A sound","A backdrop","A clone","A timer","Null","True"]},
+      {question:"Which symbol is used to create a list?",correct:["[]","square brackets"],wrong:["()","{}","<>","''","\"\"","//","##","==","+=","-=","()[]","None","True","False","Comma only","ListError","Crash","Stop"]},
+      {question:"What is the first index of a list?",correct:["0","zero"],wrong:["1","2","3","10","-1","First","Start","Begin","True","False","Null","Undefined","IndexError","ListError","Crash","Stop","Middle"]},
+      {question:"What does myList[2] do?",correct:["Gets the third item","Accesses index 2"],wrong:["Gets the second item","Gets the first item","Deletes the list","Creates a list","Sorts the list","Adds items","Removes items","Crashes","Loops","Prints everything","Makes a variable","Starts a function","Randomises items","Null","True","False"]},
+      {question:"What does append() do?",correct:["Adds an item to the end","Appends a value"],wrong:["Deletes items","Sorts items","Creates a list","Starts a loop","Ends a loop","Makes a variable","Changes a string","Runs code","Stops code","Moves sprite","Plays sound","Randomises list","Clears list","Prints list","Null","True","False"]},
+      {question:"Which is a correct list?",correct:["[1, 2, 3]","a list of numbers"],wrong:["1, 2, 3","(1, 2, 3)","{1, 2, 3}","[1 2 3]","[1;2;3]","[1:2:3]","'1,2,3'","None","True","False","Empty","ListError","Crash","Undefined","Stop","Tuple"]},
+      {question:"What does len(myList) return?",correct:["Number of items","List length"],wrong:["Last item","First item","Middle item","Deletes list","Creates list","Sorts list","Adds items","Removes items","Crashes","Loops","True","False","Null","Undefined","Stop","IndexError"]}
+      ],
 
     },
 
@@ -324,9 +345,454 @@ export const theoryData = {
         {question:"Which has the highest bandwidth?",correct:["FIBRE OPTIC","fibre optic"],wrong:["TWISTED PAIR","twisted pair","COAXIAL","coaxial","fibre optik","FIBER OPTIC","low bandwidth","LOW BANDWIDTH","usb cable","USB CABLE","telephone cable","TELEPHONE CABLE","power cable","POWER CABLE","monitor"]},
         {question:"What is another name for twisted pair cable used in networks?",correct:["ETHERNET CABLE","ethernet cable"],wrong:["FIBRE OPTIC","fibre optic","COAXIAL","coaxial","ethernet cabel","ETHERNET CABEL","usb cable","USB CABLE","HDMI cable","hdmi cable","power cable","POWER CABLE","telephone cable","TELEPHONE CABLE","speaker wire"]}
                 
+      ],
+
+      "Network Devices (Router, Switch, WAP)": [
+
+        {question:"What does a router do?",correct:["Connects networks","Directs data between networks"],wrong:["Stores data","Displays images","Runs programs","Cools the computer","Prints documents","Sends emails","Creates websites","Sorts files","Runs loops","Checks conditions","Plays sound","Moves sprites","Creates variables","Deletes data","Shows graphics","Runs games"]},
+        {question:"What does a switch do?",correct:["Connects devices in a LAN","Forwards data to correct device"],wrong:["Connects to the internet","Creates websites","Runs programs","Stores data","Prints documents","Sends emails","Cools the computer","Displays images","Sorts files","Runs loops","Checks conditions","Plays sound","Moves sprites","Creates variables","Deletes data","Shows graphics"]},
+        {question:"What does a WAP provide?",correct:["Wireless access","Wi-Fi connection"],wrong:["Wired connection","Internet cables","Runs programs","Stores data","Prints documents","Sends emails","Cools the computer","Displays images","Sorts files","Runs loops","Checks conditions","Plays sound","Moves sprites","Creates variables","Deletes data","Shows graphics"]},
+        {question:"Which device connects a LAN to the internet?",correct:["Router","Network router"],wrong:["Switch","WAP","Printer","Monitor","CPU","Keyboard","Mouse","Speaker","Projector","Scanner","Firewall","Cable","Hub","Cloud","Browser","Email"]},
+        {question:"Which device sends data only to the correct device?",correct:["Switch","Network switch"],wrong:["Router","WAP","Printer","Monitor","CPU","Keyboard","Mouse","Speaker","Projector","Scanner","Firewall","Cable","Hub","Cloud","Browser","Email"]},
+        {question:"Which device gives wireless access?",correct:["WAP","Wireless Access Point"],wrong:["Router","Switch","Printer","Monitor","CPU","Keyboard","Mouse","Speaker","Projector","Scanner","Firewall","Cable","Hub","Cloud","Browser","Email"]},
+        {question:"Which device is used in Wi-Fi networks?",correct:["WAP","Wireless Access Point"],wrong:["Router","Switch","Printer","Monitor","CPU","Keyboard","Mouse","Speaker","Projector","Scanner","Firewall","Cable","Hub","Cloud","Browser","Email"]},
+        {question:"Which device connects multiple computers in a LAN?",correct:["Switch","Network switch"],wrong:["Router","WAP","Printer","Monitor","CPU","Keyboard","Mouse","Speaker","Projector","Scanner","Firewall","Cable","Hub","Cloud","Browser","Email"]}
+
+      ],
+
+      "LAN and WAN": [
+
+        {question:"What does LAN stand for?",correct:["Local Area Network","Local network"],wrong:["Wide Area Network","Large Area Network","Long Access Network","Local Access Node","Wireless Area Network","Web Area Network","Local Active Network","Loop Area Network","Logical Area Network","Network Area Local","Local Array Network","Local Action Network","Wide Access Node","World Area Network","Local App Network","Local Address Network"]},
+        {question:"What does WAN stand for?",correct:["Wide Area Network","Wide network"],wrong:["Local Area Network","Wireless Area Network","World Area Network","Web Area Network","Wide Access Node","Wide Action Network","Wide Array Network","Wide Address Network","Wide Active Network","Wide App Network","Wide Access Network","Wide Application Network","Wide Alert Network","Wide Admin Network","Wide Area Node","Wide Area Link"]},
+        {question:"Which is usually larger?",correct:["WAN","Wide Area Network"],wrong:["LAN","Local Area Network","PAN","MAN","SAN","VPN","CPU","GPU","Browser","Cloud","Cable","Switch","Router","WAP","Hub","Email"]},
+        {question:"Which network is used inside a school?",correct:["LAN","Local Area Network"],wrong:["WAN","PAN","MAN","SAN","VPN","CPU","GPU","Browser","Cloud","Cable","Switch","Router","WAP","Hub","Email"]},
+        {question:"Which network connects cities or countries?",correct:["WAN","Wide Area Network"],wrong:["LAN","PAN","MAN","SAN","VPN","CPU","GPU","Browser","Cloud","Cable","Switch","Router","WAP","Hub","Email"]},
+        {question:"Which network is smaller?",correct:["LAN","Local Area Network"],wrong:["WAN","PAN","MAN","SAN","VPN","CPU","GPU","Browser","Cloud","Cable","Switch","Router","WAP","Hub","Email"]},
+        {question:"Which network uses routers to connect?",correct:["WAN","Wide Area Network"],wrong:["LAN","PAN","MAN","SAN","VPN","CPU","GPU","Browser","Cloud","Cable","Switch","Router","WAP","Hub","Email"]},
+        {question:"Which network is inside one building?",correct:["LAN","Local Area Network"],wrong:["WAN","PAN","MAN","SAN","VPN","CPU","GPU","Browser","Cloud","Cable","Switch","Router","WAP","Hub","Email"]}
+      ],
+
+
+      "Network Topologies": [
+
+        {question:"Which topology connects all devices to a central switch?",correct:["Star","Star topology"],wrong:["Bus","Ring","Mesh","Tree","Line","Grid","Chain","Loop","Web","Cloud","Cable","Router","Hub","WAP","LAN","WAN"]},
+        {question:"Which topology uses one main cable?",correct:["Bus","Bus topology"],wrong:["Star","Ring","Mesh","Tree","Line","Grid","Chain","Loop","Web","Cloud","Cable","Router","Hub","WAP","LAN","WAN"]},
+        {question:"Which topology forms a circle?",correct:["Ring","Ring topology"],wrong:["Star","Bus","Mesh","Tree","Line","Grid","Chain","Loop","Web","Cloud","Cable","Router","Hub","WAP","LAN","WAN"]},
+        {question:"Which topology has many connections?",correct:["Mesh","Mesh topology"],wrong:["Star","Bus","Ring","Tree","Line","Grid","Chain","Loop","Web","Cloud","Cable","Router","Hub","WAP","LAN","WAN"]},
+        {question:"Which topology is most reliable?",correct:["Mesh","Mesh topology"],wrong:["Star","Bus","Ring","Tree","Line","Grid","Chain","Loop","Web","Cloud","Cable","Router","Hub","WAP","LAN","WAN"]},
+        {question:"Which topology is cheapest?",correct:["Bus","Bus topology"],wrong:["Star","Ring","Mesh","Tree","Line","Grid","Chain","Loop","Web","Cloud","Cable","Router","Hub","WAP","LAN","WAN"]},
+        {question:"Which topology uses a central device?",correct:["Star","Star topology"],wrong:["Bus","Ring","Mesh","Tree","Line","Grid","Chain","Loop","Web","Cloud","Cable","Router","Hub","WAP","LAN","WAN"]},
+        {question:"Which topology is used in modern networks?",correct:["Star","Star topology"],wrong:["Bus","Ring","Mesh","Tree","Line","Grid","Chain","Loop","Web","Cloud","Cable","Router","Hub","WAP","LAN","WAN"]}
+
+      ],
+
+      "Wired and Wireless Networks": [
+
+        {question:"Which is usually faster?",correct:["Wired","Ethernet"],wrong:["Wireless","Wi-Fi","Bluetooth","4G","5G","Hotspot","Router","Switch","WAP","Hub","Cloud","Browser","Cable","Email","CPU","GPU"]},
+        {question:"Which uses radio waves?",correct:["Wireless","Wi-Fi"],wrong:["Wired","Ethernet","Cable","Router","Switch","WAP","Hub","Cloud","Browser","Bluetooth","4G","5G","CPU","GPU","Email","Monitor"]},
+        {question:"Which is more secure?",correct:["Wired","Ethernet"],wrong:["Wireless","Wi-Fi","Bluetooth","4G","5G","Hotspot","Router","Switch","WAP","Hub","Cloud","Browser","Cable","Email","CPU","GPU"]},
+        {question:"Which is easier to move around with?",correct:["Wireless","Wi-Fi"],wrong:["Wired","Ethernet","Cable","Router","Switch","WAP","Hub","Cloud","Browser","Bluetooth","4G","5G","CPU","GPU","Email","Monitor"]},
+        {question:"Which needs physical cables?",correct:["Wired","Ethernet"],wrong:["Wireless","Wi-Fi","Bluetooth","4G","5G","Hotspot","Router","Switch","WAP","Hub","Cloud","Browser","Email","CPU","GPU"]},
+        {question:"Which can suffer from interference?",correct:["Wireless","Wi-Fi"],wrong:["Wired","Ethernet","Cable","Router","Switch","WAP","Hub","Cloud","Browser","Bluetooth","4G","5G","CPU","GPU","Email","Monitor"]},
+        {question:"Which is used for laptops and phones?",correct:["Wireless","Wi-Fi"],wrong:["Wired","Ethernet","Cable","Router","Switch","WAP","Hub","Cloud","Browser","Bluetooth","4G","5G","CPU","GPU","Email","Monitor"]},
+        {question:"Which is best for gaming?",correct:["Wired","Ethernet"],wrong:["Wireless","Wi-Fi","Bluetooth","4G","5G","Hotspot","Router","Switch","WAP","Hub","Cloud","Browser","Email","CPU","GPU"]}
+
+      ],
+
+      "Internet, Web and Cloud": [
+
+        {question:"What is the internet?",correct:["A global network","Worldwide network"],wrong:["A website","A browser","A cloud","A computer","A program","A file","A router","A switch","A WAP","A cable","A LAN","A WAN","A CPU","A GPU","An email","A document"]},
+        {question:"What is the web?",correct:["Websites and pages","Collection of websites"],wrong:["The internet","A router","A switch","A WAP","A cable","A LAN","A WAN","A CPU","A GPU","An email","A document","A cloud","A program","A file","A computer"]},
+        {question:"What is the cloud?",correct:["Online storage","Internet storage"],wrong:["A website","A browser","A router","A switch","A WAP","A cable","A LAN","A WAN","A CPU","A GPU","An email","A document","A program","A file","A computer"]},
+        {question:"Which stores files online?",correct:["Cloud","Online storage"],wrong:["Internet","Web","Router","Switch","WAP","Cable","LAN","WAN","CPU","GPU","Email","Document","Program","File","Computer"]},
+        {question:"Which shows websites?",correct:["Browser","Web browser"],wrong:["Internet","Web","Router","Switch","WAP","Cable","LAN","WAN","CPU","GPU","Email","Document","Program","File","Computer"]},
+        {question:"Which connects devices worldwide?",correct:["Internet","Global network"],wrong:["Web","Cloud","Router","Switch","WAP","Cable","LAN","WAN","CPU","GPU","Email","Document","Program","File","Computer"]},
+        {question:"Which stores data remotely?",correct:["Cloud","Online storage"],wrong:["Internet","Web","Router","Switch","WAP","Cable","LAN","WAN","CPU","GPU","Email","Document","Program","File","Computer"]},
+        {question:"Which loads web pages?",correct:["Browser","Web browser"],wrong:["Internet","Web","Router","Switch","WAP","Cable","LAN","WAN","CPU","GPU","Email","Document","Program","File","Computer"]}
+
+      ],
+
+      "IP addresses": [
+
+        {question:"What is an IP address?",correct:["A device's network address","Internet Protocol address"],wrong:["A password","A username","A website","A browser","A router","A switch","A WAP","A cable","A LAN","A WAN","A CPU","A GPU","An email","A document","A file","A program"]},
+        {question:"What does an IP address identify?",correct:["A device","A computer"],wrong:["A website","A browser","A router","A switch","A WAP","A cable","A LAN","A WAN","A CPU","A GPU","An email","A document","A file","A program","A cloud"]},
+        {question:"Which format is an IP address?",correct:["Numbers with dots","e.g. 192.168.1.1"],wrong:["Words","Letters","Symbols","Binary only","Hex only","Fractions","Decimals","Brackets","Quotes","Emails","Passwords","Usernames","Files","Programs","Cloud","Router"]},
+        {question:"Which device uses an IP address?",correct:["Every network device","All devices"],wrong:["Only routers","Only switches","Only WAPs","Only laptops","Only phones","Only PCs","Only servers","Only printers","Only monitors","Only cables","Only clouds","Only browsers","Only websites","Only programs","Only files"]},
+        {question:"What does IP stand for?",correct:["Internet Protocol","Protocol"],wrong:["Internal Program","Internet Page","Input Process","Information Packet","Internet Provider","Internal Protocol","Instant Program","Image Processor","Internet Path","Internet Port","Internet Panel","Internet Platform","Internet Plug","Internet Power","Internet Profile"]},
+        {question:"Which IP is private?",correct:["192.168.x.x","Private IP"],wrong:["8.8.8.8","1.1.1.1","Google DNS","Public IP","Website IP","Router IP","Switch IP","WAP IP","LAN IP","WAN IP","CPU","GPU","Email","Document","File"]},
+        {question:"Which IP is public?",correct:["Given by ISP","Public IP"],wrong:["192.168.x.x","Private IP","Router IP","Switch IP","WAP IP","LAN IP","WAN IP","CPU","GPU","Email","Document","File","Program","Cloud","Browser"]},
+        {question:"Which IP changes when reconnecting?",correct:["Dynamic IP","Changing IP"],wrong:["Static IP","Fixed IP","Router IP","Switch IP","WAP IP","LAN IP","WAN IP","CPU","GPU","Email","Document","File","Program","Cloud","Browser"]}
+
+      ],
+
+      "MAC addresses": [
+
+        {question:"What is a MAC address?",correct:["Unique device ID","Hardware address"],wrong:["IP address","Password","Username","Website","Browser","Router","Switch","WAP","Cable","LAN","WAN","CPU","GPU","Email","Document","File","Program"]},
+        {question:"Where is a MAC address stored?",correct:["Network card","Hardware"],wrong:["Software","Browser","Cloud","Router","Switch","WAP","Cable","LAN","WAN","CPU","GPU","Email","Document","File","Program","Website"]},
+        {question:"What format is a MAC address?",correct:["Hexadecimal","e.g. AA:BB:CC:DD:EE:FF"],wrong:["Decimal","Binary only","Words","Letters only","Symbols","Fractions","Brackets","Quotes","Emails","Passwords","Usernames","Files","Programs","Cloud","Router"]},
+        {question:"What does MAC stand for?",correct:["Media Access Control","MAC"],wrong:["Main Access Code","Machine Address Code","Media Area Control","Media Access Card","Main Area Control","Main Access Control","Machine Access Control","Media Access Chip","Media Access Channel","Media Access Connector","Media Access Computer","Media Access Cloud","Media Access Cable","Media Access Component","Media Access Core"]},
+        {question:"Which devices have MAC addresses?",correct:["All network devices","Every device"],wrong:["Only routers","Only switches","Only WAPs","Only laptops","Only phones","Only PCs","Only servers","Only printers","Only monitors","Only cables","Only clouds","Only browsers","Only websites","Only programs","Only files"]},
+        {question:"Is a MAC address permanent?",correct:["Yes","Permanent"],wrong:["No","Changes daily","Changes hourly","Changes monthly","Changes yearly","Random","Temporary","Cloud-based","Browser-based","Router-based","Switch-based","WAP-based","LAN-based","WAN-based","CPU-based","GPU-based"]},
+        {question:"Which address is burned into hardware?",correct:["MAC address","Hardware ID"],wrong:["IP address","Password","Username","Website","Browser","Router","Switch","WAP","Cable","LAN","WAN","CPU","GPU","Email","Document"]},
+        {question:"Which address identifies a network card?",correct:["MAC address","Hardware address"],wrong:["IP address","Password","Username","Website","Browser","Router","Switch","WAP","Cable","LAN","WAN","CPU","GPU","Email","Document","File"]}
+
+      ],
+
+      "Network Protocols" : [
+
+        {question:"What does HTTP do?",correct:["Loads web pages","Transfers web data"],wrong:["Sends emails","Transfers files","Secures websites","Prints documents","Runs programs","Stores data","Displays images","Moves sprites","Plays sound","Creates variables","Deletes data","Runs loops","Checks conditions","Shows graphics","Runs games"]},
+        {question:"What does HTTPS add?",correct:["Security","Encryption"],wrong:["Speed","Images","Files","Emails","Programs","Storage","Loops","Conditions","Sprites","Sounds","Variables","Deletes data","Graphics","Games","Cloud"]},
+        {question:"Which protocol sends emails?",correct:["SMTP","Email sending"],wrong:["HTTP","HTTPS","FTP","IMAP","POP","DNS","DHCP","TCP","UDP","Router","Switch","WAP","LAN","WAN","Cloud"]},
+        {question:"Which protocol transfers files?",correct:["FTP","File Transfer Protocol"],wrong:["HTTP","HTTPS","SMTP","IMAP","POP","DNS","DHCP","TCP","UDP","Router","Switch","WAP","LAN","WAN","Cloud"]},
+        {question:"Which protocol finds website addresses?",correct:["DNS","Domain Name System"],wrong:["HTTP","HTTPS","SMTP","FTP","IMAP","POP","DHCP","TCP","UDP","Router","Switch","WAP","LAN","WAN","Cloud"]},
+        {question:"Which protocol gives IP addresses?",correct:["DHCP","Dynamic Host Configuration"],wrong:["HTTP","HTTPS","SMTP","FTP","IMAP","POP","DNS","TCP","UDP","Router","Switch","WAP","LAN","WAN","Cloud"]},
+        {question:"Which protocol checks connection reliability?",correct:["TCP","Transmission Control Protocol"],wrong:["UDP","HTTP","HTTPS","SMTP","FTP","IMAP","POP","DNS","DHCP","Router","Switch","WAP","LAN","WAN","Cloud"]},
+        {question:"Which protocol is faster but less reliable?",correct:["UDP","User Datagram Protocol"],wrong:["TCP","HTTP","HTTPS","SMTP","FTP","IMAP","POP","DNS","DHCP","Router","Switch","WAP","LAN","WAN","Cloud"]}
+
       ]
 
+
+
   },
+
+  "Online Safety & Digital Literacy": {
+
+  "Password Strength": [
+    {question:"Which password is strongest?",correct:["Long and complex","Contains letters, numbers, symbols"],wrong:["Short password","Only letters","Only numbers","Your name","Your birthday","123456","password","qwerty","abc123","Your pet's name","Your school name","Simple words","Repeating characters","Single digit","Your username","Your email","Your postcode"]},
+    {question:"What makes a password weak?",correct:["Easy to guess","Common words"],wrong:["Long length","Symbols","Numbers","Uppercase letters","Lowercase letters","Random characters","Unique phrases","Strong encryption","Two-factor codes","Biometrics","PIN with symbols","Password manager","Complex pattern","Random generator","Secure key","Strong passphrase"]},
+    {question:"Which should you avoid in passwords?",correct:["Personal info","Birthdays"],wrong:["Symbols","Numbers","Uppercase letters","Lowercase letters","Random characters","Unique phrases","Strong encryption","Two-factor codes","Biometrics","PIN with symbols","Password manager","Complex pattern","Random generator","Secure key","Strong passphrase"]},
+    {question:"Which password is safest?",correct:["Random characters","Mixed symbols"],wrong:["Your name","Your pet","Your school","Your birthday","123456","password","qwerty","abc123","Simple words","Repeating characters","Single digit","Your username","Your email","Your postcode","Your favourite team","Your favourite food"]},
+    {question:"What helps protect accounts?",correct:["Strong password","Two-factor authentication"],wrong:["Weak password","Sharing password","Writing password publicly","Using same password everywhere","Simple PIN","No symbols","No numbers","No uppercase","No lowercase","Short password","Common words","Your name","Your birthday","Your postcode","Your pet","Your school"]},
+    {question:"What should you never do with your password?",correct:["Share it","Tell others"],wrong:["Use symbols","Use numbers","Use uppercase","Use lowercase","Use random characters","Use long password","Use password manager","Use two-factor","Change regularly","Keep private","Store securely","Use strong passphrase","Use unique password","Use secure device","Use encryption"]},
+    {question:"Which is an example of a strong password?",correct:["T9!bX4@p","Complex mix"],wrong:["123456","password","qwerty","abc123","iloveyou","football","dragon","monkey","letmein","sunshine","princess","welcome","flower","birthday","school","petname"]},
+    {question:"What is the safest way to store passwords?",correct:["Password manager","Encrypted storage"],wrong:["Notebook","Sticky note","Text file","Sharing with friends","Saving in email","Saving in chat","Writing on desk","Posting online","Using same password","Simple PIN","Weak password","Browser autofill only","Phone notes","Public document","Screenshot","Unencrypted file"]}
+  ],
+
+  "Types of Malware": [
+    {question:"What is malware?",correct:["Malicious software","Harmful software"],wrong:["Helpful software","System update","Password manager","Web browser","Game app","Music app","Photo editor","Video editor","Document creator","Printer driver","Safe program","Firewall","Antivirus","Router software","Cloud storage","Email app","Calendar app"]},
+    {question:"What is a virus?",correct:["Self-replicating malware","Spreads between files"],wrong:["Hardware","Password","Safe program","Firewall","Antivirus","Router","Switch","WAP","Cloud","Browser","Document","Music app","Photo editor","Video editor","Game app","Email app","Calendar app"]},
+    {question:"What is spyware?",correct:["Steals information","Monitors activity"],wrong:["Deletes files","Creates files","Improves speed","Protects system","Runs updates","Stores data","Prints documents","Displays graphics","Plays music","Edits photos","Edits videos","Browses web","Sends emails","Runs games","Records audio","Designs graphics"]},
+    {question:"What is ransomware?",correct:["Locks files","Demands payment"],wrong:["Protects files","Deletes malware","Improves speed","Runs updates","Stores data","Prints documents","Displays graphics","Plays music","Edits photos","Edits videos","Browses web","Sends emails","Runs games","Records audio","Designs graphics","Stores backups"]},
+    {question:"What is a Trojan?",correct:["Malware disguised as safe software","Hidden malicious program"],wrong:["Virus","Spyware","Ransomware","Firewall","Antivirus","Router","Switch","WAP","Cloud","Browser","Document","Music app","Photo editor","Video editor","Game app","Email app","Calendar app"]},
+    {question:"What is adware?",correct:["Shows unwanted ads","Displays pop-ups"],wrong:["Deletes files","Steals data","Encrypts files","Protects system","Runs updates","Stores data","Prints documents","Displays graphics","Plays music","Edits photos","Edits videos","Browses web","Sends emails","Runs games","Records audio","Designs graphics"]},
+    {question:"What can malware do?",correct:["Damage system","Steal data"],wrong:["Improve speed","Protect system","Run updates","Store data","Print documents","Display graphics","Play music","Edit photos","Edit videos","Browse web","Send emails","Run games","Record audio","Design graphics","Store backups"]},
+    {question:"How can malware spread?",correct:["Email attachments","Unsafe downloads"],wrong:["Strong passwords","Two-factor authentication","Secure websites","Firewall","Antivirus","Router","Switch","WAP","Cloud","Browser","Document","Music app","Photo editor","Video editor","Game app","Calendar app"]}
+  ],
+
+  "Phishing": [
+    {question:"What is phishing?",correct:["Tricking users for information","Fake messages"],wrong:["Real emails","Secure login","Strong password","Two-factor authentication","Safe website","Firewall","Antivirus","Router","Switch","WAP","Cloud","Browser","Document","Music app","Photo editor","Video editor","Game app"]},
+    {question:"Which is a sign of phishing?",correct:["Suspicious links","Fake sender"],wrong:["Correct spelling","Secure website","Official domain","Strong password","Two-factor authentication","Firewall","Antivirus","Router","Switch","WAP","Cloud","Browser","Document","Music app","Photo editor","Video editor","Game app"]},
+    {question:"What should you NOT do with phishing emails?",correct:["Click links","Reply"],wrong:["Delete","Report","Ignore","Block sender","Use strong password","Use two-factor","Update antivirus","Check website","Use firewall","Restart device","Print email","Save email","Forward to friend","Open safely","Store email","Download safely"]},
+    {question:"What do phishers want?",correct:["Personal info","Passwords"],wrong:["Music","Photos","Videos","Games","Documents","Graphics","Emails","Calendar events","Weather","News","Maps","Notes","Reminders","Contacts","Messages","Storage"]},
+    {question:"Which message is likely phishing?",correct:["Urgent request","Unexpected prize"],wrong:["School update","Teacher message","Official notice","Homework reminder","Class timetable","Newsletter","Report card","Assignment feedback","Exam schedule","Meeting invite","Calendar update","Weather alert","News update","System update","Safe login","Secure email"]},
+    {question:"How can you avoid phishing?",correct:["Check sender","Avoid suspicious links"],wrong:["Click everything","Reply to all","Share password","Use weak password","Ignore warnings","Disable antivirus","Disable firewall","Use unsafe websites","Download everything","Open all attachments","Trust unknown senders","Use public Wi-Fi","Share personal info","Store passwords publicly","Use simple PIN"]},
+    {question:"What should you check before clicking a link?",correct:["URL","Sender"],wrong:["Font","Colour","Image","Emoji","Background","Music","Video","Animation","Theme","Layout","Spacing","Grammar only","Design","Logo","Picture","Sound"]},
+    {question:"What should you do if you suspect phishing?",correct:["Report it","Delete it"],wrong:["Click link","Reply","Share","Forward","Download","Save","Print","Store","Open","Trust","Ignore","Use password","Use PIN","Send info","Login","Enter details"]}
+  ],
+
+  "Cyberbullying & Online Conduct": [
+    {question:"What is cyberbullying?",correct:["Bullying online","Harassing digitally"],wrong:["Helping online","Teaching online","Gaming online","Messaging friends","Sharing homework","Posting photos","Watching videos","Streaming music","Editing images","Editing videos","Browsing safely","Sending emails","Joining classes","Doing homework","Studying online","Learning online"]},
+    {question:"Which is an example of cyberbullying?",correct:["Sending hurtful messages","Posting mean comments"],wrong:["Sharing notes","Helping classmates","Posting homework","Sending reminders","Sharing resources","Posting compliments","Sending encouragement","Sharing study tips","Posting achievements","Sending invitations","Sharing photos","Streaming music","Editing videos","Browsing safely","Doing homework","Learning online"]},
+    {question:"What should you do if bullied online?",correct:["Report","Block"],wrong:["Reply angrily","Fight back","Share password","Delete account","Ignore forever","Tell no one","Post publicly","Send personal info","Meet stranger","Hide problem","Give details","Share location","Send photos","Trust bully","Stay silent","Keep chatting"]},
+    {question:"What is good online conduct?",correct:["Respect others","Be kind"],wrong:["Insult people","Spam messages","Share private info","Post rumours","Send threats","Hack accounts","Share passwords","Post personal data","Lie online","Pretend identity","Spread malware","Break rules","Ignore safety","Be rude","Post harmful content","Encourage bullying"]},
+    {question:"What should you NOT share online?",correct:["Personal info","Passwords"],wrong:["School name","Favourite food","Favourite colour","Music taste","Movie preference","Game preference","Hobbies","Sports","Weather","News","Memes","Jokes","Homework","Notes","Timetable","Calendar"]},
+    {question:"What is a safe online behaviour?",correct:["Think before posting","Be respectful"],wrong:["Post everything","Share private info","Insult others","Spam chats","Click unknown links","Download everything","Trust strangers","Meet strangers","Share passwords","Post location","Send photos to strangers","Ignore rules","Be rude","Spread rumours","Encourage bullying"]},
+    {question:"Who should you tell if bullied?",correct:["Trusted adult","Teacher"],wrong:["Stranger","Bully","Random friend","Internet","Social media","Unknown person","Chat bot","Game player","Online stranger","Random classmate","Public group","Comment section","Forum","Website","Email list","Nobody"]},
+    {question:"What is a sign of unsafe behaviour?",correct:["Sharing private info","Talking to strangers"],wrong:["Using strong password","Using two-factor","Updating antivirus","Checking links","Reporting issues","Blocking bullies","Being respectful","Thinking before posting","Using secure websites","Following rules","Being kind","Helping others","Studying online","Doing homework","Sharing notes"]}
+  ],
+
+  "LAN and WAN": [
+    {question:"What does LAN stand for?",correct:["Local Area Network","Local network"],wrong:["Wide Area Network","Large Area Network","Long Access Network","Local Access Node","Wireless Area Network","Web Area Network","Local Active Network","Loop Area Network","Logical Area Network","Network Area Local","Local Array Network","Local Action Network","Wide Access Node","World Area Network","Local App Network","Local Address Network"]},
+    {question:"What does WAN stand for?",correct:["Wide Area Network","Wide network"],wrong:["Local Area Network","Wireless Area Network","World Area Network","Web Area Network","Wide Access Node","Wide Action Network","Wide Array Network","Wide Address Network","Wide Active Network","Wide App Network","Wide Access Network","Wide Application Network","Wide Alert Network","Wide Admin Network","Wide Area Node","Wide Area Link"]},
+    {question:"Which is larger?",correct:["WAN","Wide Area Network"],wrong:["LAN","PAN","MAN","SAN","VPN","CPU","GPU","Browser","Cloud","Cable","Switch","Router","WAP","Hub","Email","Document"]},
+    {question:"Which network is inside a school?",correct:["LAN","Local Area Network"],wrong:["WAN","PAN","MAN","SAN","VPN","CPU","GPU","Browser","Cloud","Cable","Switch","Router","WAP","Hub","Email","Document"]},
+    {question:"Which connects cities?",correct:["WAN","Wide Area Network"],wrong:["LAN","PAN","MAN","SAN","VPN","CPU","GPU","Browser","Cloud","Cable","Switch","Router","WAP","Hub","Email","Document"]},
+    {question:"Which is smaller?",correct:["LAN","Local Area Network"],wrong:["WAN","PAN","MAN","SAN","VPN","CPU","GPU","Browser","Cloud","Cable","Switch","Router","WAP","Hub","Email","Document"]},
+    {question:"Which uses routers?",correct:["WAN","Wide Area Network"],wrong:["LAN","PAN","MAN","SAN","VPN","CPU","GPU","Browser","Cloud","Cable","Switch","Router","WAP","Hub","Email","Document"]},
+    {question:"Which is inside one building?",correct:["LAN","Local Area Network"],wrong:["WAN","PAN","MAN","SAN","VPN","CPU","GPU","Browser","Cloud","Cable","Switch","Router","WAP","Hub","Email","Document"]}
+  ],
+
+  "Emails (CC, BCC, Subject Line)": [
+    {question:"What does CC mean?",correct:["Carbon Copy","Sends copy"],wrong:["Blind Copy","Subject","Attachment","Forward","Reply","Spam","Draft","Inbox","Outbox","Signature","Header","Footer","Filter","Flag","Priority","Archive","Label"]},
+    {question:"What does BCC mean?",correct:["Blind Carbon Copy","Hidden copy"],wrong:["Carbon Copy","Subject","Attachment","Forward","Reply","Spam","Draft","Inbox","Outbox","Signature","Header","Footer","Filter","Flag","Priority","Archive","Label"]},
+    {question:"What is the subject line?",correct:["Email title","Topic"],wrong:["Body","Signature","Attachment","CC","BCC","Forward","Reply","Spam","Draft","Inbox","Outbox","Header","Footer","Filter","Flag","Priority","Archive"]},
+    {question:"Who can see BCC recipients?",correct:["Sender only","Hidden recipients"],wrong:["Everyone","CC recipients","All contacts","Inbox","Outbox","Spam folder","Drafts","Forward list","Reply list","Signature","Header","Footer","Filter","Flag","Priority","Archive","Label"]},
+    {question:"What should the subject line be?",correct:["Clear","Short"],wrong:["Long paragraph","Blank","Random words","Emojis only","Symbols only","Numbers only","Spam text","Jokes","Memes","Songs","Quotes","Stories","Poems","Images","Videos","Links","Attachments"]},
+    {question:"What should you NOT put in CC?",correct:["Too many people","Unrelated recipients"],wrong:["Relevant people","Teacher","Group","Team","Class","Subject","Attachment","Reply","Forward","Draft","Inbox","Outbox","Signature","Header","Footer","Filter","Flag"]},
+    {question:"What is the email body?",correct:["Main message","Content"],wrong:["Subject","CC","BCC","Attachment","Signature","Header","Footer","Filter","Flag","Priority","Archive","Label","Inbox","Outbox","Draft","Spam","Forward"]},
+    {question:"What is BCC used for?",correct:["Hide recipients","Private copy"],wrong:["Show recipients","Public copy","Subject","Attachment","Reply","Forward","Spam","Draft","Inbox","Outbox","Signature","Header","Footer","Filter","Flag","Priority","Archive"]}
+  ]
+
+},
+
+"CyberSecurity": {
+
+  "DoS": [
+    {question:"What does a DoS attack do?",correct:["Overloads a system","Stops service"],wrong:["Protects system","Speeds up network","Encrypts files","Deletes malware","Runs updates","Stores data","Prints documents","Displays graphics","Plays music","Edits photos","Edits videos","Browses web","Sends emails","Runs games","Records audio","Designs graphics"]},
+    {question:"What does DoS stand for?",correct:["Denial of Service","Denial-of-Service"],wrong:["Data over System","Download of Software","Device over System","Direct online Service","Digital operating System","Domain of Security","Drive over Storage","Disk operating Service","Data output System","Device operating Software","Digital output Service","Domain operating System","Drive operating System","Disk over System","Data online Service"]},
+    {question:"What is the goal of a DoS attack?",correct:["Make service unavailable","Crash system"],wrong:["Protect system","Improve speed","Encrypt files","Delete malware","Run updates","Store data","Print documents","Display graphics","Play music","Edit photos","Edit videos","Browse web","Send emails","Run games","Record audio","Design graphics"]},
+    {question:"Which is a sign of DoS?",correct:["Slow network","Service not responding"],wrong:["Fast internet","Strong password","Two-factor enabled","Secure website","Firewall active","Antivirus running","Clear graphics","Loud audio","New files","Deleted malware","Updated apps","Printed documents","Sent emails","Opened browser","Played music"]},
+    {question:"What causes DoS?",correct:["Too many requests","Traffic overload"],wrong:["Strong password","Two-factor","Firewall","Antivirus","Router","Switch","WAP","Cloud","Browser","Document","Music app","Photo editor","Video editor","Game app","Email app","Calendar app"]},
+    {question:"Which device can be targeted by DoS?",correct:["Servers","Websites"],wrong:["Keyboard","Mouse","Monitor","Printer","Speakers","Projector","Scanner","Microphone","Webcam","Touchpad","Stylus","Game controller","Barcode scanner","Graphics tablet","Trackball","CPU"]},
+    {question:"What is the effect of DoS?",correct:["Service stops","Website down"],wrong:["Service improves","Website speeds up","Files encrypt","Files delete","System updates","Data stores","Documents print","Graphics display","Music plays","Photos edit","Videos edit","Web browses","Emails send","Games run","Audio records"]},
+    {question:"How can DoS be reduced?",correct:["Firewall","Traffic filtering"],wrong:["Weak password","Sharing password","Turning off antivirus","Clicking links","Downloading everything","Trusting strangers","Using public Wi-Fi","Ignoring warnings","Opening attachments","Saving malware","Running unsafe apps","Posting info","Sharing data","Using simple PIN","Using unsafe websites","Storing passwords publicly"]}
+  ],
+
+  "DDoS": [
+    {question:"What does DDoS stand for?",correct:["Distributed Denial of Service","Distributed DoS"],wrong:["Digital Denial of Service","Device Denial of Service","Domain Denial of Service","Data Denial of Service","Distributed Data Output","Distributed Device Operation","Distributed Domain Output","Distributed Drive Operation","Distributed Disk Output","Digital Device Output","Domain Drive Operation","Data Drive Operation","Device Data Output","Disk Domain Operation","Drive Domain Output"]},
+    {question:"What makes DDoS different from DoS?",correct:["Uses many devices","Multiple attackers"],wrong:["Uses one device","Protects system","Encrypts files","Deletes malware","Runs updates","Stores data","Prints documents","Displays graphics","Plays music","Edits photos","Edits videos","Browses web","Sends emails","Runs games","Records audio"]},
+    {question:"What is the goal of a DDoS attack?",correct:["Overwhelm target","Shut down service"],wrong:["Protect system","Improve speed","Encrypt files","Delete malware","Run updates","Store data","Print documents","Display graphics","Play music","Edit photos","Edit videos","Browse web","Send emails","Run games","Record audio"]},
+    {question:"Which is a sign of DDoS?",correct:["Massive traffic","Website offline"],wrong:["Fast internet","Strong password","Two-factor enabled","Secure website","Firewall active","Antivirus running","Clear graphics","Loud audio","New files","Deleted malware","Updated apps","Printed documents","Sent emails","Opened browser","Played music"]},
+    {question:"What devices are used in DDoS?",correct:["Botnets","Infected computers"],wrong:["Printers","Monitors","Keyboards","Mice","Speakers","Projectors","Scanners","Microphones","Webcams","Touchpads","Styluses","Game controllers","Barcode scanners","Graphics tablets","Trackballs","CPU"]},
+    {question:"What is a botnet?",correct:["Group of infected devices","Controlled network"],wrong:["Secure network","Password manager","Firewall","Antivirus","Router","Switch","WAP","Cloud","Browser","Document","Music app","Photo editor","Video editor","Game app","Email app"]},
+    {question:"What can DDoS cause?",correct:["Website crash","Service failure"],wrong:["Website speed","Service improvement","File encryption","File deletion","System update","Data storage","Document printing","Graphic display","Music playing","Photo editing","Video editing","Web browsing","Email sending","Game running","Audio recording"]},
+    {question:"How can DDoS be prevented?",correct:["Traffic filtering","Strong firewall"],wrong:["Weak password","Sharing password","Turning off antivirus","Clicking links","Downloading everything","Trusting strangers","Using public Wi-Fi","Ignoring warnings","Opening attachments","Saving malware","Running unsafe apps","Posting info","Sharing data","Using simple PIN","Using unsafe websites","Storing passwords publicly"]}
+  ],
+
+  "Hacking": [
+    {question:"What is hacking?",correct:["Unauthorized access","Breaking into systems"],wrong:["Authorized login","Safe browsing","Strong password","Two-factor","Firewall","Antivirus","Router","Switch","WAP","Cloud","Browser","Document","Music app","Photo editor","Video editor","Game app"]},
+    {question:"Which is an example of hacking?",correct:["Accessing accounts illegally","Breaking security"],wrong:["Logging in normally","Using strong password","Updating antivirus","Checking links","Reporting issues","Blocking bullies","Being respectful","Thinking before posting","Using secure websites","Following rules","Being kind","Helping others","Studying online","Doing homework","Sharing notes"]},
+    {question:"What do hackers often want?",correct:["Data","Access"],wrong:["Music","Photos","Videos","Games","Documents","Graphics","Emails","Calendar events","Weather","News","Maps","Notes","Reminders","Contacts","Messages","Storage"]},
+    {question:"Which is a hacking method?",correct:["Brute force","Password cracking"],wrong:["Strong password","Two-factor","Firewall","Antivirus","Router","Switch","WAP","Cloud","Browser","Document","Music app","Photo editor","Video editor","Game app","Email app"]},
+    {question:"What should you NOT do to avoid hacking?",correct:["Use weak password","Share password"],wrong:["Use strong password","Use two-factor","Update antivirus","Check links","Report issues","Block bullies","Be respectful","Think before posting","Use secure websites","Follow rules","Be kind","Help others","Study online","Do homework","Share notes"]},
+    {question:"Which is a sign of hacking?",correct:["Strange activity","Unknown logins"],wrong:["Normal speed","Strong password","Two-factor enabled","Secure website","Firewall active","Antivirus running","Clear graphics","Loud audio","New files","Deleted malware","Updated apps","Printed documents","Sent emails","Opened browser","Played music"]},
+    {question:"What can hackers do?",correct:["Steal data","Damage systems"],wrong:["Improve speed","Protect system","Run updates","Store data","Print documents","Display graphics","Play music","Edit photos","Edit videos","Browse web","Send emails","Run games","Record audio","Design graphics"]},
+    {question:"How can hacking be prevented?",correct:["Strong password","Two-factor"],wrong:["Weak password","Sharing password","Turning off antivirus","Clicking links","Downloading everything","Trusting strangers","Using public Wi-Fi","Ignoring warnings","Opening attachments","Saving malware","Running unsafe apps","Posting info","Sharing data","Using simple PIN","Using unsafe websites","Storing passwords publicly"]}
+  ],
+
+  "Script Kiddies": [
+    {question:"Who are script kiddies?",correct:["Unskilled hackers","Use tools they don't understand"],wrong:["Professional hackers","Security experts","Programmers","Developers","Engineers","Admins","Teachers","Students","Gamers","Designers","Artists","Writers","Editors","Managers","Technicians","Scientists"]},
+    {question:"What do script kiddies use?",correct:["Pre-made tools","Ready-made scripts"],wrong:["Custom code","Professional tools","Strong passwords","Two-factor","Firewall","Antivirus","Router","Switch","WAP","Cloud","Browser","Document","Music app","Photo editor","Video editor","Game app"]},
+    {question:"What is a common goal of script kiddies?",correct:["Cause disruption","Show off"],wrong:["Protect systems","Improve security","Run updates","Store data","Print documents","Display graphics","Play music","Edit photos","Edit videos","Browse web","Send emails","Run games","Record audio","Design graphics"]},
+    {question:"Why are script kiddies dangerous?",correct:["Can cause damage","Don't understand tools"],wrong:["Highly skilled","Very experienced","Security experts","Professional developers","Network engineers","System admins","Teachers","Students","Gamers","Designers","Artists","Writers","Editors","Managers","Technicians"]},
+    {question:"Which describes script kiddies?",correct:["Beginner hackers","Low skill"],wrong:["Expert hackers","Security researchers","Professional developers","Network engineers","System admins","Teachers","Students","Gamers","Designers","Artists","Writers","Editors","Managers","Technicians","Scientists"]},
+    {question:"What do script kiddies often attack?",correct:["Easy targets","Weak systems"],wrong:["Secure systems","Strong passwords","Two-factor","Firewall","Antivirus","Router","Switch","WAP","Cloud","Browser","Document","Music app","Photo editor","Video editor","Game app"]},
+    {question:"What motivates script kiddies?",correct:["Fun","Attention"],wrong:["Security","Protection","Learning","Teaching","Helping","Fixing","Improving","Updating","Storing","Printing","Displaying","Playing","Editing","Browsing","Sending","Recording"]},
+    {question:"How can script kiddie attacks be prevented?",correct:["Strong security","Updated systems"],wrong:["Weak password","Sharing password","Turning off antivirus","Clicking links","Downloading everything","Trusting strangers","Using public Wi-Fi","Ignoring warnings","Opening attachments","Saving malware","Running unsafe apps","Posting info","Sharing data","Using simple PIN","Using unsafe websites","Storing passwords publicly"]}
+  ]
+
+},
+
+"Developing for the Web": {
+
+  "HTML": [
+    {question:"What does HTML stand for?",correct:["HyperText Markup Language","hypertext markup language"],wrong:["HighText Machine Language","Hyperlink Text Mode Language","Home Tool Markup Language","Hyper Transfer Markup Language","HyperText Making Language","HyperText Model Language","HyperTag Markup Language","HyperText Module Language","HyperText Mapping Language","HyperText Main Language","HyperText Media Language","HyperText Monitor Language","HyperText Motion Language","HyperText Macro Language","HyperText Master Language","HyperText Menu Language"]},
+    {question:"What is HTML used for?",correct:["Structure web pages","Build page layout"],wrong:["Style pages","Add animations","Run logic","Store data","Process images","Play audio","Print documents","Manage servers","Control networks","Write programs","Compile code","Encrypt data","Run apps","Design graphics","Edit videos","Manage files"]},
+    {question:"Which tag displays a heading?",correct:["<h1>","h1"],wrong:["<p>","<div>","<span>","<img>","<a>","<ul>","<li>","<body>","<head>","<title>","<script>","<style>","<table>","<form>","<input>","<footer>","<section>"]},
+    {question:"Which tag displays a paragraph?",correct:["<p>","p"],wrong:["<h1>","<div>","<span>","<img>","<a>","<ul>","<li>","<body>","<head>","<title>","<script>","<style>","<table>","<form>","<input>","<footer>","<section>"]},
+    {question:"Which tag inserts an image?",correct:["<img>","img"],wrong:["<p>","<h1>","<div>","<span>","<a>","<ul>","<li>","<body>","<head>","<title>","<script>","<style>","<table>","<form>","<input>","<footer>","<section>"]},
+    {question:"Which tag creates a link?",correct:["<a>","anchor tag"],wrong:["<p>","<h1>","<div>","<span>","<img>","<ul>","<li>","<body>","<head>","<title>","<script>","<style>","<table>","<form>","<input>","<footer>","<section>"]},
+    {question:"Which tag contains the main content?",correct:["<body>","body"],wrong:["<head>","<title>","<script>","<style>","<img>","<a>","<p>","<h1>","<div>","<span>","<ul>","<li>","<table>","<form>","<input>","<footer>","<section>"]},
+    {question:"Which tag contains page metadata?",correct:["<head>","head"],wrong:["<body>","<title>","<script>","<style>","<img>","<a>","<p>","<h1>","<div>","<span>","<ul>","<li>","<table>","<form>","<input>","<footer>","<section>"]}
+  ],
+
+  "CSS": [
+    {question:"What does CSS stand for?",correct:["Cascading Style Sheets","cascading style sheets"],wrong:["Creative Style System","Computer Style Sheets","Coded Style Sheets","Cascading Script Sheets","Cascading Style System","Cascading Sheet Styles","Cascading Style Syntax","Cascading Style Structure","Cascading Style Setup","Cascading Style Scheme","Cascading Style Script","Cascading Style Selector","Cascading Style Source","Cascading Style Server","Cascading Style Studio","Cascading Style Software"]},
+    {question:"What is CSS used for?",correct:["Style web pages","Control appearance"],wrong:["Structure pages","Run logic","Store data","Process images","Play audio","Print documents","Manage servers","Control networks","Write programs","Compile code","Encrypt data","Run apps","Design graphics","Edit videos","Manage files"]},
+    {question:"Which property changes text colour?",correct:["color","text color"],wrong:["background","font-size","margin","padding","border","display","width","height","opacity","position","float","align","justify","overflow","shadow","radius"]},
+    {question:"Which property changes background colour?",correct:["background-color","bg color"],wrong:["color","font-size","margin","padding","border","display","width","height","opacity","position","float","align","justify","overflow","shadow","radius"]},
+    {question:"Which property changes text size?",correct:["font-size","text size"],wrong:["color","background","margin","padding","border","display","width","height","opacity","position","float","align","justify","overflow","shadow","radius"]},
+    {question:"Which property adds space inside an element?",correct:["padding","inner space"],wrong:["margin","border","color","background","font-size","display","width","height","opacity","position","float","align","justify","overflow","shadow","radius"]},
+    {question:"Which property adds space outside an element?",correct:["margin","outer space"],wrong:["padding","border","color","background","font-size","display","width","height","opacity","position","float","align","justify","overflow","shadow","radius"]},
+    {question:"Which property adds a border?",correct:["border","outline"],wrong:["margin","padding","color","background","font-size","display","width","height","opacity","position","float","align","justify","overflow","shadow","radius"]}
+  ],
+
+  "JavaScript": [
+    {question:"What is JavaScript used for?",correct:["Add interactivity","Make pages dynamic"],wrong:["Structure pages","Style pages","Store data","Print documents","Manage servers","Control networks","Write HTML","Write CSS","Compile code","Encrypt data","Run BIOS","Design graphics","Edit videos","Manage files","Play audio","Display images"]},
+    {question:"Which keyword creates a variable?",correct:["let","var"],wrong:["const","function","if","else","for","while","return","class","import","export","switch","case","break","continue","true","false"]},
+    {question:"Which symbol is used for comments?",correct:["//","double slash"],wrong:["/*","*/","#","<>","{}","[]","()","--","++","==","===","!=","+=","-=","*=","/="]},
+    {question:"Which keyword defines a function?",correct:["function","func"],wrong:["let","var","const","if","else","for","while","return","class","import","export","switch","case","break","continue","true"]},
+    {question:"Which operator adds numbers?",correct:["+","plus"],wrong:["-","*","/","%","=","==","===","!=","&&","||","++","--","+=","-=","*=","/=","<>"]},
+    {question:"Which operator compares equality?",correct:["==","==="],wrong:["=","!=","+","-","*","/","%","&&","||","++","--","+=","-=","*=","/=","<>"]},
+    {question:"Which keyword stops a loop?",correct:["break","stop"],wrong:["continue","return","function","let","var","const","if","else","for","while","switch","case","true","false","class","import"]},
+    {question:"Which keyword skips to next loop iteration?",correct:["continue","skip"],wrong:["break","return","function","let","var","const","if","else","for","while","switch","case","true","false","class","import"]}
+  ]
+
+},
+
+"Computational Thinking": {
+
+  "Decomposition": [
+    {question:"What is decomposition?",correct:["Breaking a problem into smaller parts","Splitting tasks"],wrong:["Repeating actions","Choosing options","Random guessing","Making code longer","Deleting code","Running loops","Checking conditions","Creating variables","Drawing pictures","Playing music","Editing videos","Browsing web","Sending emails","Running games","Recording audio","Designing graphics"]},
+    {question:"Why is decomposition useful?",correct:["Makes problems easier","Simplifies tasks"],wrong:["Makes problems harder","Adds confusion","Creates errors","Slows down work","Removes steps","Deletes tasks","Runs loops","Checks conditions","Creates variables","Draws pictures","Plays music","Edits videos","Browses web","Sends emails","Runs games","Records audio"]},
+    {question:"Which is an example of decomposition?",correct:["Breaking a project into steps","Splitting tasks"],wrong:["Doing everything at once","Guessing solution","Repeating actions","Choosing options","Random guessing","Deleting code","Running loops","Checking conditions","Creating variables","Drawing pictures","Playing music","Editing videos","Browsing web","Sending emails","Running games","Recording audio"]},
+    {question:"What does decomposition help with?",correct:["Understanding problems","Organising tasks"],wrong:["Confusing problems","Removing tasks","Deleting steps","Running loops","Checking conditions","Creating variables","Drawing pictures","Playing music","Editing videos","Browsing web","Sending emails","Running games","Recording audio","Designing graphics","Making errors"]},
+    {question:"Which task uses decomposition?",correct:["Planning a program","Breaking tasks"],wrong:["Guessing solution","Repeating actions","Choosing options","Random guessing","Deleting code","Running loops","Checking conditions","Creating variables","Drawing pictures","Playing music","Editing videos","Browsing web","Sends emails","Runs games","Records audio"]},
+    {question:"What happens when you decompose a problem?",correct:["It becomes manageable","Easier to solve"],wrong:["Harder to solve","More confusing","Longer to solve","Impossible to solve","Deletes tasks","Runs loops","Checks conditions","Creates variables","Draws pictures","Plays music","Edits videos","Browses web","Sends emails","Runs games","Records audio"]},
+    {question:"Which phrase describes decomposition?",correct:["Break it down","Split tasks"],wrong:["Guess it","Repeat it","Choose it","Delete it","Confuse it","Run loops","Check conditions","Create variables","Draw pictures","Play music","Edit videos","Browse web","Send emails","Run games","Record audio"]},
+    {question:"What is the first step in decomposition?",correct:["Identify parts","Find components"],wrong:["Guess solution","Repeat actions","Choose options","Delete code","Run loops","Check conditions","Create variables","Draw pictures","Play music","Edit videos","Browse web","Send emails","Run games","Record audio"]}
+  ],
+
+  "Abstraction": [
+    {question:"What is abstraction?",correct:["Ignoring unnecessary detail","Focusing on important parts"],wrong:["Adding detail","Showing everything","Repeating actions","Choosing options","Random guessing","Deleting code","Running loops","Checking conditions","Creating variables","Drawing pictures","Playing music","Editing videos","Browsing web","Sending emails","Running games","Recording audio"]},
+    {question:"Why is abstraction useful?",correct:["Simplifies problems","Removes clutter"],wrong:["Complicates problems","Adds confusion","Shows everything","Repeats actions","Chooses options","Deletes code","Runs loops","Checks conditions","Creates variables","Draws pictures","Plays music","Edits videos","Browses web","Sends emails","Runs games","Records audio"]},
+    {question:"Which is an example of abstraction?",correct:["Focusing on key features","Ignoring extra detail"],wrong:["Showing all details","Adding unnecessary info","Repeating actions","Choosing options","Random guessing","Deleting code","Running loops","Checking conditions","Creating variables","Drawing pictures","Playing music","Editing videos","Browsing web","Sending emails","Running games","Recording audio"]},
+    {question:"What does abstraction help with?",correct:["Understanding main idea","Simplifying tasks"],wrong:["Confusing tasks","Adding detail","Deleting steps","Running loops","Checking conditions","Creating variables","Drawing pictures","Playing music","Editing videos","Browsing web","Sending emails","Running games","Recording audio","Designing graphics"]},
+    {question:"Which task uses abstraction?",correct:["Designing a model","Simplifying problem"],wrong:["Adding detail","Repeating actions","Choosing options","Random guessing","Deleting code","Running loops","Checking conditions","Creating variables","Drawing pictures","Playing music","Editing videos","Browsing web","Sending emails","Running games","Recording audio"]},
+    {question:"What happens when you abstract a problem?",correct:["It becomes clearer","Easier to understand"],wrong:["Harder to understand","More confusing","Longer to solve","Impossible to solve","Deletes tasks","Runs loops","Checks conditions","Creates variables","Draws pictures","Plays music","Edits videos","Browses web","Sends emails","Runs games","Records audio"]},
+    {question:"Which phrase describes abstraction?",correct:["Focus on important","Ignore extra"],wrong:["Show everything","Add detail","Repeat actions","Choose options","Delete code","Run loops","Check conditions","Create variables","Draw pictures","Play music","Edit videos","Browse web","Send emails","Run games"]},
+    {question:"What is the first step in abstraction?",correct:["Identify key info","Remove extra detail"],wrong:["Add detail","Repeat actions","Choose options","Delete code","Run loops","Check conditions","Create variables","Draw pictures","Play music","Edit videos","Browse web","Send emails","Run games","Record audio"]}
+  ],
+
+  "Pattern Recognition": [
+    {question:"What is pattern recognition?",correct:["Finding similarities","Spotting patterns"],wrong:["Ignoring patterns","Adding detail","Repeating actions","Choosing options","Random guessing","Deleting code","Running loops","Checking conditions","Creating variables","Drawing pictures","Playing music","Editing videos","Browsing web","Sending emails","Running games","Recording audio"]},
+    {question:"Why is pattern recognition useful?",correct:["Helps solve problems","Finds repeated ideas"],wrong:["Makes problems harder","Adds confusion","Shows everything","Repeats actions","Chooses options","Deletes code","Runs loops","Checks conditions","Creates variables","Draws pictures","Plays music","Edits videos","Browses web","Sends emails","Runs games","Records audio"]},
+    {question:"Which is an example of pattern recognition?",correct:["Noticing repeated steps","Finding similarities"],wrong:["Ignoring patterns","Adding detail","Repeating actions","Choosing options","Random guessing","Deleting code","Running loops","Checking conditions","Creating variables","Drawing pictures","Playing music","Editing videos","Browsing web","Sending emails","Running games"]},
+    {question:"What does pattern recognition help with?",correct:["Predicting solutions","Understanding structure"],wrong:["Confusing tasks","Adding detail","Deleting steps","Running loops","Checking conditions","Creating variables","Drawing pictures","Playing music","Editing videos","Browsing web","Sending emails","Running games","Recording audio"]},
+    {question:"Which task uses pattern recognition?",correct:["Solving puzzles","Finding repeated ideas"],wrong:["Adding detail","Repeating actions","Choosing options","Random guessing","Deleting code","Running loops","Checking conditions","Creating variables","Drawing pictures","Playing music","Editing videos","Browsing web","Sending emails","Running games"]},
+    {question:"What happens when you recognise patterns?",correct:["Solve faster","Understand better"],wrong:["Solve slower","More confusing","Longer to solve","Impossible to solve","Deletes tasks","Runs loops","Checks conditions","Creates variables","Draws pictures","Plays music","Edits videos","Browses web","Sends emails","Runs games"]},
+    {question:"Which phrase describes pattern recognition?",correct:["Find similarities","Spot patterns"],wrong:["Ignore patterns","Add detail","Repeat actions","Choose options","Delete code","Run loops","Check conditions","Create variables","Draw pictures","Play music","Edit videos","Browse web","Send emails","Run games"]},
+    {question:"What is the first step in pattern recognition?",correct:["Look for repeats","Find similarities"],wrong:["Ignore repeats","Add detail","Repeat actions","Choose options","Delete code","Run loops","Check conditions","Create variables","Draw pictures","Play music","Edit videos","Browse web","Send emails","Run games"]}
+  ],
+
+  "Algorithmic Thinking": [
+    {question:"What is algorithmic thinking?",correct:["Step-by-step solving","Logical steps"],wrong:["Random guessing","Repeating actions","Choosing options","Adding detail","Deleting code","Running loops","Checking conditions","Creating variables","Drawing pictures","Playing music","Editing videos","Browsing web","Sending emails","Running games","Recording audio"]},
+    {question:"Why is algorithmic thinking useful?",correct:["Creates clear steps","Solves problems"],wrong:["Adds confusion","Makes problems harder","Shows everything","Repeats actions","Chooses options","Deletes code","Runs loops","Checks conditions","Creates variables","Draws pictures","Plays music","Edits videos","Browses web","Sends emails","Runs games"]},
+    {question:"Which is an example of algorithmic thinking?",correct:["Following instructions","Step-by-step"],wrong:["Guessing solution","Repeating actions","Choosing options","Random guessing","Deleting code","Running loops","Checking conditions","Creating variables","Drawing pictures","Playing music","Editing videos","Browsing web","Sending emails","Running games"]},
+    {question:"What does algorithmic thinking help with?",correct:["Creating algorithms","Solving tasks"],wrong:["Confusing tasks","Adding detail","Deleting steps","Running loops","Checking conditions","Creating variables","Drawing pictures","Playing music","Editing videos","Browsing web","Sending emails","Running games"]},
+    {question:"Which task uses algorithmic thinking?",correct:["Writing instructions","Planning steps"],wrong:["Adding detail","Repeating actions","Choosing options","Random guessing","Deleting code","Running loops","Checking conditions","Creating variables","Drawing pictures","Playing music","Editing videos","Browsing web","Sending emails","Running games"]},
+    {question:"What happens when you use algorithmic thinking?",correct:["Solve logically","Clear steps"],wrong:["Solve randomly","More confusing","Longer to solve","Impossible to solve","Deletes tasks","Runs loops","Checks conditions","Creates variables","Draws pictures","Plays music","Edits videos","Browses web","Sends emails","Runs games"]},
+    {question:"Which phrase describes algorithmic thinking?",correct:["Step-by-step","Logical order"],wrong:["Guessing","Repeating","Choosing","Deleting","Confusing","Running loops","Checking conditions","Creating variables","Drawing pictures","Playing music","Editing videos","Browsing web","Sending emails","Running games"]},
+    {question:"What is the first step in algorithmic thinking?",correct:["Plan steps","Think logically"],wrong:["Guess solution","Repeat actions","Choose options","Delete code","Run loops","Check conditions","Create variables","Draw pictures","Play music","Edit videos","Browse web","Send emails","Run games"]}
+  ]
+
+},
+
+"Algorithms & Flowcharts": {
+
+  "Algorithms": [
+    {question:"What is an algorithm?",correct:["Step-by-step instructions","A method to solve a problem"],wrong:["Random guessing","A picture","A video","A sound","A loop","A variable","A sprite","A function","A list","A comment","A print statement","A game","A website","A password","A file","A document"]},
+    {question:"Why are algorithms useful?",correct:["Solve problems clearly","Give structured steps"],wrong:["Make problems harder","Add confusion","Delete steps","Repeat actions","Choose options","Draw pictures","Play music","Edit videos","Browse web","Send emails","Run games","Record audio","Design graphics","Store files","Print documents"]},
+    {question:"Which is an example of an algorithm?",correct:["Recipe steps","Instructions"],wrong:["Random actions","Guessing","Drawing","Singing","Dancing","Playing games","Watching videos","Browsing web","Sending emails","Editing photos","Editing videos","Running loops","Checking conditions","Creating variables","Deleting code"]},
+    {question:"What does an algorithm help with?",correct:["Solving tasks","Planning steps"],wrong:["Confusing tasks","Adding detail","Deleting steps","Running loops","Checking conditions","Creating variables","Drawing pictures","Playing music","Editing videos","Browsing web","Sending emails","Running games","Recording audio","Designing graphics"]},
+    {question:"Which phrase describes an algorithm?",correct:["Step-by-step","Clear instructions"],wrong:["Guessing","Repeating","Choosing","Deleting","Confusing","Running loops","Checking conditions","Creating variables","Drawing pictures","Playing music","Editing videos","Browsing web","Sending emails","Running games"]},
+    {question:"What is the first step in writing an algorithm?",correct:["Understand problem","Identify steps"],wrong:["Guess solution","Repeat actions","Choose options","Delete code","Run loops","Check conditions","Create variables","Draw pictures","Play music","Edit videos","Browse web","Send emails","Run games"]},
+    {question:"Which task uses algorithms?",correct:["Solving puzzles","Planning tasks"],wrong:["Adding detail","Repeating actions","Choosing options","Random guessing","Deleting code","Running loops","Checking conditions","Creating variables","Drawing pictures","Playing music","Editing videos","Browsing web","Sending emails","Running games"]},
+    {question:"What happens when you follow an algorithm?",correct:["Solve correctly","Follow steps"],wrong:["Solve randomly","More confusing","Longer to solve","Impossible to solve","Delete tasks","Run loops","Check conditions","Create variables","Draw pictures","Play music","Edit videos","Browse web","Send emails","Run games"]}
+  ],
+
+  "Flowcharts": [
+    {question:"What is a flowchart?",correct:["Diagram showing steps","Visual algorithm"],wrong:["Random drawing","Music sheet","Video timeline","Picture only","Loop","Variable","Sprite","Function","List","Comment","Print statement","Game","Website","Password","File","Document"]},
+    {question:"Why are flowcharts useful?",correct:["Show logic clearly","Visualise steps"],wrong:["Confuse steps","Hide logic","Add detail","Delete steps","Repeat actions","Choose options","Draw pictures","Play music","Edit videos","Browse web","Send emails","Run games","Record audio","Design graphics"]},
+    {question:"Which symbol shows a decision?",correct:["Diamond","Decision symbol"],wrong:["Rectangle","Oval","Circle","Triangle","Square","Arrow","Line","Dot","Star","Hexagon","Pentagon","Bracket","Quote","Slash","Colon","Comma"]},
+    {question:"Which symbol shows a process?",correct:["Rectangle","Process box"],wrong:["Diamond","Oval","Circle","Triangle","Square","Arrow","Line","Dot","Star","Hexagon","Pentagon","Bracket","Quote","Slash","Colon","Comma"]},
+    {question:"Which symbol shows start/end?",correct:["Oval","Terminator"],wrong:["Rectangle","Diamond","Circle","Triangle","Square","Arrow","Line","Dot","Star","Hexagon","Pentagon","Bracket","Quote","Slash","Colon","Comma"]},
+    {question:"What do arrows show?",correct:["Flow of steps","Direction"],wrong:["Decoration","Music","Images","Random lines","Loops","Variables","Sprites","Functions","Lists","Comments","Print statements","Games","Websites","Passwords","Files","Documents"]},
+    {question:"Which is an example of a flowchart?",correct:["Diagram with symbols","Step flow"],wrong:["Random drawing","Music sheet","Video timeline","Picture only","Loop","Variable","Sprite","Function","List","Comment","Print statement","Game","Website","Password","File"]},
+    {question:"What does a flowchart help with?",correct:["Understanding logic","Planning algorithms"],wrong:["Confusing logic","Adding detail","Deleting steps","Running loops","Checking conditions","Creating variables","Drawing pictures","Playing music","Editing videos","Browsing web","Sending emails","Running games","Recording audio"]}
+  ],
+
+  "Sorting Algorithm (Bubble Sort)": [
+    {question:"What does bubble sort do?",correct:["Sorts items","Orders list"],wrong:["Deletes items","Adds items","Randomises list","Encrypts data","Runs loops only","Checks conditions only","Creates variables","Draws pictures","Plays music","Edits videos","Browses web","Sends emails","Runs games","Records audio","Designs graphics"]},
+    {question:"How does bubble sort work?",correct:["Compares neighbours","Swaps items"],wrong:["Jumps randomly","Deletes items","Adds items","Encrypts data","Runs loops only","Checks conditions only","Creates variables","Draws pictures","Plays music","Edits videos","Browses web","Sends emails","Runs games","Records audio"]},
+    {question:"Which list does bubble sort produce?",correct:["Sorted list","Ordered list"],wrong:["Random list","Reversed list","Deleted list","Encrypted list","Mixed list","Broken list","Empty list","Huge list","Short list","Long list","Graphic list","Audio list","Video list","Website list","Game list"]},
+    {question:"What does bubble sort compare?",correct:["Adjacent items","Neighbouring values"],wrong:["Random items","Far items","All items at once","Only first item","Only last item","Only middle item","Pictures","Videos","Music","Games","Websites","Passwords","Files","Documents"]},
+    {question:"What happens when items are in wrong order?",correct:["Swap them","Exchange positions"],wrong:["Delete them","Encrypt them","Ignore them","Randomise them","Draw them","Play them","Edit them","Browse them","Send them","Run them","Record them","Design them","Store them","Print them"]},
+    {question:"Bubble sort repeats until?",correct:["List sorted","No swaps"],wrong:["List deleted","List encrypted","List randomised","List reversed","List broken","List empty","List huge","List short","List long","List graphic","List audio","List video","List website","List game"]},
+    {question:"Bubble sort is best described as?",correct:["Simple sort","Comparison sort"],wrong:["Complex sort","Random sort","Encrypted sort","Graphic sort","Audio sort","Video sort","Website sort","Game sort","Password sort","File sort","Document sort","Sprite sort","Loop sort","Variable sort"]},
+    {question:"Bubble sort performance is?",correct:["Slow","Inefficient"],wrong:["Fast","Very fast","Instant","Optimised","Encrypted","Graphic","Audio","Video","Website","Game","Password","File","Document","Sprite","Loop","Variable"]}
+  ],
+
+  "Sorting Algorithm (Insertion Sort)": [
+    {question:"What does insertion sort do?",correct:["Sorts items","Orders list"],wrong:["Deletes items","Adds items","Randomises list","Encrypts data","Runs loops only","Checks conditions only","Creates variables","Draws pictures","Plays music","Edits videos","Browses web","Sends emails","Runs games","Records audio"]},
+    {question:"How does insertion sort work?",correct:["Builds sorted list","Inserts items"],wrong:["Jumps randomly","Deletes items","Adds items","Encrypts data","Runs loops only","Checks conditions only","Creates variables","Draws pictures","Plays music","Edits videos","Browses web","Sends emails","Runs games"]},
+    {question:"Which part is sorted first?",correct:["Left side","Beginning"],wrong:["Right side","Middle","End","Random part","Pictures","Videos","Music","Games","Websites","Passwords","Files","Documents","Sprites","Loops"]},
+    {question:"What does insertion sort compare?",correct:["Current item","Previous items"],wrong:["Random items","Far items","All items at once","Only first item","Only last item","Only middle item","Pictures","Videos","Music","Games","Websites","Passwords","Files","Documents"]},
+    {question:"What happens when item is smaller?",correct:["Insert earlier","Move left"],wrong:["Delete item","Encrypt item","Ignore item","Randomise item","Draw item","Play item","Edit item","Browse item","Send item","Run item","Record item","Design item","Store item","Print item"]},
+    {question:"Insertion sort repeats until?",correct:["List sorted","All items placed"],wrong:["List deleted","List encrypted","List randomised","List reversed","List broken","List empty","List huge","List short","List long","List graphic","List audio","List video","List website","List game"]},
+    {question:"Insertion sort is best described as?",correct:["Efficient for small lists","Simple sort"],wrong:["Complex sort","Random sort","Encrypted sort","Graphic sort","Audio sort","Video sort","Website sort","Game sort","Password sort","File sort","Document sort","Sprite sort","Loop sort","Variable sort"]},
+    {question:"Insertion sort performance is?",correct:["Moderate","Better than bubble"],wrong:["Very slow","Instant","Optimised","Encrypted","Graphic","Audio","Video","Website","Game","Password","File","Document","Sprite","Loop","Variable"]}
+  ],
+
+  "Searching Algorithm (Linear Search)": [
+    {question:"What does linear search do?",correct:["Searches one by one","Checks each item"],wrong:["Jumps randomly","Sorts list","Deletes items","Adds items","Encrypts data","Runs loops only","Checks conditions only","Creates variables","Draws pictures","Plays music","Edits videos","Browses web","Sends emails","Runs games"]},
+    {question:"How does linear search work?",correct:["Starts at beginning","Moves through list"],wrong:["Starts at end","Starts in middle","Jumps randomly","Sorts list","Deletes items","Adds items","Encrypts data","Draws pictures","Plays music","Edits videos","Browses web","Sends emails","Runs games"]},
+    {question:"Which list can linear search use?",correct:["Any list","Unsorted list"],wrong:["Only sorted list","Only reversed list","Only random list","Only encrypted list","Only graphic list","Only audio list","Only video list","Only website list","Only game list","Only password list","Only file list","Only document list","Only sprite list","Only loop list"]},
+    {question:"What does linear search compare?",correct:["Target item","Each element"],wrong:["Random items","Far items","All items at once","Only first item","Only last item","Only middle item","Pictures","Videos","Music","Games","Websites","Passwords","Files","Documents"]},
+    {question:"When does linear search stop?",correct:["Item found","End of list"],wrong:["List deleted","List encrypted","List randomised","List reversed","List broken","List empty","List huge","List short","List long","List graphic","List audio","List video","List website","List game"]},
+    {question:"Linear search is best described as?",correct:["Simple search","Sequential search"],wrong:["Complex search","Random search","Encrypted search","Graphic search","Audio search","Video search","Website search","Game search","Password search","File search","Document search","Sprite search","Loop search","Variable search"]},
+    {question:"Linear search performance is?",correct:["Slow for large lists","Fast for small lists"],wrong:["Instant","Optimised","Encrypted","Graphic","Audio","Video","Website","Game","Password","File","Document","Sprite","Loop","Variable"]},
+    {question:"Which item does linear search check first?",correct:["First item","Start"],wrong:["Last item","Middle item","Random item","Encrypted item","Graphic item","Audio item","Video item","Website item","Game item","Password item","File item","Document item","Sprite item","Loop item"]}
+  ],
+
+  "Searching Algorithm (Binary Search)": [
+    {question:"What does binary search do?",correct:["Searches by halving","Divides list"],wrong:["Searches one by one","Jumps randomly","Sorts list","Deletes items","Adds items","Encrypts data","Runs loops only","Checks conditions only","Creates variables","Draws pictures","Plays music","Edits videos","Browses web","Sends emails"]},
+    {question:"Which list does binary search need?",correct:["Sorted list","Ordered list"],wrong:["Unsorted list","Reversed list","Random list","Encrypted list","Graphic list","Audio list","Video list","Website list","Game list","Password list","File list","Document list","Sprite list","Loop list"]},
+    {question:"How does binary search work?",correct:["Checks middle","Halves list"],wrong:["Checks first","Checks last","Checks random","Sorts list","Deletes items","Adds items","Encrypts data","Draws pictures","Plays music","Edits videos","Browses web","Sends emails","Runs games"]},
+    {question:"What does binary search compare?",correct:["Middle item","Target"],wrong:["Random items","Far items","All items at once","Only first item","Only last item","Only middle item","Pictures","Videos","Music","Games","Websites","Passwords","Files","Documents"]},
+    {question:"When does binary search stop?",correct:["Item found","Search space empty"],wrong:["List deleted","List encrypted","List randomised","List reversed","List broken","List empty","List huge","List short","List long","List graphic","List audio","List video","List website","List game"]},
+    {question:"Binary search is best described as?",correct:["Efficient search","Fast search"],wrong:["Slow search","Random search","Encrypted search","Graphic search","Audio search","Video search","Website search","Game search","Password search","File search","Document search","Sprite search","Loop search","Variable search"]},
+    {question:"Binary search performance is?",correct:["Very fast","Efficient"],wrong:["Very slow","Instant","Optimised","Encrypted","Graphic","Audio","Video","Website","Game","Password","File","Document","Sprite","Loop","Variable"]},
+    {question:"Which item does binary search check first?",correct:["Middle item","Centre"],wrong:["First item","Last item","Random item","Encrypted item","Graphic item","Audio item","Video item","Website item","Game item","Password item","File item","Document item","Sprite item","Loop item"]}
+  ],
+
+  "Comparing Algorithm Efficiency": [
+    {question:"What is algorithm efficiency?",correct:["Speed and resources","Performance"],wrong:["Colour","Shape","Sound","Image","Randomness","Guessing","Deleting code","Repeating actions","Choosing options","Drawing pictures","Playing music","Editing videos","Browsing web","Sending emails","Running games","Recording audio"]},
+    {question:"Which algorithm is usually faster?",correct:["Binary search","Efficient search"],wrong:["Linear search","Bubble sort","Insertion sort","Random search","Encrypted search","Graphic search","Audio search","Video search","Website search","Game search","Password search","File search","Document search","Sprite search","Loop search"]},
+    {question:"Which algorithm is slowest?",correct:["Bubble sort","Inefficient sort"],wrong:["Binary search","Insertion sort","Linear search","Random search","Encrypted search","Graphic search","Audio search","Video search","Website search","Game search","Password search","File search","Document search","Sprite search","Loop search"]},
+    {question:"What affects algorithm efficiency?",correct:["List size","Number of steps"],wrong:["Colour","Shape","Sound","Image","Randomness","Guessing","Deleting code","Repeating actions","Choosing options","Drawing pictures","Playing music","Editing videos","Browsing web","Sending emails","Running games"]},
+    {question:"Which algorithm works on sorted lists?",correct:["Binary search","Insertion sort"],wrong:["Linear search","Bubble sort","Random search","Encrypted search","Graphic search","Audio search","Video search","Website search","Game search","Password search","File search","Document search","Sprite search","Loop search"]},
+    {question:"Which algorithm checks every item?",correct:["Linear search","Sequential search"],wrong:["Binary search","Bubble sort","Insertion sort","Random search","Encrypted search","Graphic search","Audio search","Video search","Website search","Game search","Password search","File search","Document search","Sprite search"]},
+    {question:"Which algorithm swaps items?",correct:["Bubble sort","Swap sort"],wrong:["Binary search","Linear search","Insertion sort","Random search","Encrypted search","Graphic search","Audio search","Video search","Website search","Game search","Password search","File search","Document search","Sprite search"]},
+    {question:"Why compare algorithms?",correct:["Choose best method","Improve performance"],wrong:["Confuse tasks","Add detail","Delete steps","Run loops","Check conditions","Create variables","Draw pictures","Play music","Edit videos","Browse web","Send emails","Run games","Record audio"]}
+  ]
+
+},
+
+"Spreadsheets": {
+
+  "Data Analysis": [
+    {question:"What does data analysis mean?",correct:["Examining data","Finding patterns"],wrong:["Deleting data","Random guessing","Drawing pictures","Playing music","Editing videos","Browsing web","Sending emails","Running games","Recording audio","Designing graphics","Printing documents","Storing files","Encrypting data","Sorting alphabetically only","Making slides","Writing essays"]},
+    {question:"Which tool helps analyse data?",correct:["Charts","Graphs"],wrong:["Pictures","Videos","Music","Games","Websites","Passwords","Files","Documents","Sprites","Loops","Variables","Comments","Animations","Transitions","Themes","Filters only"]},
+    {question:"What does a chart show?",correct:["Visual data","Data patterns"],wrong:["Random images","Music","Videos","Games","Websites","Passwords","Files","Documents","Sprites","Loops","Variables","Comments","Animations","Transitions","Themes","Blank screen"]},
+    {question:"Which feature sorts data?",correct:["Sort","Sorting tool"],wrong:["Chart","Graph","Picture","Video","Music","Game","Website","Password","File","Document","Sprite","Loop","Variable","Comment","Animation","Transition"]},
+    {question:"Which feature filters data?",correct:["Filter","Filtering tool"],wrong:["Sort","Chart","Graph","Picture","Video","Music","Game","Website","Password","File","Document","Sprite","Loop","Variable","Comment","Animation"]},
+    {question:"What does sorting do?",correct:["Orders data","Arranges values"],wrong:["Deletes data","Encrypts data","Randomises data","Draws pictures","Plays music","Edits videos","Browses web","Sends emails","Runs games","Records audio","Designs graphics","Prints documents","Stores files","Makes slides","Writes essays"]},
+    {question:"What does filtering do?",correct:["Shows selected data","Hides unwanted data"],wrong:["Deletes data","Encrypts data","Randomises data","Draws pictures","Plays music","Edits videos","Browses web","Sends emails","Runs games","Records audio","Designs graphics","Prints documents","Stores files","Makes slides","Writes essays"]},
+    {question:"Which tool helps compare values?",correct:["Charts","Graphs"],wrong:["Pictures","Videos","Music","Games","Websites","Passwords","Files","Documents","Sprites","Loops","Variables","Comments","Animations","Transitions","Themes"]}
+  ],
+
+  "Formulas": [
+    {question:"What is a formula?",correct:["Calculation in a cell","Maths instruction"],wrong:["Picture","Video","Music","Game","Website","Password","File","Document","Sprite","Loop","Variable","Comment","Animation","Transition","Theme","Drawing","Audio"]},
+    {question:"Which symbol starts a formula?",correct:["=","equals sign"],wrong:["+","-","*","/","%","<>","{}","[]","()","#","@","&","?","!",";"]},
+    {question:"Which formula adds numbers?",correct:["=A1+A2","Addition formula"],wrong:["=A1-A2","=A1*A2","=A1/A2","=A1%A2","=SUM","=AVERAGE","=MAX","=MIN","Picture","Video","Music","Game","Website","Password","File","Document"]},
+    {question:"Which formula subtracts numbers?",correct:["=A1-A2","Subtraction formula"],wrong:["=A1+A2","=A1*A2","=A1/A2","=A1%A2","=SUM","=AVERAGE","=MAX","=MIN","Picture","Video","Music","Game","Website","Password","File","Document"]},
+    {question:"Which formula multiplies numbers?",correct:["=A1*A2","Multiplication formula"],wrong:["=A1+A2","=A1-A2","=A1/A2","=A1%A2","=SUM","=AVERAGE","=MAX","=MIN","Picture","Video","Music","Game","Website","Password","File","Document"]},
+    {question:"Which formula divides numbers?",correct:["=A1/A2","Division formula"],wrong:["=A1+A2","=A1-A2","=A1*A2","=A1%A2","=SUM","=AVERAGE","=MAX","=MIN","Picture","Video","Music","Game","Website","Password","File","Document"]},
+    {question:"What does a formula always start with?",correct:["=","equals"],wrong:["+","-","*","/","%","<>","{}","[]","()","#","@","&","?","!",";"]},
+    {question:"Which formula finds remainder?",correct:["=A1%A2","Modulo"],wrong:["=A1+A2","=A1-A2","=A1*A2","=A1/A2","=SUM","=AVERAGE","=MAX","=MIN","Picture","Video","Music","Game","Website","Password","File","Document"]}
+  ],
+
+  "Functions": [
+    {question:"What is a function?",correct:["Built-in formula","Pre-made calculation"],wrong:["Picture","Video","Music","Game","Website","Password","File","Document","Sprite","Loop","Variable","Comment","Animation","Transition","Theme","Drawing","Audio"]},
+    {question:"Which function adds a range?",correct:["SUM","=SUM()"],wrong:["AVERAGE","MAX","MIN","COUNT","PICTURE","VIDEO","MUSIC","GAME","WEBSITE","PASSWORD","FILE","DOCUMENT","SPRITE","LOOP","VARIABLE","COMMENT"]},
+    {question:"Which function finds average?",correct:["AVERAGE","=AVERAGE()"],wrong:["SUM","MAX","MIN","COUNT","PICTURE","VIDEO","MUSIC","GAME","WEBSITE","PASSWORD","FILE","DOCUMENT","SPRITE","LOOP","VARIABLE","COMMENT"]},
+    {question:"Which function finds highest value?",correct:["MAX","=MAX()"],wrong:["SUM","AVERAGE","MIN","COUNT","PICTURE","VIDEO","MUSIC","GAME","WEBSITE","PASSWORD","FILE","DOCUMENT","SPRITE","LOOP","VARIABLE","COMMENT"]},
+    {question:"Which function finds lowest value?",correct:["MIN","=MIN()"],wrong:["SUM","AVERAGE","MAX","COUNT","PICTURE","VIDEO","MUSIC","GAME","WEBSITE","PASSWORD","FILE","DOCUMENT","SPRITE","LOOP","VARIABLE","COMMENT"]},
+    {question:"Which function counts numbers?",correct:["COUNT","=COUNT()"],wrong:["SUM","AVERAGE","MAX","MIN","PICTURE","VIDEO","MUSIC","GAME","WEBSITE","PASSWORD","FILE","DOCUMENT","SPRITE","LOOP","VARIABLE","COMMENT"]},
+    {question:"Which function adds multiple cells?",correct:["SUM","=SUM()"],wrong:["AVERAGE","MAX","MIN","COUNT","PICTURE","VIDEO","MUSIC","GAME","WEBSITE","PASSWORD","FILE","DOCUMENT","SPRITE","LOOP","VARIABLE"]},
+    {question:"Which function calculates average?",correct:["AVERAGE","=AVERAGE()"],wrong:["SUM","MAX","MIN","COUNT","PICTURE","VIDEO","MUSIC","GAME","WEBSITE","PASSWORD","FILE","DOCUMENT","SPRITE","LOOP","VARIABLE"]}
+  ]
+
+},
+
+"Digital Artefacts & Design": {
+
+  "Copyright and Licensing Basics": [
+    {question:"What is copyright?",correct:["Legal protection for creators","Protects original work"],wrong:["Free use of content","Public domain","Open access","Unlimited sharing","Copying freely","Stealing content","Deleting content","Encrypting content","Randomising content","Editing videos","Playing music","Browsing web","Sending emails","Running games","Recording audio","Designing graphics"]},
+    {question:"What does copyright protect?",correct:["Original work","Creative content"],wrong:["Passwords","Usernames","Random data","Hardware","Software updates","Network cables","Wi-Fi signals","Printers","Monitors","Keyboards","Mice","Speakers","Projectors","Scanners","Microphones","Webcams","Touchpads"]},
+    {question:"What is a license?",correct:["Permission to use content","Usage agreement"],wrong:["Copyright removal","Free access","Unlimited copying","Deleting content","Encrypting content","Randomising content","Drawing pictures","Playing music","Editing videos","Browsing web","Sending emails","Running games","Recording audio","Designing graphics","Printing documents"]},
+    {question:"What is plagiarism?",correct:["Copying without credit","Using work illegally"],wrong:["Giving credit","Creating original work","Buying content legally","Sharing licensed content","Editing your own work","Writing essays","Drawing pictures","Playing music","Editing videos","Browsing web","Sending emails","Running games","Recording audio","Designing graphics","Printing documents"]},
+    {question:"Which content is free to use?",correct:["Public domain","No copyright"],wrong:["Copyrighted content","Licensed content","Paid content","Private content","Encrypted content","Randomised content","Drawings","Music","Videos","Games","Websites","Passwords","Files","Documents","Sprites","Loops"]},
+    {question:"What must you do when using copyrighted work?",correct:["Give credit","Follow license"],wrong:["Copy freely","Delete author","Hide creator","Claim ownership","Randomise content","Encrypt content","Draw pictures","Play music","Edit videos","Browse web","Send emails","Run games","Record audio","Design graphics","Print documents"]},
+    {question:"What is fair use?",correct:["Limited legal use","Small allowed portions"],wrong:["Unlimited copying","Full access","Deleting content","Encrypting content","Randomising content","Drawing pictures","Playing music","Editing videos","Browsing web","Sending emails","Running games","Recording audio","Designing graphics","Printing documents","Sharing everything"]},
+    {question:"Which license allows free use with credit?",correct:["Creative Commons","CC license"],wrong:["Copyright","Public domain","Paid license","Private license","Encrypted license","Random license","Music license","Video license","Game license","Website license","Password license","File license","Document license","Sprite license","Loop license","Variable license"]}
+  ]
+
+}
+
+
+
 
 
 },

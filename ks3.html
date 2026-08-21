@@ -47,15 +47,16 @@
         btn.className = "menu-btn";
         btn.innerText = category;
 
-        if (category === "Programming" || category === "Laws and Regulations" || category === "Networks") {
-            // ✅ Active and clickable
+        const unlocked = ["Programming", "Laws and Regulations", "Networks", "Spreadsheets", "Algorithms & Flowcharts","Computational Thinking",
+        "Developing for the Web", "CyberSecurity", "Online Safety & Digital Literacy", "Computer Systems", "Digital Artefacts & Design", "Boolean Logic & Binary"];
+
+        if (unlocked.includes(category)) {
             btn.onclick = () => window.location.href = `ks3-topics.html?category=${encodeURIComponent(category)}`;
         } else {
-            // 🔒 Locked / Coming Soon
             btn.classList.add("locked");
             btn.onclick = () => alert(`${category} is locked — Coming Soon!`);
-            btn.innerText = `${category} 🔒 `;
         }
+
 
         container.appendChild(btn);
         });
