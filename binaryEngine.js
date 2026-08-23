@@ -184,14 +184,9 @@ function updateStatsBar() {
     document.getElementById("accuracy").textContent = `${accuracy.toFixed(0)}%`;
 }
 
-// ===============================
-// BUTTON EVENTS
-// ===============================
-
-
 if (quitBtn) {
     quitBtn.onclick = () => {
         clearInterval(timerInterval);
-        window.location.href = "ks3.html";
+        window.history.back();
     };
 }

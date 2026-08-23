@@ -181,13 +181,10 @@ function updateStatsBar() {
 
 
 
-// ===============================
-// QUIT BUTTON
-// ===============================
 if (quitBtn) {
     quitBtn.onclick = () => {
         clearInterval(timerInterval);
-        window.location.href = "index.html";
+        window.history.back();
     };
 }
 

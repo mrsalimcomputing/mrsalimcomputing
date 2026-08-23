@@ -183,10 +183,9 @@ function updateStatsBar() {
 }
 
 
-
 if (quitBtn) {
     quitBtn.onclick = () => {
         clearInterval(timerInterval);
-        window.location.href = "ks3.html";
+        window.history.back();
     };
 }
