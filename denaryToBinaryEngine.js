@@ -182,11 +182,7 @@ function updateStatsBar() {
     document.getElementById("accuracy").textContent = `${accuracy.toFixed(0)}%`;
 }
 
-// ===============================
-// BUTTON EVENTS
-// ===============================
-startBtn.onclick = () => startDenaryToBinaryQuiz();
-playAgainBtn.onclick = () => startDenaryToBinaryQuiz();
+
 
 if (quitBtn) {
     quitBtn.onclick = () => {

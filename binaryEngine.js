@@ -187,8 +187,7 @@ function updateStatsBar() {
 // ===============================
 // BUTTON EVENTS
 // ===============================
-startBtn.onclick = () => startBinaryQuiz();
-playAgainBtn.onclick = () => startBinaryQuiz();
+
 
 if (quitBtn) {
     quitBtn.onclick = () => {

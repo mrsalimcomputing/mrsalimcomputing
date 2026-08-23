@@ -177,6 +177,8 @@ function updateStatsBar() {
     document.getElementById("accuracy").textContent = `${accuracy.toFixed(0)}%`;
 }
 
+
+
 // ===============================
 // QUIT BUTTON
 // ===============================

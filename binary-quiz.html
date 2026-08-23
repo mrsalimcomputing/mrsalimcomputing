@@ -84,52 +84,70 @@
 
     </div>
 
-    <script type="module">
-        import { startBinaryQuiz, showBinaryRules } from "./binaryEngine.js";
-        import { startDenaryToBinaryQuiz, showDenaryToBinaryRules } from "./denaryToBinaryEngine.js";
-        import { startBinaryAdditionQuiz, showBinaryAdditionRules } from "./binaryAdditionEngine.js";
+<script type="module">
+    import { startBinaryQuiz, showBinaryRules } from "./binaryEngine.js";
+    import { startDenaryToBinaryQuiz, showDenaryToBinaryRules } from "./denaryToBinaryEngine.js";
+    import { startBinaryAdditionQuiz, showBinaryAdditionRules } from "./binaryAdditionEngine.js";
 
-        import { startBinaryEasyQuiz, showBinaryEasyRules } from "./binaryEngineEASY.js";
-        import { startDenaryToBinaryEasyQuiz, showDenaryToBinaryEasyRules } from "./denaryToBinaryEngineEASY.js";
-        import { startBinaryAdditionEasyQuiz, showBinaryAdditionEasyRules } from "./binaryAdditionEngineEASY.js";
+    import { startBinaryEasyQuiz, showBinaryEasyRules } from "./binaryEngineEASY.js";
+    import { startDenaryToBinaryEasyQuiz, showDenaryToBinaryEasyRules } from "./denaryToBinaryEngineEASY.js";
+    import { startBinaryAdditionEasyQuiz, showBinaryAdditionEasyRules } from "./binaryAdditionEngineEASY.js";
 
+    const params = new URLSearchParams(window.location.search);
+    const topic = decodeURIComponent(params.get("topic") || "").toLowerCase();
 
-        const params = new URLSearchParams(window.location.search);
-        const topic = decodeURIComponent(params.get("topic") || "");
-        const t = topic.toLowerCase();
+    const startBtn = document.getElementById("startBinaryBtn");
+    const playAgainBtn = document.getElementById("playAgainBinaryBtn");
 
-        const startBtn = document.getElementById("startBinaryBtn");
+    let startFunction = null;
+    let showRulesFunction = null;
 
-        // ⭐ EASY MODES FIRST — MUST BE FIRST
-        if (t.includes("binary to denary") && t.includes("easy")) {
-            showBinaryEasyRules();
-            startBtn.onclick = () => startBinaryEasyQuiz();
-        }
-        else if (t.includes("denary to binary") && t.includes("easy")) {
-            showDenaryToBinaryEasyRules();
-            startBtn.onclick = () => startDenaryToBinaryEasyQuiz();
-        }
-        else if (t.includes("binary addition") && t.includes("easy")) {
-            showBinaryAdditionEasyRules();
-            startBtn.onclick = () => startBinaryAdditionEasyQuiz();
-        }
+    switch (topic) {
 
-        // ⭐ HARD MODES AFTER EASY
-        else if (t.includes("denary to binary")) {
-            showDenaryToBinaryRules();
-            startBtn.onclick = () => startDenaryToBinaryQuiz();
-        }
-        else if (t.includes("binary addition")) {
-            showBinaryAdditionRules();
-            startBtn.onclick = () => startBinaryAdditionQuiz();
-        }
-        else {
-            showBinaryRules();
-            startBtn.onclick = () => startBinaryQuiz();
-        }
-    </script>
+        case "binary to denary easy":
+            startFunction = startBinaryEasyQuiz;
+            showRulesFunction = showBinaryEasyRules;
+            break;
 
+        case "denary to binary easy":
+            startFunction = startDenaryToBinaryEasyQuiz;
+            showRulesFunction = showDenaryToBinaryEasyRules;
+            break;
 
+        case "binary addition easy":
+            startFunction = startBinaryAdditionEasyQuiz;
+            showRulesFunction = showBinaryAdditionEasyRules;
+            break;
+
+        case "binary to denary":
+            startFunction = startBinaryQuiz;
+            showRulesFunction = showBinaryRules;
+            break;
+
+        case "denary to binary":
+            startFunction = startDenaryToBinaryQuiz;
+            showRulesFunction = showDenaryToBinaryRules;
+            break;
+
+        case "binary addition":
+            startFunction = startBinaryAdditionQuiz;
+            showRulesFunction = showBinaryAdditionRules;
+            break;
+
+        default:
+            startFunction = startBinaryQuiz;
+            showRulesFunction = showBinaryRules;
+            break;
+    }
+
+    // SHOW RULES FOR THE SELECTED MODE
+    showRulesFunction();
+
+    // WIRE BOTH BUTTONS TO THE SAME FUNCTION
+    startBtn.onclick = () => startFunction();
+    playAgainBtn.onclick = () => startFunction();
+    
+</script>
 
 
 
