@@ -85,13 +85,14 @@
     </div>
 
     <script type="module">
-        import { startBinaryQuiz, showBinaryRules } from "./js/engines/binaryEngine.js";
-        import { startDenaryToBinaryQuiz, showDenaryToBinaryRules } from "./js/engines/denaryToBinaryEngine.js";
-        import { startBinaryAdditionQuiz, showBinaryAdditionRules } from "./js/engines/binaryAdditionEngine.js";
+        import { startBinaryQuiz, showBinaryRules } from "./binaryEngine.js";
+        import { startDenaryToBinaryQuiz, showDenaryToBinaryRules } from "./denaryToBinaryEngine.js";
+        import { startBinaryAdditionQuiz, showBinaryAdditionRules } from "./binaryAdditionEngine.js";
 
-        import { startBinaryEasyQuiz, showBinaryEasyRules } from "./js/engines/binaryEngineEASY.js";
-        import { startDenaryToBinaryEasyQuiz, showDenaryToBinaryEasyRules } from "./js/engines/denaryToBinaryEngineEASY.js";
-        import { startBinaryAdditionEasyQuiz, showBinaryAdditionEasyRules } from "./js/engines/binaryAdditionEngineEASY.js";
+        import { startBinaryEasyQuiz, showBinaryEasyRules } from "./binaryEngineEASY.js";
+        import { startDenaryToBinaryEasyQuiz, showDenaryToBinaryEasyRules } from "./denaryToBinaryEngineEASY.js";
+        import { startBinaryAdditionEasyQuiz, showBinaryAdditionEasyRules } from "./binaryAdditionEngineEASY.js";
+
 
         const params = new URLSearchParams(window.location.search);
         const topic = decodeURIComponent(params.get("topic") || "");

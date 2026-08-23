@@ -430,12 +430,12 @@ Networks: {
 
 ],
 
-"MAC addresses": [
+"MAC Addresses": [
 
   {question:"What is a MAC address?",correct:["Unique device ID","Hardware address"],wrong:["IP address","Password","Username","Website","Browser","Router","Switch","WAP","Cable","LAN","WAN","CPU","GPU","Email","Document","File","Program"]},
   {question:"Where is a MAC address stored?",correct:["Network card","Hardware"],wrong:["Software","Browser","Cloud","Router","Switch","WAP","Cable","LAN","WAN","CPU","GPU","Email","Document","File","Program","Website"]},
   {question:"What format is a MAC address?",correct:["Hexadecimal","e.g. AA:BB:CC:DD:EE:FF"],wrong:["Decimal","Binary only","Words","Letters only","Symbols","Fractions","Brackets","Quotes","Emails","Passwords","Usernames","Files","Programs","Cloud","Router"]},
-  {question:"What does MAC stand for?",correct:["Media Access Control","MAC"],wrong:["Main Access Code","Machine Address Code","Media Area Control","Media Access Card","Main Area Control","Main Access Control","Machine Access Control","Media Access Chip","Media Access Channel","Media Access Connector","Media Access Computer","Media Access Cloud","Media Access Cable","Media Access Component","Media Access Core"]},
+  {question:"What does MAC stand for?",correct:["Media Access Control","media access control"],wrong:["Main Access Code","Machine Address Code","Media Area Control","Media Access Card","Main Area Control","Main Access Control","Machine Access Control","Media Access Chip","Media Access Channel","Media Access Connector","Media Access Computer","Media Access Cloud","Media Access Cable","Media Access Component","Media Access Core"]},
   {question:"Which devices have MAC addresses?",correct:["All network devices","Every device"],wrong:["Only routers","Only switches","Only WAPs","Only laptops","Only phones","Only PCs","Only servers","Only printers","Only monitors","Only cables","Only clouds","Only browsers","Only websites","Only programs","Only files"]},
   {question:"Is a MAC address permanent?",correct:["Yes","Permanent"],wrong:["No","Changes daily","Changes hourly","Changes monthly","Changes yearly","Random","Temporary","Cloud-based","Browser-based","Router-based","Switch-based","WAP-based","LAN-based","WAN-based","CPU-based","GPU-based"]},
   {question:"Which address is burned into hardware?",correct:["MAC address","Hardware ID"],wrong:["IP address","Password","Username","Website","Browser","Router","Switch","WAP","Cable","LAN","WAN","CPU","GPU","Email","Document"]},
