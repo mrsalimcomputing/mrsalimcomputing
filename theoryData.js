@@ -48,11 +48,73 @@ export const theoryData = {
   {question:"Which software helps keep your computer safe?",correct:["Antivirus","Firewall"],wrong:["Word","Chrome","Photoshop","Spotify","Teams","Zoom","Paint","Calculator","Camera","Media Player","Email app","Web browser","Video editor","Music app","Game launcher","Spreadsheet app"]},
   {question:"What is the purpose of a firewall?",correct:["Blocks unwanted network access","Protects the system"],wrong:["Plays music","Edits photos","Runs games","Browses websites","Stores files","Prints pages","Manages RAM","Controls CPU","Runs BIOS","Designs graphics","Makes spreadsheets","Edits videos","Records audio","Sends emails","Draw pictures"]},
   {question:"What is the purpose of system tools?",correct:["Maintain the computer","Manage system settings"],wrong:["Play music","Edit photos","Browse websites","Run games","Create documents","Print pages","Store files","Record audio","Scan images","Design graphics","Make spreadsheets","Edit videos","Send emails","Draw pictures","Install apps"]}
+],
+
+"Hardware and Software Devices (Easy)": [
+{question:"Which of these is hardware?",correct:["Keyboard","Mouse"],wrong:["Word Processor","Chrome","Photoshop","Email App","Calculator App","Media Player","Web Browser","Spreadsheet Software","Presentation Software","Antivirus","Firewall","Disk Cleanup Tool","File Manager","Photo Editor","Video Editor","Music App"]},
+{question:"Which of these is software?",correct:["Web Browser","Word Processor"],wrong:["Monitor","Printer","Keyboard","Mouse","Scanner","Microphone","Speakers","Projector","CPU","GPU","RAM","SSD","Motherboard","Power Supply","Cooling Fan","Network Card"]},
+{question:"What is hardware?",correct:["Physical parts of a computer","Touchable components"],wrong:["Programs you install","Files and folders","Internet services","Cloud storage","Software updates","User accounts","Passwords","Websites","Online apps","System settings","Drivers","Utilities","Operating system","Background processes","Network protocols","Email services"]},
+{question:"What is software?",correct:["Programs that run on a computer","Instructions for the computer"],wrong:["Physical components","Network cables","Power supply","Cooling fans","Motherboard","CPU","GPU","RAM","SSD","Speakers","Monitor","Printer","Keyboard","Mouse","Scanner","Webcam"]}
+],
+
+"CPU Components & Their Functions": [
+{question:"What does the MAR do?",correct:["Holds memory addresses","Stores the location to access"],wrong:["Stores instructions","Executes programs","Displays graphics","Controls input devices","Runs the OS","Manages RAM","Stores files","Runs background tasks","Controls the GPU","Manages user accounts","Stores BIOS","Handles printing","Controls sound","Runs applications","Manages storage"]},
+{question:"What does the MDR do?",correct:["Holds data being transferred","Stores data from memory"],wrong:["Stores permanent files","Runs the OS","Controls the GPU","Manages user accounts","Displays graphics","Runs programs","Stores BIOS","Handles printing","Controls sound","Manages RAM","Runs background tasks","Stores instructions","Manages storage","Runs applications","Controls peripherals"]},
+{question:"What does the Program Counter do?",correct:["Stores next instruction address","Points to the next instruction"],wrong:["Stores user data","Runs applications","Controls RAM","Manages storage","Displays graphics","Runs the OS","Stores BIOS","Handles printing","Controls sound","Runs background tasks","Stores files","Manages user accounts","Controls GPU","Runs programs","Manages internet"]},
+{question:"What does the ALU do?",correct:["Performs calculations","Handles logic operations"],wrong:["Stores data","Displays graphics","Runs the OS","Controls peripherals","Manages RAM","Runs background tasks","Stores BIOS","Handles printing","Controls sound","Runs applications","Manages storage","Stores instructions","Runs programs","Manages user accounts","Controls GPU"]},
+{question:"What does the CU do?",correct:["Controls the CPU","Sends signals to components"],wrong:["Stores instructions","Runs programs","Displays images","Manages storage","Runs the OS","Controls GPU","Handles printing","Controls sound","Manages RAM","Runs background tasks","Stores BIOS","Runs applications","Stores files","Manages user accounts","Controls internet"]}
+],
+
+"Characteristics of a CPU": [
+{question:"What does clock speed measure?",correct:["How fast instructions run","Speed of processing"],wrong:["Screen brightness","Storage size","Internet speed","GPU temperature","Speaker volume","Monitor resolution","Keyboard sensitivity","Mouse DPI","Cable length","Battery life","Fan speed","Case size","Wi-Fi strength","Bluetooth range","Printer speed","Monitor refresh rate"]},
+{question:"What do more CPU cores allow?",correct:["More tasks at once","Better multitasking"],wrong:["Better graphics","More storage","Louder sound","Better Wi-Fi","Brighter screen","Better keyboard","More USB ports","Longer battery","Better cooling","Faster internet","Better speakers","More RAM","Better camera","More cables","Better monitor"]},
+{question:"What is cache used for?",correct:["Storing frequently used data","Quick access memory"],wrong:["Permanent storage","Cooling the CPU","Running the OS","Managing networks","Storing files","Running programs","Displaying graphics","Storing BIOS","Handling printing","Controlling sound","Managing RAM","Running background tasks","Storing user accounts","Managing storage","Running applications"]}
+],
+
+"Types of User Interfaces": [
+{question:"What is a GUI?",correct:["Graphical User Interface","Uses icons and windows"],wrong:["General User Input","Game User Interface","Graphic Upload Interface","Command Line Interface","Menu‑Driven Interface","Voice Interface","Touch Interface","Network Interface","Hardware Interface","Software Interface","Peripheral Interface","System Interface","Input Interface","Output Interface","Device Interface"]},
+{question:"What is a CLI?",correct:["Command Line Interface","Uses typed commands"],wrong:["Graphical User Interface","Menu‑Driven Interface","Voice Interface","Touch Interface","Game Interface","Network Interface","Hardware Interface","Software Interface","Peripheral Interface","System Interface","Input Interface","Output Interface","Device Interface","Icon Interface","Window Interface","Pointer Interface"]},
+{question:"Which interface uses spoken instructions?",correct:["Voice UI","Voice commands"],wrong:["CLI","GUI","Menu‑Driven","Touch UI","Keyboard UI","Mouse UI","Gamepad UI","Scanner UI","Printer UI","Monitor UI","Network UI","Hardware UI","Software UI","Icon UI","Window UI","Pointer UI"]}
+]
+
+
+},
+
+"Operating Systems": {
+
+  "OS User Interface": [
+{question:"What is the purpose of an operating system’s user interface?",correct:["Allows users to interact with the computer","Provides menus and icons for control"],wrong:["Stores files permanently","Runs background tasks","Manages power supply","Connects to the internet","Controls hardware directly","Processes graphics","Manages memory","Runs games","Displays advertisements","Handles printing","Stores BIOS","Controls sound","Runs antivirus","Manages updates","Stores passwords","Runs applications only"]},
+{question:"Which is an example of a graphical user interface?",correct:["Windows desktop","macOS Finder"],wrong:["Command Prompt","Terminal","BIOS screen","Device Manager","Task Scheduler","Firewall settings","Disk Cleanup","Driver installer","Control Panel","Registry Editor","File Explorer","System Monitor","Boot Loader","Command Line","Text editor","Console window"]},
+{question:"What does a command line interface use?",correct:["Text commands","Keyboard input"],wrong:["Icons","Windows","Menus","Voice","Touch","Gestures","Mouse clicks","Graphics","Animations","Videos","Buttons","Sliders","Images","Speech","Microphone","Camera"]}
+],
+
+"OS Memory Management": [
+{question:"What is the role of memory management in an operating system?",correct:["Allocates RAM to programs","Keeps track of memory use"],wrong:["Displays graphics","Stores files permanently","Runs applications","Manages CPU speed","Controls peripherals","Handles printing","Runs antivirus","Manages updates","Stores BIOS","Controls sound","Runs games","Connects to internet","Manages passwords","Stores user accounts","Controls GPU","Runs background tasks"]},
+{question:"What happens when RAM is full?",correct:["Uses virtual memory","Swaps data to disk"],wrong:["Stops the CPU","Deletes files","Turns off monitor","Runs faster","Clears cache","Starts BIOS","Runs antivirus","Displays warning","Stores data permanently","Connects to internet","Manages power","Runs games","Controls sound","Handles printing","Manages storage","Runs updates"]},
+{question:"Why does the OS manage memory?",correct:["To prevent crashes","To share memory between programs"],wrong:["To improve graphics","To store backups","To cool the CPU","To manage passwords","To run BIOS","To control sound","To print documents","To store files","To manage internet","To run games","To handle input","To manage storage","To run antivirus","To control GPU","To manage updates"]}
+],
+
+"OS Multi‑Tasking": [
+{question:"What does multi‑tasking allow?",correct:["Running multiple programs at once","Switching between tasks easily"],wrong:["Running one program only","Storing files permanently","Printing faster","Connecting to internet","Cooling the CPU","Managing passwords","Running BIOS","Controlling sound","Running antivirus","Handling input","Managing storage","Running games","Displaying graphics","Managing updates","Controlling GPU","Running background tasks only"]},
+{question:"How does the OS handle multi‑tasking?",correct:["Shares CPU time between tasks","Uses scheduling to manage processes"],wrong:["Runs one program continuously","Stores data permanently","Displays graphics","Manages passwords","Runs BIOS","Controls sound","Runs antivirus","Handles printing","Manages storage","Runs games","Connects to internet","Manages power","Stores files","Runs updates","Controls GPU","Runs background tasks only"]},
+{question:"What is an example of multi‑tasking?",correct:["Listening to music while browsing","Typing while downloading files"],wrong:["Running one app only","Turning off monitor","Printing documents","Installing BIOS","Running antivirus","Managing passwords","Controlling sound","Running games","Handling input","Managing storage","Running updates","Displaying graphics","Managing power","Connecting to internet","Running background tasks","Storing files permanently"]}
+],
+
+"OS Peripheral Management": [
+{question:"What does peripheral management do?",correct:["Controls input and output devices","Allows hardware to communicate with OS"],wrong:["Stores files","Runs programs","Displays graphics","Manages memory","Runs BIOS","Controls sound","Runs antivirus","Handles printing","Manages storage","Runs games","Connects to internet","Manages passwords","Stores user accounts","Controls GPU","Runs updates"]},
+{question:"Which devices are managed by the OS?",correct:["Keyboard and printer","Mouse and monitor"],wrong:["CPU","RAM","Cache","BIOS","GPU","Motherboard","Power Supply","Cooling Fan","Network Card","SSD","Speakers","Hard Drive","ROM","Chipset","Expansion Card","Heat Sink"]},
+{question:"How does the OS manage peripherals?",correct:["Uses drivers","Sends control signals"],wrong:["Stores files","Runs programs","Displays graphics","Manages memory","Runs BIOS","Controls sound","Runs antivirus","Handles printing","Manages storage","Runs games","Connects to internet","Manages passwords","Stores user accounts","Controls GPU","Runs updates","Runs background tasks"]}
+],
+
+"OS User & File Management": [
+{question:"What is the purpose of user management?",correct:["Controls user accounts","Manages login permissions"],wrong:["Stores files","Runs programs","Displays graphics","Manages memory","Runs BIOS","Controls sound","Runs antivirus","Handles printing","Manages storage","Runs games","Connects to internet","Manages passwords","Stores user data permanently","Controls GPU","Runs updates","Runs background tasks"]},
+{question:"What is file management?",correct:["Organising files and folders","Allowing users to save and open files"],wrong:["Running programs","Displaying graphics","Managing memory","Running BIOS","Controlling sound","Running antivirus","Handling printing","Managing storage","Running games","Connecting to internet","Managing passwords","Storing user accounts","Controlling GPU","Running updates","Running background tasks","Storing backups"]},
+{question:"Which software manages files and folders?",correct:["Operating system","File manager"],wrong:["Word","Chrome","Photoshop","Spotify","Teams","Zoom","Paint","Calculator","Camera","Media Player","Email app","Web browser","Video editor","Music app","Game launcher","Spreadsheet app"]}
 ]
 
 },
 
-Programming: {
+"Programming": {
 
 "Data Types": [
 
@@ -325,7 +387,7 @@ Programming: {
 
 },
 
-Networks: {
+"Networks": {
 
 "Bandwidth and Types of Cables": [
 
@@ -456,6 +518,25 @@ Networks: {
 
 ]
 
+
+},
+
+"Boolean Logic & Binary": {
+
+"logic gates (AND, OR, NOT)": [
+
+{question:"What does an AND gate output when both inputs are 1?",correct:["1","True"],wrong:["0","False","2","Both inputs","Neither input","Same as input A","Same as input B","Opposite of input","Random value","Half value","Double value","Undefined","Error","No output","Binary addition","Binary subtraction"]},
+{question:"What does an AND gate output when one input is 0?",correct:["0","False"],wrong:["1","True","2","Same as input A","Same as input B","Opposite of input","Random value","Half value","Double value","Undefined","Error","No output","Binary addition","Binary subtraction","Both inputs"]},
+{question:"What does an OR gate output when at least one input is 1?",correct:["1","True"],wrong:["0","False","2","Both inputs","Neither input","Same as input A","Same as input B","Opposite of input","Random value","Half value","Double value","Undefined","Error","No output","Binary addition","Binary subtraction"]},
+{question:"What does an OR gate output when both inputs are 0?",correct:["0","False"],wrong:["1","True","2","Same as input A","Same as input B","Opposite of input","Random value","Half value","Double value","Undefined","Error","No output","Binary addition","Binary subtraction","Both inputs"]},
+{question:"What does a NOT gate do?",correct:["Flips the input","Outputs the opposite"],wrong:["Adds inputs","Compares inputs","Copies input","Stores data","Multiplies inputs","Divides inputs","Outputs both inputs","Outputs neither input","Random output","Half output","Double output","Undefined","Error","No output","Binary addition","Binary subtraction"]},
+{question:"If a NOT gate receives 1, what is the output?",correct:["0","False"],wrong:["1","True","2","Same as input","Both inputs","Neither input","Random value","Half value","Double value","Undefined","Error","No output","Binary addition","Binary subtraction","Opposite of output"]},
+{question:"If a NOT gate receives 0, what is the output?",correct:["1","True"],wrong:["0","False","2","Same as input","Both inputs","Neither input","Random value","Half value","Double value","Undefined","Error","No output","Binary addition","Binary subtraction","Opposite of output"]},
+{question:"Which gate outputs 1 only when both inputs are 1?",correct:["AND gate","AND"],wrong:["OR gate","NOT gate","XOR gate","NAND gate","NOR gate","XNOR gate","CPU","RAM","GPU","Monitor","Keyboard","Mouse","Speaker","Printer","Scanner","Touchpad"]},
+{question:"Which gate outputs 1 when at least one input is 1?",correct:["OR gate","OR"],wrong:["AND gate","NOT gate","XOR gate","NAND gate","NOR gate","XNOR gate","CPU","RAM","GPU","Monitor","Keyboard","Mouse","Speaker","Printer","Scanner","Touchpad"]},
+{question:"Which gate outputs the opposite of the input?",correct:["NOT gate","NOT"],wrong:["AND gate","OR gate","XOR gate","NAND gate","NOR gate","XNOR gate","CPU","RAM","GPU","Monitor","Keyboard","Mouse","Speaker","Printer","Scanner","Touchpad"]}
+
+]
 
 },
 

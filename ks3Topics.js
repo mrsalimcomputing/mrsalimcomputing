@@ -72,7 +72,20 @@ export const ks3Topics = {
         "Hardware Components",
         "Input/Output Devices",
         "Software (System vs Application)",
-        "Storage Devices"
+        "Storage Devices",
+        "Hardware and Software Devices (Easy)",
+        "CPU Components & Their Functions",
+        "Characteristics of a CPU",
+        "Types of User Interfaces"
+    ],
+
+    "Operating Systems": [
+        "OS User Interface",
+        "OS Memory Management",
+        "OS Multi‑Tasking",
+        "OS Peripheral Management",
+        "OS User & File Management",
+
     ],
 
     "Boolean Logic & Binary": [
@@ -82,7 +95,10 @@ export const ks3Topics = {
         "denary to binary (easy)",
         "logic gates (AND, OR, NOT)",
         "binary addition",
-        "binary addition (easy)"
+        "binary addition (easy)",
+        "Hexadecimal To Decimal",
+        "Decimal To Hexadecimal",
+        "ASCII"
     ],
 
     "Networks": [
@@ -95,6 +111,7 @@ export const ks3Topics = {
         "MAC Addresses",
         "Network Protocols",
         "Bandwidth and Types of Cables",
+        "Cloud Computing"
     ]
 
 };

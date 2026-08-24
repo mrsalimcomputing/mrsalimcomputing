@@ -4,81 +4,429 @@ export const examQuestionBank = {
 
 "Computer Systems": {
 
-    "Hardware Components": [
-        {
-            question: "Aylin wants to install the component that processes all instructions. Which part is this?",
-            answers: ["RAM", "CPU", "Hard Drive", "GPU"],
-            correct: 1
-        },
-        {
-            question: "Omar wants to upgrade his computer’s temporary memory. Which component should he add?",
-            answers: ["RAM", "CPU", "SSD", "Motherboard"],
-            correct: 0
-        },
-        {
-            question: "Evelyn wants to store large files permanently. Which component does this?",
-            answers: ["CPU", "RAM", "Hard Drive", "GPU"],
-            correct: 2
-        },
-        {
-            question: "Radwan wants to cool down his CPU. Which component helps with this?",
-            answers: ["Heat Sink", "GPU", "RAM", "SSD"],
-            correct: 0
-        },
-        {
-            question: "Tye wants to improve graphics performance for gaming. Which component should he upgrade?",
-            answers: ["CPU", "GPU", "RAM", "Motherboard"],
-            correct: 1
-        },
-        {
-            question: "Maryam wants to connect all components together. Which part does this?",
-            answers: ["Motherboard", "CPU", "RAM", "SSD"],
-            correct: 0
-        },
-        {
-            question: "Chris wants faster storage with no moving parts. Which component should he choose?",
-            answers: ["Hard Drive", "SSD", "CPU", "GPU"],
-            correct: 1
-        }
-    ],
+"Hardware Components": [
+    {
+        question: "Aylin wants to install the component that processes all instructions. Which part is this?",
+        answers: ["RAM", "CPU", "Hard Drive", "GPU"],
+        correct: 1
+    },
+    {
+        question: "Omar wants to upgrade his computer’s temporary memory. Which component should he add?",
+        answers: ["RAM", "CPU", "SSD", "Motherboard"],
+        correct: 0
+    },
+    {
+        question: "Evelyn wants to store large files permanently. Which component does this?",
+        answers: ["CPU", "RAM", "Hard Drive", "GPU"],
+        correct: 2
+    },
+    {
+        question: "Radwan wants to cool down his CPU. Which component helps with this?",
+        answers: ["Heat Sink", "GPU", "RAM", "SSD"],
+        correct: 0
+    },
+    {
+        question: "Tye wants to improve graphics performance for gaming. Which component should he upgrade?",
+        answers: ["CPU", "GPU", "RAM", "Motherboard"],
+        correct: 1
+    },
+    {
+        question: "Maryam wants to connect all components together. Which part does this?",
+        answers: ["Motherboard", "CPU", "RAM", "SSD"],
+        correct: 0
+    },
+    {
+        question: "Chris wants faster storage with no moving parts. Which component should he choose?",
+        answers: ["Hard Drive", "SSD", "CPU", "GPU"],
+        correct: 1
+    }
+],
 
-    "Software (System vs Application)": [
-        {
-            question: "Mylo wants software that controls the computer’s hardware. What type is this?",
-            answers: ["Application Software", "System Software", "Utility Software", "Firmware"],
-            correct: 1
-        },
-        {
-            question: "Farhan wants to write a document. Which type of software does he need?",
-            answers: ["System Software", "Application Software", "Firmware", "Utility"],
-            correct: 1
-        },
-        {
-            question: "Agata wants to install Windows 11. What type of software is this?",
-            answers: ["Application Software", "System Software", "Utility Software", "Driver"],
-            correct: 1
-        },
-        {
-            question: "Zayn wants to edit photos. Which type of software does he need?",
-            answers: ["System Software", "Application Software", "Firmware", "Driver"],
-            correct: 1
-        },
-        {
-            question: "Sofia wants software that helps manage files and perform maintenance tasks. What type is this?",
-            answers: ["Utility Software", "System Software", "Application Software", "Firmware"],
-            correct: 0
-        },
-        {
-            question: "Hanan wants to update her printer so it works correctly. What software does she need?",
-            answers: ["Driver", "System Software", "Application Software", "Utility"],
-            correct: 0
-        },
-        {
-            question: "Jonathan wants to run apps like Word and PowerPoint. What type of software are these?",
-            answers: ["System Software", "Application Software", "Utility Software", "Firmware"],
-            correct: 1
-        }
-    ]
+"Software (System vs Application)": [
+    {
+        question: "Mylo wants software that controls the computer’s hardware. What type is this?",
+        answers: ["Application Software", "System Software", "Utility Software", "Firmware"],
+        correct: 1
+    },
+    {
+        question: "Farhan wants to write a document. Which type of software does he need?",
+        answers: ["System Software", "Application Software", "Firmware", "Utility"],
+        correct: 1
+    },
+    {
+        question: "Agata wants to install Windows 11. What type of software is this?",
+        answers: ["Application Software", "System Software", "Utility Software", "Driver"],
+        correct: 1
+    },
+    {
+        question: "Zayn wants to edit photos. Which type of software does he need?",
+        answers: ["System Software", "Application Software", "Firmware", "Driver"],
+        correct: 1
+    },
+    {
+        question: "Sofia wants software that helps manage files and perform maintenance tasks. What type is this?",
+        answers: ["Utility Software", "System Software", "Application Software", "Firmware"],
+        correct: 0
+    },
+    {
+        question: "Hanan wants to update her printer so it works correctly. What software does she need?",
+        answers: ["Driver", "System Software", "Application Software", "Utility"],
+        correct: 0
+    },
+    {
+        question: "Jonathan wants to run apps like Word and PowerPoint. What type of software are these?",
+        answers: ["System Software", "Application Software", "Utility Software", "Firmware"],
+        correct: 1
+    }
+],
+
+"Hardware and Software Devices (Easy)": [
+{
+    question: "What is hardware?",
+    answers: ["Physical parts of a computer", "Programs", "Files", "Websites"],
+    correct: 0
+},
+{
+    question: "Which is an input device?",
+    answers: ["Keyboard", "Monitor", "Printer", "Speakers"],
+    correct: 0
+},
+{
+    question: "Which is software?",
+    answers: ["Web browser", "Mouse", "CPU", "RAM"],
+    correct: 0
+},
+{
+    question: "What is the CPU?",
+    answers: ["Brain of the computer", "Storage device", "Output device", "Input device"],
+    correct: 0
+},
+{
+    question: "What is RAM used for?",
+    answers: ["Temporary memory", "Permanent storage", "Graphics", "Sound"],
+    correct: 0
+},
+{
+    question: "Which is an output device?",
+    answers: ["Monitor", "Keyboard", "Mouse", "Scanner"],
+    correct: 0
+},
+{
+    question: "What is software used for?",
+    answers: ["Running programs", "Cooling the CPU", "Storing electricity", "Connecting cables"],
+    correct: 0
+}
+],
+
+"CPU Components & Their Functions": [
+    {
+        question: "What does the MAR do?",
+        answers: ["Holds memory addresses", "Stores files", "Runs programs", "Displays graphics"],
+        correct: 0
+    },
+    {
+        question: "What does the MDR do?",
+        answers: ["Holds data being transferred", "Stores passwords", "Controls sound", "Runs BIOS"],
+        correct: 0
+    },
+    {
+        question: "What does the PC store?",
+        answers: ["Next instruction address", "User data", "Graphics", "Sound"],
+        correct: 0
+    },
+    {
+        question: "What does the ALU do?",
+        answers: ["Performs calculations", "Stores files", "Runs games", "Controls RAM"],
+        correct: 0
+    },
+    {
+        question: "What does the CU do?",
+        answers: ["Controls the CPU", "Stores data", "Runs antivirus", "Displays images"],
+        correct: 0
+    },
+    {
+        question: "What is a register?",
+        answers: ["Small storage inside CPU", "Large storage device", "Output device", "Input device"],
+        correct: 0
+    },
+    {
+        question: "What is the fetch stage?",
+        answers: ["Getting instruction from memory", "Running the instruction", "Saving the instruction", "Deleting the instruction"],
+        correct: 0
+    }
+],
+
+"Characteristics of a CPU": [
+    {
+        question: "What does clock speed measure?",
+        answers: ["How fast CPU runs", "Screen brightness", "Internet speed", "Sound volume"],
+        correct: 0
+    },
+    {
+        question: "What do more cores allow?",
+        answers: ["More tasks at once", "Better sound", "More storage", "Better Wi-Fi"],
+        correct: 0
+    },
+    {
+        question: "What is cache?",
+        answers: ["Fast memory", "Permanent storage", "Graphics card", "Input device"],
+        correct: 0
+    },
+    {
+        question: "What unit is clock speed measured in?",
+        answers: ["GHz", "MB", "GB", "FPS"],
+        correct: 0
+    },
+    {
+        question: "What is the instruction cycle?",
+        answers: ["Fetch-decode-execute", "Open-save-close", "Click-type-enter", "Load-run-stop"],
+        correct: 0
+    },
+    {
+        question: "What happens if CPU overheats?",
+        answers: ["System slows down", "Screen gets brighter", "Internet disconnects", "Speakers stop working"],
+        correct: 0
+    },
+    {
+        question: "What is a thread?",
+        answers: ["Smallest unit of processing", "A file", "A folder", "A password"],
+        correct: 0
+    }
+],
+
+"Types of User Interfaces": [
+    {
+        question: "Which interface uses icons and windows?",
+        answers: ["GUI", "CLI", "Voice UI", "Menu-driven UI"],
+        correct: 0
+    },
+    {
+        question: "Which interface uses typed commands?",
+        answers: ["CLI", "GUI", "Touch UI", "Voice UI"],
+        correct: 0
+    },
+    {
+        question: "Which interface uses spoken commands?",
+        answers: ["Voice UI", "CLI", "GUI", "Menu-driven UI"],
+        correct: 0
+    },
+    {
+        question: "Which interface shows a list of options?",
+        answers: ["Menu-driven UI", "GUI", "CLI", "Touch UI"],
+        correct: 0
+    },
+    {
+        question: "Which interface is used on smartphones?",
+        answers: ["Touch UI", "CLI", "Menu-driven UI", "Voice UI"],
+        correct: 0
+    },
+    {
+        question: "Which UI is easiest for beginners?",
+        answers: ["GUI", "CLI", "Voice UI", "Touch UI"],
+        correct: 0
+    },
+    {
+        question: "Which UI is best for advanced users?",
+        answers: ["CLI", "GUI", "Touch UI", "Voice UI"],
+        correct: 0
+    }
+]
+
+
+},
+
+"Operating Systems": {
+
+"OS User Interface": [
+    {
+        question: "What is the purpose of a user interface?",
+        answers: ["Helps users interact with the computer", "Stores files", "Runs the BIOS", "Controls RAM"],
+        correct: 0
+    },
+    {
+        question: "Which interface uses icons and windows?",
+        answers: ["GUI", "CLI", "Voice UI", "Menu-driven UI"],
+        correct: 0
+    },
+    {
+        question: "Which interface uses typed commands?",
+        answers: ["CLI", "GUI", "Touch UI", "Voice UI"],
+        correct: 0
+    },
+    {
+        question: "Which interface uses spoken instructions?",
+        answers: ["Voice UI", "CLI", "GUI", "Menu-driven UI"],
+        correct: 0
+    },
+    {
+        question: "Which interface shows a list of options?",
+        answers: ["Menu-driven UI", "GUI", "CLI", "Voice UI"],
+        correct: 0
+    },
+    {
+        question: "Which interface is used on smartphones?",
+        answers: ["Touch UI", "CLI", "Menu-driven UI", "Voice UI"],
+        correct: 0
+    },
+    {
+        question: "Which UI is best for beginners?",
+        answers: ["GUI", "CLI", "Voice UI", "Touch UI"],
+        correct: 0
+    }
+],
+
+"OS Memory Management": [
+    {
+        question: "What does memory management control?",
+        answers: ["RAM usage", "Graphics", "Sound", "Internet speed"],
+        correct: 0
+    },
+    {
+        question: "What happens when RAM is full?",
+        answers: ["Virtual memory is used", "Computer shuts down", "Files are deleted", "CPU stops working"],
+        correct: 0
+    },
+    {
+        question: "What is virtual memory?",
+        answers: ["Storage used as extra RAM", "Permanent storage", "Cache memory", "Graphics memory"],
+        correct: 0
+    },
+    {
+        question: "Why does the OS manage memory?",
+        answers: ["To prevent crashes", "To improve graphics", "To store files", "To control sound"],
+        correct: 0
+    },
+    {
+        question: "What is RAM?",
+        answers: ["Temporary working memory", "Permanent storage", "CPU speed", "Internet data"],
+        correct: 0
+    },
+    {
+        question: "What does the OS do with inactive programs?",
+        answers: ["Moves them to virtual memory", "Deletes them", "Runs them faster", "Turns off the monitor"],
+        correct: 0
+    },
+    {
+        question: "What is a process?",
+        answers: ["A running program", "A saved file", "A hardware device", "A network connection"],
+        correct: 0
+    }
+],
+
+"OS Multi‑Tasking": [
+    {
+        question: "What does multi-tasking allow?",
+        answers: ["Running multiple programs at once", "Running one app only", "Deleting files", "Installing BIOS"],
+        correct: 0
+    },
+    {
+        question: "What does the OS share between tasks?",
+        answers: ["CPU time", "Screen brightness", "Internet speed", "Sound volume"],
+        correct: 0
+    },
+    {
+        question: "Which is an example of multi-tasking?",
+        answers: ["Listening to music while browsing", "Turning off the monitor", "Printing documents", "Installing updates"],
+        correct: 0
+    },
+    {
+        question: "What is a foreground app?",
+        answers: ["The app currently in use", "An app that is deleted", "An app that is offline", "An app that is broken"],
+        correct: 0
+    },
+    {
+        question: "What is a background app?",
+        answers: ["Running but not active", "Deleted app", "App with errors", "App that cannot open"],
+        correct: 0
+    },
+    {
+        question: "What can happen if too many apps run at once?",
+        answers: ["The system may crash", "The screen becomes brighter", "The keyboard stops working", "The speakers turn off"],
+        correct: 0
+    },
+    {
+        question: "What does CPU scheduling do?",
+        answers: ["Shares CPU time between tasks", "Changes screen colour", "Stores files", "Controls sound"],
+        correct: 0
+    }
+],
+
+"OS Peripheral Management": [
+    {
+        question: "What is a peripheral?",
+        answers: ["External device", "CPU", "RAM", "Cache"],
+        correct: 0
+    },
+    {
+        question: "What is the purpose of a driver?",
+        answers: ["Helps hardware communicate with OS", "Stores files", "Runs games", "Controls RAM"],
+        correct: 0
+    },
+    {
+        question: "Which is an input device?",
+        answers: ["Keyboard", "Printer", "Monitor", "Speakers"],
+        correct: 0
+    },
+    {
+        question: "Which is an output device?",
+        answers: ["Monitor", "Mouse", "Keyboard", "Scanner"],
+        correct: 0
+    },
+    {
+        question: "What does the OS do with peripherals?",
+        answers: ["Controls them", "Deletes them", "Turns them off", "Stores them"],
+        correct: 0
+    },
+    {
+        question: "What does plug and play mean?",
+        answers: ["Device auto-detects", "Device must be installed manually", "Device cannot work", "Device is broken"],
+        correct: 0
+    },
+    {
+        question: "What often causes device errors?",
+        answers: ["Driver problems", "Screen brightness", "Internet speed", "Speaker volume"],
+        correct: 0
+    }
+],
+
+"OS User & File Management": [
+    {
+        question: "What is a user account?",
+        answers: ["Personal login", "A file", "A folder", "A password"],
+        correct: 0
+    },
+    {
+        question: "What is the purpose of a password?",
+        answers: ["Protects account", "Stores files", "Runs apps", "Controls RAM"],
+        correct: 0
+    },
+    {
+        question: "What is an administrator?",
+        answers: ["User with full control", "Guest user", "File manager", "Folder"],
+        correct: 0
+    },
+    {
+        question: "What does a file manager do?",
+        answers: ["Organises files", "Runs games", "Controls sound", "Manages RAM"],
+        correct: 0
+    },
+    {
+        question: "What does 'save' mean?",
+        answers: ["Store a file", "Delete a file", "Rename a file", "Move a file"],
+        correct: 0
+    },
+    {
+        question: "What does 'delete' mean?",
+        answers: ["Remove file", "Open file", "Copy file", "Rename file"],
+        correct: 0
+    },
+    {
+        question: "What does the OS manage?",
+        answers: ["Users and files", "Only graphics", "Only sound", "Only internet"],
+        correct: 0
+    }
+]
+
 
 },
 
@@ -362,6 +710,56 @@ export const examQuestionBank = {
     ]
 
 },
+
+"Boolean Logic & Binary": {
+
+"logic gates (AND, OR, NOT)": [
+
+    {
+        question: "Fares wants to know what an AND gate outputs when both inputs are 1. What is the correct output?",
+        answers: [ "0", "True only if input A is 1", "Opposite of input", "1"],
+        correct: 3
+    },
+
+    {
+        question: "Farhan wants to know what an AND gate outputs when one input is 0. What is the correct output?",
+        answers: ["0", "1", "Same as input A", "Opposite of input"],
+        correct: 0
+    },
+
+    {
+        question: "Robyn wants to know what an OR gate outputs when at least one input is 1. What is the correct output?",
+        answers: ["1", "0", "Only if both inputs are 1", "Opposite of input"],
+        correct: 0
+    },
+
+    {
+        question: "Malachi wants to know what an OR gate outputs when both inputs are 0. What is the correct output?",
+        answers: [ "0", "True only if input A is 1", "Opposite of input", "1"],
+        correct: 3
+    },
+
+    {
+        question: "Raed wants to know what a NOT gate does. Which answer is correct?",
+        answers: ["Flips the input", "Adds the inputs", "Outputs both inputs", "Only works with 1s"],
+        correct: 0
+    },
+
+    {
+        question: "Ali wants to know what a NOT gate outputs when the input is 1. What is the correct output?",
+        answers: [ "0", "True only if input A is 1", "Same as input", "1"],
+        correct: 3
+    },
+
+    {
+        question: "Ibrahim wants to know which gate outputs 1 only when both inputs are 1. Which gate is correct?",
+        answers: ["AND gate", "OR gate", "NOT gate", "XOR gate"],
+        correct: 0
+    }
+
+]
+},
+
 
 "Algorithms & Flowcharts": {
 

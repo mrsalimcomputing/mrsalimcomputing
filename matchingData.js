@@ -82,9 +82,199 @@ export const matchingData = {
     { left: "Photo Editor", right: "Edit images" },
     { left: "Video Editor", right: "Edit videos" },
     { left: "Music Player", right: "Play audio" }
+],
+
+"Hardware and Software Devices (Easy)": [
+    { left: "Hardware", right: "Physical parts of a computer" },
+    { left: "Software", right: "Programs that run on a computer" },
+    { left: "Keyboard", right: "Input device" },
+    { left: "Mouse", right: "Input device" },
+    { left: "Monitor", right: "Output device" },
+
+    { left: "Printer", right: "Output device" },
+    { left: "CPU", right: "Brain of the computer" },
+    { left: "RAM", right: "Temporary memory" },
+    { left: "SSD", right: "Storage device" },
+    { left: "GPU", right: "Graphics processor" },
+
+    { left: "Web browser", right: "Software" },
+    { left: "Word processor", right: "Software" },
+    { left: "Antivirus", right: "Utility software" },
+    { left: "Operating system", right: "System software" },
+    { left: "Speakers", right: "Output device" }
+],
+
+"CPU Components & Their Functions": [
+    { left: "MAR", right: "Holds memory addresses" },
+    { left: "MDR", right: "Holds data being transferred" },
+    { left: "PC", right: "Stores next instruction address" },
+    { left: "ACC", right: "Stores calculations" },
+    { left: "ALU", right: "Performs calculations" },
+
+    { left: "CU", right: "Controls the CPU" },
+    { left: "Clock speed", right: "Measures CPU speed" },
+    { left: "Core", right: "Processing unit inside CPU" },
+    { left: "Cache", right: "Fast memory for quick access" },
+    { left: "Instruction", right: "Command for CPU" },
+
+    { left: "Fetch", right: "Get instruction from memory" },
+    { left: "Decode", right: "Understand instruction" },
+    { left: "Execute", right: "Carry out instruction" },
+    { left: "Register", right: "Small storage inside CPU" },
+    { left: "Bus", right: "Transfers data" }
+],
+
+"Characteristics of a CPU": [
+    { left: "Clock speed", right: "How fast CPU runs" },
+    { left: "Cores", right: "Number of processing units" },
+    { left: "Cache", right: "Fast memory" },
+    { left: "GHz", right: "Clock speed unit" },
+    { left: "Performance", right: "How fast CPU works" },
+
+    { left: "Single-core", right: "One processing unit" },
+    { left: "Multi-core", right: "Multiple processing units" },
+    { left: "Instruction cycle", right: "Fetch-decode-execute" },
+    { left: "Heat", right: "Produced by CPU" },
+    { left: "Cooling", right: "Prevents overheating" },
+
+    { left: "Efficiency", right: "Uses less power" },
+    { left: "Overclocking", right: "Increasing clock speed" },
+    { left: "Underclocking", right: "Reducing clock speed" },
+    { left: "CPU load", right: "Amount of work CPU is doing" },
+    { left: "Thread", right: "Smallest unit of processing" }
+],
+
+"Types of User Interfaces": [
+    { left: "GUI", right: "Uses icons and windows" },
+    { left: "CLI", right: "Uses typed commands" },
+    { left: "Menu-driven UI", right: "Shows list of options" },
+    { left: "Voice UI", right: "Uses spoken commands" },
+    { left: "Touch UI", right: "Uses taps and swipes" },
+
+    { left: "GUI example", right: "Windows desktop" },
+    { left: "CLI example", right: "Command Prompt" },
+    { left: "Menu-driven example", right: "ATM machine" },
+    { left: "Voice UI example", right: "Siri / Alexa" },
+    { left: "Touch UI example", right: "Smartphone screen" },
+
+    { left: "UI element", right: "Button" },
+    { left: "UI element", right: "Icon" },
+    { left: "UI element", right: "Menu" },
+    { left: "UI element", right: "Window" },
+    { left: "Purpose of UI", right: "Helps users interact with computer" }
 ]
+
+
+
+
 },
 
+"Operating Systems": {
+
+"OS User Interface": [
+    { left: "GUI", right: "Uses icons and windows" },
+    { left: "CLI", right: "Uses typed commands" },
+    { left: "Menu-driven UI", right: "Shows a list of options" },
+    { left: "Voice UI", right: "Uses spoken commands" },
+    { left: "Touch UI", right: "Uses taps and swipes" },
+
+    { left: "GUI example", right: "Windows desktop" },
+    { left: "CLI example", right: "Command Prompt" },
+    { left: "Menu-driven example", right: "ATM machine" },
+    { left: "Voice UI example", right: "Siri / Alexa" },
+    { left: "Touch UI example", right: "Smartphone screen" },
+
+    { left: "Purpose of UI", right: "Helps users interact with the computer" },
+    { left: "UI element", right: "Button" },
+    { left: "UI element", right: "Icon" },
+    { left: "UI element", right: "Window" },
+    { left: "UI element", right: "Menu" }
+],
+
+"OS Memory Management": [
+    { left: "Memory management", right: "Controls RAM usage" },
+    { left: "RAM", right: "Temporary working memory" },
+    { left: "Virtual memory", right: "Uses storage as extra RAM" },
+    { left: "Swap space", right: "Part of virtual memory" },
+    { left: "Process", right: "A running program" },
+
+    { left: "Purpose of memory management", right: "Prevents crashes" },
+    { left: "RAM full", right: "OS uses virtual memory" },
+    { left: "Inactive program", right: "Moved to virtual memory" },
+    { left: "Active program", right: "Kept in RAM" },
+    { left: "Memory leak", right: "Program uses too much RAM" },
+
+    { left: "OS responsibility", right: "Shares memory between apps" },
+    { left: "Cache", right: "Stores frequently used data" },
+    { left: "Free memory", right: "Available RAM" },
+    { left: "Allocated memory", right: "RAM given to a program" },
+    { left: "Memory error", right: "Program crashes due to RAM issues" }
+],
+
+"OS Multi‑Tasking": [
+    { left: "Multi-tasking", right: "Running multiple programs at once" },
+    { left: "Task switching", right: "Moving between apps" },
+    { left: "CPU scheduling", right: "Sharing CPU time" },
+    { left: "Foreground app", right: "App currently in use" },
+    { left: "Background app", right: "App running but not active" },
+
+    { left: "Benefit of multi-tasking", right: "Improves productivity" },
+    { left: "Example", right: "Listening to music while browsing" },
+    { left: "Another example", right: "Typing while downloading" },
+    { left: "OS role", right: "Manages running programs" },
+    { left: "Crash", right: "Too many apps open" },
+
+    { left: "CPU time slice", right: "Small chunk of processing time" },
+    { left: "Process queue", right: "List of running tasks" },
+    { left: "App freeze", right: "Program stops responding" },
+    { left: "Resource", right: "CPU, RAM, storage" },
+    { left: "Heavy app", right: "Uses lots of CPU" }
+],
+
+"OS Peripheral Management": [
+    { left: "Peripheral", right: "External device" },
+    { left: "Driver", right: "Helps hardware communicate with OS" },
+    { left: "Keyboard", right: "Input device" },
+    { left: "Printer", right: "Output device" },
+    { left: "Mouse", right: "Input device" },
+
+    { left: "Monitor", right: "Output device" },
+    { left: "Scanner", right: "Input device" },
+    { left: "Speakers", right: "Output device" },
+    { left: "Webcam", right: "Input device" },
+    { left: "OS role", right: "Controls peripherals" },
+
+    { left: "Driver update", right: "Improves device performance" },
+    { left: "Device error", right: "Driver problem" },
+    { left: "Plug and play", right: "Auto-detect device" },
+    { left: "USB device", right: "External hardware" },
+    { left: "Peripheral example", right: "Printer" }
+],
+
+
+"OS User & File Management": [
+    { left: "User account", right: "Personal login" },
+    { left: "Password", right: "Protects account" },
+    { left: "Administrator", right: "Has full control" },
+    { left: "Standard user", right: "Limited access" },
+    { left: "Permissions", right: "Controls what users can do" },
+
+    { left: "File", right: "Stored data" },
+    { left: "Folder", right: "Holds files" },
+    { left: "File manager", right: "Organises files" },
+    { left: "Save", right: "Store a file" },
+    { left: "Open", right: "Access a file" },
+
+    { left: "Rename", right: "Change file name" },
+    { left: "Delete", right: "Remove file" },
+    { left: "Copy", right: "Duplicate file" },
+    { left: "Move", right: "Change file location" },
+    { left: "OS role", right: "Manages users and files" }
+]
+
+
+
+},
 
 "Programming": {
 
@@ -723,6 +913,34 @@ export const matchingData = {
     { left: "x + y", right: "Addition" },
     { left: "return", right: "Give back value" }
 ]
+},
+
+"Boolean Logic & Binary": {
+
+"logic gates (AND, OR, NOT)": [
+
+    { left: "AND gate", right: "Outputs 1 only if both inputs are 1" },
+    { left: "OR gate", right: "Outputs 1 if at least one input is 1" },
+    { left: "NOT gate", right: "Flips the input (1 becomes 0)" },
+
+    { left: "AND: 1 AND 1", right: "1" },
+    { left: "AND: 1 AND 0", right: "0" },
+    { left: "AND: 0 AND 1", right: "0" },
+    { left: "AND: 0 AND 0", right: "0" },
+
+    { left: "OR: 1 OR 1", right: "1" },
+    { left: "OR: 1 OR 0", right: "1" },
+    { left: "OR: 0 OR 1", right: "1" },
+    { left: "OR: 0 OR 0", right: "0" },
+
+    { left: "NOT: NOT 1", right: "0" },
+    { left: "NOT: NOT 0", right: "1" },
+
+    { left: "Binary 1", right: "True" },
+    { left: "Binary 0", right: "False" }
+]
+
+
 },
 
 "Computational Thinking": {
