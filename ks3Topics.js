@@ -96,9 +96,8 @@ export const ks3Topics = {
         "logic gates (AND, OR, NOT)",
         "binary addition",
         "binary addition (easy)",
-        "Hexadecimal To Decimal",
-        "Decimal To Hexadecimal",
-        "ASCII"
+        "hex to binary",
+        "binary to hex"
     ],
 
     "Networks": [

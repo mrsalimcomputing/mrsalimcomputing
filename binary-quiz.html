@@ -13,7 +13,7 @@
     <div id="binaryRulesPopup" class="popup-overlay">
         <div class="popup-box">
             <h2>Instructions</h2>
-            <p>You will be shown a binary number. Select the correct decimal value.</p>
+            <p> You will be shown a Binary/ASCII style question. Select the correct answer from the options</p>
 
             <div class="popup-buttons">
                 <button class="menu-back-btn" onclick="window.location.href='home.html'">Menu</button>
@@ -93,6 +93,10 @@
     import { startDenaryToBinaryEasyQuiz, showDenaryToBinaryEasyRules } from "./denaryToBinaryEngineEASY.js";
     import { startBinaryAdditionEasyQuiz, showBinaryAdditionEasyRules } from "./binaryAdditionEngineEASY.js";
 
+    /* ⭐ NEW IMPORTS */
+    import { startHexBinaryQuiz, showHexBinaryRules } from "./hexToBinary.js";
+    import { startBinaryHexQuiz, showBinaryHexRules } from "./binaryToHex.js";
+
     const params = new URLSearchParams(window.location.search);
     const rawTopic = decodeURIComponent(params.get("topic") || "");
     const t = rawTopic.toLowerCase();
@@ -103,7 +107,9 @@
     let startFunction = null;
     let showRulesFunction = null;
 
+    // ============================
     // EASY MODES FIRST
+    // ============================
     if (t.includes("binary to denary") && t.includes("easy")) {
         startFunction = startBinaryEasyQuiz;
         showRulesFunction = showBinaryEasyRules;
@@ -117,7 +123,9 @@
         showRulesFunction = showBinaryAdditionEasyRules;
     }
 
+    // ============================
     // HARD MODES
+    // ============================
     else if (t.includes("binary to denary")) {
         startFunction = startBinaryQuiz;
         showRulesFunction = showBinaryRules;
@@ -131,19 +139,34 @@
         showRulesFunction = showBinaryAdditionRules;
     }
 
+    // ============================
+    // ⭐ NEW MODES (HEX)
+    // ============================
+    else if (t.includes("hex to binary")) {
+        startFunction = startHexBinaryQuiz;
+        showRulesFunction = showHexBinaryRules;
+    }
+    else if (t.includes("binary to hex")) {
+        startFunction = startBinaryHexQuiz;
+        showRulesFunction = showBinaryHexRules;
+    }
+
+    // ============================
     // FALLBACK
+    // ============================
     else {
         startFunction = startBinaryQuiz;
         showRulesFunction = showBinaryRules;
     }
 
-    // show rules for the chosen mode
+    // Show rules for the chosen mode
     showRulesFunction();
 
-    // wire both buttons to the same start function
+    // Wire both buttons to the same start function
     startBtn.onclick = () => startFunction();
     playAgainBtn.onclick = () => startFunction();
 </script>
+
 
 
 

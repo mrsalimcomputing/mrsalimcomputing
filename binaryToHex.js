@@ -15,13 +15,13 @@ let questionsAttempted = 0;
 let accuracy = 0;
 
 // DOM elements
-const rulesPopup = document.getElementById("binaryHexRulesPopup");
-const endPopup = document.getElementById("binaryHexEndPopup");
-const endScoreText = document.getElementById("binaryHexEndScore");
-const endAccuracyText = document.getElementById("binaryHexEndAccuracy");
-const startBtn = document.getElementById("startBinaryHexBtn");
-const playAgainBtn = document.getElementById("playAgainBinaryHexBtn");
-const quitBtn = document.getElementById("binaryHexQuitBtn");
+const rulesPopup = document.getElementById("binaryRulesPopup");
+const endPopup = document.getElementById("binaryEndPopup");
+const endScoreText = document.getElementById("binaryEndScore");
+const endAccuracyText = document.getElementById("binaryEndAccuracy");
+const startBtn = document.getElementById("startBinaryBtn");
+const playAgainBtn = document.getElementById("playAgainBinaryBtn");
+const quitBtn = document.getElementById("binaryQuitBtn");
 
 // ===============================
 // SHOW RULES
