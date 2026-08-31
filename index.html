@@ -1,127 +1,319 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Login - Learn with Mr Salim </title>
+
+  <!-- SEO -->
+  <title>Learn With Mr Salim | Computing & ICT Learning</title>
+
+  <meta
+    name="description"
+    content="Learn With Mr Salim is an interactive Computing and ICT learning website with quizzes, activities and classroom resources for students."
+  />
+
+  <meta name="robots" content="index, follow" />
+
+  <link rel="canonical" href="https://learnwithmrsalim.co.uk/" />
+
+  <!-- CSS -->
   <link rel="stylesheet" href="style.css" />
 </head>
 
 <body>
+
   <div class="menu-screen">
-    <h1 class="menu-title">Learn with Mr Salim BETA</h1>
-    <p class="menu-subtitle">Choose how you want to play</p>
+
+    <!-- MAIN WEBSITE HEADING -->
+    <h1 class="menu-title">Learn With Mr Salim</h1>
+
+    <p class="menu-subtitle">BETA - Choose how you want to play</p>
 
     <div class="button-column">
+
       <!-- 🔒 GOOGLE LOGIN BUTTON -->
-      <button id="googleLoginBtn" class="menu-btn google-btn locked" disabled>
+      <button
+        id="googleLoginBtn"
+        class="menu-btn google-btn locked"
+        disabled
+      >
         Sign in with Google 🔒
       </button>
 
       <!-- 🔒 MICROSOFT LOGIN BUTTON -->
-      <button id="microsoftLoginBtn" class="menu-btn microsoft-btn locked" disabled>
+      <button
+        id="microsoftLoginBtn"
+        class="menu-btn microsoft-btn locked"
+        disabled
+      >
         Sign in with Microsoft 🔒
       </button>
 
       <!-- 🎮 PLAY WITHOUT LOGIN -->
-      <button id="playBtn" class="menu-btn guest-btn">
+      <button
+        id="playBtn"
+        class="menu-btn guest-btn"
+      >
         Play
       </button>
 
       <!-- ⭐ JOIN WITH CODE BUTTON -->
-      <button id="joinCodeBtn" class="menu-btn join-btn">
+      <button
+        id="joinCodeBtn"
+        class="menu-btn join-btn"
+      >
         Join with Code
       </button>
+
     </div>
   </div>
+
 
   <!-- ⭐ JOIN WITH CODE POPUP -->
-  <div id="joinCodePopup" class="popup-overlay" style="display:none;">
+  <div
+    id="joinCodePopup"
+    class="popup-overlay"
+    style="display:none;"
+  >
+
     <div class="popup-box">
+
       <h2>Enter Session Code</h2>
-      <input id="sessionCodeInput" type="text" placeholder="Enter code..." class="code-input" />
-      <button id="submitCodeBtn" class="menu-btn">Join</button>
-      <button id="closeCodePopup" class="menu-back-btn">Cancel</button>
+
+      <input
+        id="sessionCodeInput"
+        type="text"
+        placeholder="Enter code..."
+        class="code-input"
+      />
+
+      <button
+        id="submitCodeBtn"
+        class="menu-btn"
+      >
+        Join
+      </button>
+
+      <button
+        id="closeCodePopup"
+        class="menu-back-btn"
+      >
+        Cancel
+      </button>
+
     </div>
   </div>
+
 
   <!-- 🔒 GOOGLE LOCKED POPUP -->
-  <div id="googleLockedPopup" class="popup-overlay" style="display:none;">
+  <div
+    id="googleLockedPopup"
+    class="popup-overlay"
+    style="display:none;"
+  >
+
     <div class="popup-box">
-      <h2>Google Sign‑In Unavailable</h2>
-      <p>This login option is currently locked. Please use Play or Join with Code.</p>
-      <button id="closeGooglePopup" class="menu-back-btn">OK</button>
+
+      <h2>Google Sign-In Unavailable</h2>
+
+      <p>
+        This login option is currently locked.
+        Please use Play or Join with Code.
+      </p>
+
+      <button
+        id="closeGooglePopup"
+        class="menu-back-btn"
+      >
+        OK
+      </button>
+
     </div>
   </div>
+
 
   <!-- 🔒 MICROSOFT LOCKED POPUP -->
-  <div id="microsoftLockedPopup" class="popup-overlay" style="display:none;">
+  <div
+    id="microsoftLockedPopup"
+    class="popup-overlay"
+    style="display:none;"
+  >
+
     <div class="popup-box">
-      <h2>Microsoft Sign‑In Unavailable</h2>
-      <p>This login option is currently locked. Please use Play or Join with Code.</p>
-      <button id="closeMicrosoftPopup" class="menu-back-btn">OK</button>
+
+      <h2>Microsoft Sign-In Unavailable</h2>
+
+      <p>
+        This login option is currently locked.
+        Please use Play or Join with Code.
+      </p>
+
+      <button
+        id="closeMicrosoftPopup"
+        class="menu-back-btn"
+      >
+        OK
+      </button>
+
     </div>
   </div>
 
-  <!-- LOAD FIREBASE -->
-  <script type="module" src="./firebaseConfig.js"></script>
-  <script type="module" src="./login.js"></script>
-  <script type="module" src="./headerUser.js"></script>
 
-  <!-- POPUP LOGIC -->
+  <!-- LOAD FIREBASE -->
+  <script
+    type="module"
+    src="./firebaseConfig.js"
+  ></script>
+
+  <script
+    type="module"
+    src="./login.js"
+  ></script>
+
+  <script
+    type="module"
+    src="./headerUser.js"
+  ></script>
+
+
+  <!-- POPUP AND MENU LOGIC -->
   <script>
+
     // -----------------------------
     // JOIN WITH CODE POPUP
     // -----------------------------
-    const joinBtn = document.getElementById("joinCodeBtn");
-    const joinPopup = document.getElementById("joinCodePopup");
-    const closeJoinPopup = document.getElementById("closeCodePopup");
-    const submitCodeBtn = document.getElementById("submitCodeBtn");
 
-    joinBtn.onclick = () => (joinPopup.style.display = "flex");
-    closeJoinPopup.onclick = () => (joinPopup.style.display = "none");
+    const joinBtn =
+      document.getElementById("joinCodeBtn");
+
+    const joinPopup =
+      document.getElementById("joinCodePopup");
+
+    const closeJoinPopup =
+      document.getElementById("closeCodePopup");
+
+    const submitCodeBtn =
+      document.getElementById("submitCodeBtn");
+
+
+    joinBtn.onclick = () => {
+      joinPopup.style.display = "flex";
+    };
+
+
+    closeJoinPopup.onclick = () => {
+      joinPopup.style.display = "none";
+    };
+
 
     submitCodeBtn.onclick = () => {
-      const code = document.getElementById("sessionCodeInput").value.trim();
-      if (!code) return alert("Please enter a code");
-      localStorage.setItem("sessionCode", code);
-      window.location.href = "join-session.html";
+
+      const code =
+        document
+          .getElementById("sessionCodeInput")
+          .value
+          .trim();
+
+      if (!code) {
+        return alert("Please enter a code");
+      }
+
+      localStorage.setItem(
+        "sessionCode",
+        code
+      );
+
+      window.location.href =
+        "join-session.html";
     };
+
 
     // -----------------------------
     // GOOGLE LOCKED POPUP
     // -----------------------------
-    const googleBtn = document.getElementById("googleLoginBtn");
-    const googlePopup = document.getElementById("googleLockedPopup");
-    const closeGooglePopup = document.getElementById("closeGooglePopup");
+
+    const googleBtn =
+      document.getElementById("googleLoginBtn");
+
+    const googlePopup =
+      document.getElementById("googleLockedPopup");
+
+    const closeGooglePopup =
+      document.getElementById("closeGooglePopup");
+
 
     googleBtn.onclick = () => {
-      if (googleBtn.disabled) googlePopup.style.display = "flex";
+
+      if (googleBtn.disabled) {
+        googlePopup.style.display = "flex";
+      }
+
     };
-    closeGooglePopup.onclick = () => (googlePopup.style.display = "none");
+
+
+    closeGooglePopup.onclick = () => {
+      googlePopup.style.display = "none";
+    };
+
 
     // -----------------------------
     // MICROSOFT LOCKED POPUP
     // -----------------------------
-    const microsoftBtn = document.getElementById("microsoftLoginBtn");
-    const microsoftPopup = document.getElementById("microsoftLockedPopup");
-    const closeMicrosoftPopup = document.getElementById("closeMicrosoftPopup");
+
+    const microsoftBtn =
+      document.getElementById("microsoftLoginBtn");
+
+    const microsoftPopup =
+      document.getElementById("microsoftLockedPopup");
+
+    const closeMicrosoftPopup =
+      document.getElementById("closeMicrosoftPopup");
+
 
     microsoftBtn.onclick = () => {
-      if (microsoftBtn.disabled) microsoftPopup.style.display = "flex";
+
+      if (microsoftBtn.disabled) {
+        microsoftPopup.style.display = "flex";
+      }
+
     };
-    closeMicrosoftPopup.onclick = () => (microsoftPopup.style.display = "none");
+
+
+    closeMicrosoftPopup.onclick = () => {
+      microsoftPopup.style.display = "none";
+    };
+
 
     // -----------------------------
     // PLAY MODE
     // -----------------------------
-    const playBtn = document.getElementById("playBtn");
+
+    const playBtn =
+      document.getElementById("playBtn");
+
+
     playBtn.onclick = () => {
+
       localStorage.clear();
-      localStorage.setItem("isPlayMode", "true");
-      localStorage.setItem("userWelcomeName", "Guest");
-      window.location.href = "home.html";
+
+      localStorage.setItem(
+        "isPlayMode",
+        "true"
+      );
+
+      localStorage.setItem(
+        "userWelcomeName",
+        "Guest"
+      );
+
+      window.location.href =
+        "home.html";
     };
+
   </script>
+
 </body>
+
 </html>
