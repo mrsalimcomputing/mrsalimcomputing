@@ -621,7 +621,7 @@ export const theoryData = {
   {question:"What is BCC used for?",correct:["Hide recipients","Private copy"],wrong:["Show recipients","Public copy","Subject","Attachment","Reply","Forward","Spam","Draft","Inbox","Outbox","Signature","Header","Footer","Filter","Flag","Priority","Archive"]}
 ],
 
-"Using Computers Safely, Effectively & Responsibly": [
+"Using Computers Safely and Responsibly": [
 
   {question:"Why should you avoid sharing personal information online?", correct:["Protect your identity","Stay safe from strangers"], wrong:["Get more followers","Make accounts easier","Improve computer speed","Fix viruses","Unlock websites","Make passwords stronger","Get free games","Improve Wi-Fi","Make downloads faster","Help adverts","Share with everyone","Post publicly","Show off","Make friends quickly","Win competitions","Join random groups"]},
   {question:"What is cyberbullying?", correct:["Bullying online","Hurting someone through messages"], wrong:["Fixing computers","Helping friends","Playing games","Sending homework","Posting memes","Sharing photos","Joining clubs","Making accounts","Updating apps","Blocking strangers","Changing passwords","Reporting issues","Writing emails","Watching videos","Downloading apps","Using social media safely","Chatting politely"]},
