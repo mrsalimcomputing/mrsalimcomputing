@@ -654,7 +654,28 @@ export const matchingData = {
     { left: "Upload Speed", right: "Send data" },
     { left: "Download Speed", right: "Receive data" },
     { left: "Fibre", right: "Light signals" }
+],
+
+"Cloud Computing": [
+    { left: "Cloud Storage", right: "Stores files online" },
+    { left: "Cloud Backup", right: "Saves copies of files automatically" },
+    { left: "Cloud Sync", right: "Keeps files updated across devices" },
+    { left: "Cloud Service", right: "Runs apps over the internet" },
+    { left: "Internet Connection", right: "Required to access cloud files" },
+
+    { left: "Google Drive", right: "Example of cloud storage" },
+    { left: "OneDrive", right: "Microsoft cloud storage" },
+    { left: "iCloud", right: "Apple cloud storage" },
+    { left: "Dropbox", right: "Popular cloud storage service" },
+    { left: "Email Cloud Storage", right: "Stores attachments online" },
+
+    { left: "Collaboration", right: "Working together online" },
+    { left: "Sharing Link", right: "Allows others to access a file" },
+    { left: "Permissions", right: "Controls who can view or edit" },
+    { left: "Online Apps", right: "Run in the cloud, not installed" },
+    { left: "Automatic Updates", right: "Cloud apps update themselves" }
 ]
+
 },
 
 
@@ -1306,9 +1327,7 @@ export const matchingData = {
 
 },
 
-    // ============================
-    // ⭐ KS4 (placeholder)
-    // ============================
+
     "KS4": {
         "Cambridge_Nationals_IT_Level_2": {
             "R050: IT in the Digital World": {
@@ -1332,9 +1351,7 @@ export const matchingData = {
         }
     },
 
-    // ============================
-    // ⭐ KS5 (placeholder)
-    // ============================
+
     "KS5": {
         "OCR A Level Computer Science": {
             "Paper 1": {
