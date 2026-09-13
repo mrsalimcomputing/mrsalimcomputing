@@ -2468,7 +2468,7 @@ export const examQuestionBank = {
         answers: ["Upload anyway", "Check if the site is trustworthy", "Share the link with friends", "Disable antivirus"],
         correct: 1
     }
-]
+    ]
 
 },
 
