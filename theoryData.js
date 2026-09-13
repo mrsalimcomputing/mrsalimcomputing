@@ -516,7 +516,20 @@ export const theoryData = {
   {question:"Which protocol checks connection reliability?",correct:["TCP","Transmission Control Protocol"],wrong:["UDP","HTTP","HTTPS","SMTP","FTP","IMAP","POP","DNS","DHCP","Router","Switch","WAP","LAN","WAN","Cloud"]},
   {question:"Which protocol is faster but less reliable?",correct:["UDP","User Datagram Protocol"],wrong:["TCP","HTTP","HTTPS","SMTP","FTP","IMAP","POP","DNS","DHCP","Router","Switch","WAP","LAN","WAN","Cloud"]}
 
+],
+
+"Cloud Computing": [
+
+  {question:"What is cloud computing?", correct:["Storing and accessing data online","Using services over the internet"],wrong:["Saving files on paper","Using only USB sticks","Downloading viruses","Sharing passwords","Posting files publicly","Using unsafe websites","Installing random apps","Saving everything on desktop","Deleting all files","Turning off Wi-Fi","Breaking the computer","Sharing private info","Using weak passwords","Posting homework online","Sending files to strangers","Saving on random devices"]},
+  {question:"Which is an example of cloud storage?", correct:["Google Drive","OneDrive"], wrong:["USB stick","Local hard drive","CD/DVD","Paper folder","School desk","Printer tray","Random website","Public computer","Unsafe server","Email inbox","Phone gallery","Downloads folder","Temporary files","Clipboard","Recycle bin","Screenshots"]},
+  {question:"Why do people use cloud computing?", correct:["Access files anywhere","Easy collaboration"], wrong:["Make Wi-Fi faster","Break the computer","Share private info","Install viruses","Delete homework","Post everything publicly","Add strangers","Turn off antivirus","Save unsafe files","Lose data","Ignore backups","Crash system","Use weak passwords","Share accounts","Join unsafe groups","Download anything"]},
+  {question:"What does 'syncing' mean in cloud computing?", correct:["Keeping files updated across devices","Automatic saving"],wrong:["Deleting files","Sharing passwords","Posting online","Breaking apps","Turning off Wi-Fi","Saving corrupted files","Sharing location","Installing random apps","Adding strangers","Saving on unsafe websites","Losing homework","Ignoring updates","Saving everything on desktop","Using unsafe USBs","Posting private info","Downloading unsafe files"]},
+  {question:"Which device can access cloud files?", correct:["Any device with internet","Phone, laptop or tablet"],wrong:["Only one computer","Printer","Scanner","Calculator","TV remote","Keyboard","Mouse","Speaker","Projector","Broken device","Offline computer","Old CD player","USB stick","Paper notebook","Whiteboard","Camera without internet","Router only"]},
+  {question:"Why is it important to use secure passwords for cloud accounts?",correct:["Protect online files","Prevent hacking"], wrong:["Share files publicly","Make downloads faster","Improve Wi-Fi","Fix viruses","Add strangers","Post everything","Use weak passwords","Write passwords on desk","Share location","Install random apps","Delete homework","Turn off security","Ignore warnings","Join unsafe groups","Use public Wi-Fi for banking","Save passwords in chat"]},
+  {question:"What should you avoid doing when using cloud services?",correct:["Sharing private files publicly","Downloading unsafe links"],wrong:["Saving homework","Organising folders","Backing up work","Using strong passwords","Updating apps","Checking privacy settings","Logging out safely","Using secure Wi-Fi","Renaming files clearly","Saving in correct folder","Collaborating with classmates","Using password manager","Keeping files organised","Saving photos","Uploading school work","Using cloud storage correctly"]}
+
 ]
+
 
 
 },
