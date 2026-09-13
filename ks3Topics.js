@@ -65,7 +65,8 @@ export const ks3Topics = {
         "Phishing",
         "Cyberbullying & Online Conduct",
         "LAN and WAN",
-        "Emails (CC, BCC, Subject Line)"
+        "Emails (CC, BCC, Subject Line)",
+        "Using Computers Safely and Responsibly"
     ],
 
     "Computer Systems": [
