@@ -2432,7 +2432,7 @@ export const examQuestionBank = {
         }
     ],
 
-    "Cloud Computing (Scenarios)": [
+    "Cloud Computing": [
     {
         question: "Hassan wants to access his homework from home after saving it at school. What does he need?",
         answers: ["USB stick", "Internet connection", "Printer", "Offline mode"],
