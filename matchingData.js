@@ -796,6 +796,26 @@ export const matchingData = {
     { left: "Correct Address", right: "Send to right person" }
 ],
 
+"Using Computers Safely and Responsibly": [
+    { left: "S", right: "Secure" },
+    { left: "A", right: "Appropriate" },
+    { left: "F", right: "File Smart" },
+    { left: "E", right: "Evaluate" },
+
+    { left: "Secure Meaning", right: "Protecting accounts and files" },
+    { left: "Appropriate Meaning", right: "Using computers respectfully" },
+    { left: "File Smart Meaning", right: "Organising and saving work correctly" },
+    { left: "Evaluate Meaning", right: "Thinking before clicking or sharing" },
+
+    { left: "Secure Example", right: "Using strong passwords" },
+    { left: "Appropriate Example", right: "Being respectful online" },
+    { left: "File Smart Example", right: "Using clear filenames" },
+    { left: "Evaluate Example", right: "Checking if a link is safe" },
+
+    { left: "SAFE Word", right: "Helps remember online safety rules" },
+    { left: "SAFE Purpose", right: "Stay safe, organised and responsible" },
+    { left: "SAFE Use", right: "Guide for safe computer behaviour" }
+]
 
 },
 
