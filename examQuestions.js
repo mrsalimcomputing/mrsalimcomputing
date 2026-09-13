@@ -2073,7 +2073,18 @@ export const examQuestionBank = {
             answers: ["Subject", "To", "CC", "BCC"],
             correct: 0
         }
+    ],
+
+    "Using Computers Safely and Responsibly": [
+    {question: "Ashton receives a message from someone he doesn’t know asking for his login details. What should he do?",answers: ["Reply politely", "Give the details", "Ignore and report", "Click the link"],correct: 2},
+    {question: "Laith is using a school computer and finishes his work. What should he do before leaving?", answers: ["Leave it open", "Turn off the monitor", "Share his password", "Log out"],correct: 1},
+    {question: "Camil finds a USB stick on the floor at school. What is the safest action?",answers: ["Plug it in to check", "Give it to a teacher", "Take it home", "Delete all files on it"],correct: 1},
+    {question: "Henos wants to download a game he found on a random website. What should he do?", answers: ["Check if the website is safe", "Download it immediately", "Ignore warnings", "Turn off antivirus"], correct: 0},
+    {question: "Alfie is feeling eye strain after using the computer for a long time. What should he do?", answers: ["Keep working", "Make the screen brighter", "Take a short break", "Move closer to the screen"], correct: 2 }, 
+    {question: "Lionel wants to post a photo online that shows his school badge. What is the safest choice?", answers: ["Post it publicly", "Share with strangers", "Remove personal details first", "Add his location"], correct: 2 },
+    {question: "Skye receives an email saying she won a prize and must click a link. What should she do?",answers: ["Delete or report the email", "Reply with her details", "Send to her friends", "Forward it to friends"],correct: 0}
     ]
+
 
 },
 
