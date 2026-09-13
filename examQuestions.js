@@ -2430,15 +2430,47 @@ export const examQuestionBank = {
             answers: ["Fibre optic", "Ethernet", "Coaxial", "USB"],
             correct: 0
         }
-    ]
+    ],
+
+    "Cloud Computing (Scenarios)": [
+    {
+        question: "Hassan wants to access his homework from home after saving it at school. What does he need?",
+        answers: ["USB stick", "Internet connection", "Printer", "Offline mode"],
+        correct: 1
+    },
+    {
+        question: "Layla wants her files to update automatically on her laptop and tablet. Which cloud feature helps?",
+        answers: ["Syncing", "Deleting", "Printing", "Compressing"],
+        correct: 0
+    },
+    {
+        question: "Charlie wants to share a document with his group so they can all edit it together. What should he use?",
+        answers: ["Cloud collaboration", "Email attachment", "Screenshot", "Local folder"],
+        correct: 0
+    },
+    {
+        question: "Amina sees a pop‑up offering free cloud storage if she clicks a link. What should she do?",
+        answers: ["Click the link", "Check if the website is safe", "Download everything", "Share her password"],
+        correct: 1
+    },
+    {
+        question: "Jacob saves his work only on the desktop of a school computer. What is the problem?",
+        answers: ["It won’t print", "It may be deleted", "It uses too much Wi‑Fi", "It becomes cloud storage"],
+        correct: 1
+    },
+    {
+        question: "Ella wants to keep her cloud account secure. What should she do?",
+        answers: ["Use a strong password", "Share her login", "Use public Wi‑Fi for banking", "Turn off updates"],
+        correct: 0
+    },
+    {
+        question: "Rohan wants to upload a file to the cloud but the website looks suspicious. What is the safest action?",
+        answers: ["Upload anyway", "Check if the site is trustworthy", "Share the link with friends", "Disable antivirus"],
+        correct: 1
+    }
+]
 
 },
-
-
-
-
-
-
 
 },
 
