@@ -136,10 +136,10 @@ export const theoryData = {
 ],
 
 "Variables and Values": [
-  {question:"What is the variable name in: name = 'Ali'?",correct:["name","The word name"],wrong:["Ali","'Ali'","=","String","Float","Boolean","List","Tuple","Dictionary","Binary","Byte","Object","Data","Digit","Value"]},
+  {question:"What is the variable name in: name = 'Myloooo'?",correct:["name","The word name"],wrong:["Mylo","'Mylooooo'","=","String","Float","nameees","List","Tuple","Mylooooo","Binary","Byte","mylooo","Data","naMEEEE","Value"]},
   {question:"What is the value in: age = 14?",correct:["14","The number 14"],wrong:["age","=","Python","True","False","Float","String","List","Tuple","Dictionary","Binary","Byte","Object","Data","Digit"]},
   {question:"What is the variable name in: score = 10?",correct:["score","The word score"],wrong:["10","'10'","=","String","Float","Boolean","List","Tuple","Dictionary","Binary","Byte","Object","Data","Digit","Value"]},
-  {question:"What value is stored in: username = 'sam'?",correct:["'sam'","sam"],wrong:["username","=","String","Float","Boolean","List","Tuple","Dictionary","Binary","Byte","Object","Data","Digit","Value"]},
+  {question:"What value is stored in: username888 = 'King_Aghiles'?",correct:["'King_Aghiles'","The word King_Aghiles"],wrong:["username888","888","username","aghilessss","kinggg","kingaghiless","kiiiig","username_888","Binary","username_2013","Object","error","variable","Value"]},
   {question:"What is the variable name in: price = 4.99?",correct:["price","The word price"],wrong:["4.99","'4.99'","=","String","Float","Boolean","List","Tuple","Dictionary","Binary","Byte","Object","Data","Digit","Value"]},
   {question:"What value is stored in: logged_in = True?",correct:["True","true"],wrong:["logged_in","=","String","Float","List","Tuple","Dictionary","Binary","Byte","Object","Data","Digit","False","Value"]},
   {question:"What is the variable name in: colour = 'blue'?",correct:["colour","The word colour"],wrong:["blue","'blue'","=","String","Float","Boolean","List","Tuple","Dictionary","Binary","Byte","Object","Data","Digit","Value"]},
@@ -148,6 +148,8 @@ export const theoryData = {
   {question:"What value is stored in: points = 0?",correct:["0","Zero"],wrong:["points","=","Python","True","False","Float","String","List","Tuple","Dictionary","Binary","Byte","Object","Data","Digit"]},
   {question:"What is the variable name in: temp = 22?",correct:["temp","The word temp"],wrong:["22","'22'","=","String","Float","Boolean","List","Tuple","Dictionary","Binary","Byte","Object","Data","Digit","Value"]},
   {question:"What value is stored in: message = 'Hello'?",correct:["'Hello'","Hello"],wrong:["message","=","String","Float","Boolean","List","Tuple","Dictionary","Binary","Byte","Object","Data","Digit","Value"]},
+  {question:"What value is stored in: user_name203 = 'Adeelthegoat'?",correct:["'Adeelthegoat'","The word Adeelthegoat"],wrong:["username203","203","username","adeeeel","thegoat","adelthegoats","goats","username_2003","Binary","username_2013","Object","error","variable","Value"]},
+
 ],
 
 "Scratch": [
