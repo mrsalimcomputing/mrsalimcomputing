@@ -105,7 +105,7 @@ export const ks3Topics = {
         "Network Devices (Router, Switch, WAP)",
         "LAN and WAN",
         "Network Topologies",
-        "Wired vs Wireless Networks",
+        "Wired and Wireless Networks",
         "Internet, Web and Cloud",
         "IP Addresses",
         "MAC Addresses",
