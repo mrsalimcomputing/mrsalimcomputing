@@ -532,9 +532,6 @@ export const theoryData = {
   {question:"What should you avoid doing when using cloud services?",correct:["Sharing private files publicly","Downloading unsafe links"],wrong:["Saving homework","Organising folders","Backing up work","Using strong passwords","Updating apps","Checking privacy settings","Logging out safely","Using secure Wi-Fi","Renaming files clearly","Saving in correct folder","Collaborating with classmates","Using password manager","Keeping files organised","Saving photos","Uploading school work","Using cloud storage correctly"]}
 
 ]
-
-
-
 },
 
 "Boolean Logic & Binary": {
@@ -912,7 +909,6 @@ export const theoryData = {
 ]
 
 }
-
 
 },
 
