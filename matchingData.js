@@ -684,21 +684,21 @@ export const matchingData = {
 
 // ⭐ Password Strength
 "Password Strength": [
-    { left: "123456", right: "Weak" },
-    { left: "password", right: "Weak" },
-    { left: "qwerty", right: "Weak" },
-    { left: "iloveyou", right: "Weak" },
-    { left: "Abdallah123", right: "Weak" },
-    { left: "Football2024", right: "Weak" },
-    { left: "Sunshine1", right: "Weak" },
-    { left: "MyBirthday2009", right: "Weak" },
-    { left: "T9!bX4@p", right: "Strong" },
-    { left: "kL!82m$Q", right: "Strong" },
-    { left: "R@nd0m#55", right: "Strong" },
-    { left: "Xy!7Pz@9", right: "Strong" },
-    { left: "Long&Strong2026!", right: "Strong" },
-    { left: "C0mpl3x!Key", right: "Strong" },
-    { left: "H@rd2Guess!", right: "Strong" }
+    { left: "teddiesghost", right: "Weak" },
+    { left: "magicalmichelle5", right: "Weak" },
+    { left: "therealmrmonkey", right: "Weak" },
+    { left: "itsjust2joel", right: "Weak" },
+    { left: "itsarah:)", right: "Weak" },
+    { left: "!mila!", right: "Weak" },
+    { left: "yoninipanini", right: "Weak" },
+    { left: "ALEXIAISBEST", right: "Weak" },
+    { left: "NoT_HaRrIsOn$5", right: "Strong" },
+    { left: "RR4LP#8!", right: "Strong" },
+    { left: "its_AYBANZ1*", right: "Strong" },
+    { left: "AmazingAva2015&", right: "Strong" },
+    { left: "67Aura_Farm!", right: "Strong" },
+    { left: "KiKi_Kaija9@", right: "Strong" },
+    { left: "LuckLiana255!", right: "Strong" }
 ],
 
 // ⭐ Types of Malware
