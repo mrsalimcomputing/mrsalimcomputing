@@ -696,7 +696,7 @@ export const matchingData = {
     { left: "RR4LP#8!", right: "Strong" },
     { left: "its_AYBANZ1*", right: "Strong" },
     { left: "AmazingAva2015&", right: "Strong" },
-    { left: "67Aura_Farm!", right: "Strong" },
+    { left: "Laith_th3_Aura_Farm!", right: "Strong" },
     { left: "KiKi_Kaija9@", right: "Strong" },
     { left: "SSJ4SINADO$", right: "Strong" }
 ],
