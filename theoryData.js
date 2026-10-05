@@ -444,14 +444,17 @@ export const theoryData = {
 
 "Network Topologies": [
 
-  {question:"Which topology connects all devices to a central switch?",correct:["Star","Star topology"],wrong:["Bus","Ring","Mesh","Tree","Line","Grid","Chain","Loop","Web","Cloud","Cable","Router","Hub","WAP","LAN","WAN"]},
-  {question:"Which topology uses one main cable?",correct:["Bus","Bus topology"],wrong:["Star","Ring","Mesh","Tree","Line","Grid","Chain","Loop","Web","Cloud","Cable","Router","Hub","WAP","LAN","WAN"]},
-  {question:"Which topology forms a circle?",correct:["Ring","Ring topology"],wrong:["Star","Bus","Mesh","Tree","Line","Grid","Chain","Loop","Web","Cloud","Cable","Router","Hub","WAP","LAN","WAN"]},
-  {question:"Which topology has many connections?",correct:["Mesh","Mesh topology"],wrong:["Star","Bus","Ring","Tree","Line","Grid","Chain","Loop","Web","Cloud","Cable","Router","Hub","WAP","LAN","WAN"]},
-  {question:"Which topology is most reliable?",correct:["Mesh","Mesh topology"],wrong:["Star","Bus","Ring","Tree","Line","Grid","Chain","Loop","Web","Cloud","Cable","Router","Hub","WAP","LAN","WAN"]},
-  {question:"Which topology is cheapest?",correct:["Bus","Bus topology"],wrong:["Star","Ring","Mesh","Tree","Line","Grid","Chain","Loop","Web","Cloud","Cable","Router","Hub","WAP","LAN","WAN"]},
-  {question:"Which topology uses a central device?",correct:["Star","Star topology"],wrong:["Bus","Ring","Mesh","Tree","Line","Grid","Chain","Loop","Web","Cloud","Cable","Router","Hub","WAP","LAN","WAN"]},
-  {question:"Which topology is used in modern networks?",correct:["Star","Star topology"],wrong:["Bus","Ring","Mesh","Tree","Line","Grid","Chain","Loop","Web","Cloud","Cable","Router","Hub","WAP","LAN","WAN"]}
+  {question:"Which topology connects all devices to a central switch?",correct:["Star","Star topology"],wrong:["Bus topology","Bus","Ring Topology","Ring","Mesh Topology","Mesh","Stur Topology","Stur","Rung","Mosh","Stung","Best","PAN","WAP","LAN","WAN"]},
+  {question:"Which topology uses one main cable?",correct:["Bus","Bus topology"],wrong:["Bust topology","Bust","Ring Topology","Ring","Mesh Topology","Mesh","Star Topology","Star","Rung","Mosh","Stung","Best","PAN","WAP","LAN","WAN"]},
+  {question:"Which topology forms a circle?",correct:["Ring","Ring topology"],wrong:["Bus topology","Bus","Rung Topology","Rung","Mesh Topology","Mesh","Star Topology","Star","Reng","Mosh","Stung","Best","PAN","WAP","LAN","WAN"]},
+  {question:"Which topology forms interconnected nodes?",correct:["Mesh","Mesh topology"],wrong:["Bus topology","Bus","Ring Topology","Ring","Mish Topology","Mish","Star Topology","Star","Rung","Mosh","Stung","Best","PAN","WAP","LAN","WAN"]},
+  {question:"Which topology has many connections?",correct:["Mesh","Mesh topology"],wrong:["Bus topology","Bus","Ring Topology","Ring","Mish Topology","Mish","Star Topology","Star","Rung","Mosh","Stung","Best","PAN","WAP","LAN","WAN"]},
+  {question:"Which topology is most reliable?",correct:["Mesh","Mesh topology"],wrong:["Bus topology","Bus","Ring Topology","Ring","Mish Topology","Mish","Star Topology","Star","Rung","Mosh","Stung","Best","PAN","WAP","LAN","WAN"]},
+  {question:"Which topology is cheapest?",correct:["Bus","Bus topology"],wrong:["Bust topology","Bust","Ring Topology","Ring","Mesh Topology","Mesh","Star Topology","Star","Rung","Mosh","Stung","Best","PAN","WAP","LAN","WAN"]},
+  {question:"Which topology uses a central device?",correct:["Star","Star topology"],wrong:["Bus topology","Bus","Ring Topology","Ring","Mesh Topology","Mesh","Stur Topology","Stur","Rung","Mosh","Stung","Best","PAN","WAP","LAN","WAN"]},
+  {question:"Which topology is used in modern networks?",correct:["Star","Star topology"],wrong:["Bus topology","Bus","Ring Topology","Ring","Mesh Topology","Mesh","Stur Topology","Stur","Rung","Mosh","Stung","Best","PAN","WAP","LAN","WAN"]},
+  {question:"Which topology can still work if one device cable is cut?",correct:["Mesh Topology","Star"],wrong:["Bus topology","Bus","Ring Topology","Ring","Mish Topology","Mish","Stur Topology","Stur","Rung","Mosh","Stung","Best","PAN","WAP","LAN","WAN"]},
+  {question:"Which topology can be affected if the main cable is cut?",correct:["Ring Topology","Bus"],wrong:["Bis topology","Bis","Rong Topology","Rong","Mesh Topology","Mesh","Star Topology","Star","Rung","Mosh","Stung","Best","PAN","WAP","LAN","WAN"]}
 
 ],
 
