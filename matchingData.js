@@ -698,7 +698,7 @@ export const matchingData = {
     { left: "AmazingAva2015&", right: "Strong" },
     { left: "67Aura_Farm!", right: "Strong" },
     { left: "KiKi_Kaija9@", right: "Strong" },
-    { left: "LuckLiana255!", right: "Strong" }
+    { left: "SSJ4SINADO$", right: "Strong" }
 ],
 
 // ⭐ Types of Malware
