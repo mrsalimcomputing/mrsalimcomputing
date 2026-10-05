@@ -741,21 +741,21 @@ export const matchingData = {
 
 // ⭐ Cyberbullying & Online Conduct
 "Cyberbullying & Online Conduct": [
-    { left: "Cyberbullying", right: "Bullying online" },
-    { left: "Block User", right: "Stop messages" },
-    { left: "Report", right: "Tell platform" },
-    { left: "Trusted Adult", right: "Tell someone" },
-    { left: "Kind Messages", right: "Good conduct" },
-    { left: "Respect Others", right: "Online rule" },
-    { left: "Do Not Share Private Info", right: "Stay safe" },
-    { left: "Do Not Respond", right: "Avoid bullies" },
-    { left: "Screenshots", right: "Evidence" },
-    { left: "Privacy Settings", right: "Protect account" },
-    { left: "Hurtful Comments", right: "Cyberbullying" },
-    { left: "Rumours", right: "Bad conduct" },
-    { left: "Threats", right: "Cyberbullying" },
-    { left: "Think Before Posting", right: "Stay safe" },
-    { left: "Be Supportive", right: "Good behaviour" }
+    { left: "Mean comment", right: "Cyberbullying" },
+    { left: "Kind message", right: "Not Cyberbullying" },
+    { left: "Nasty rumour", right: "Cyberbullying" },
+    { left: "Nice compliment", right: "Not Cyberbullying" },
+    { left: "Threatening message", right: "Cyberbullying" },
+    { left: "Helping someone", right: "Not Cyberbullying" },
+    { left: "Sharing Embarrassing photo", right: "Cyberbullying" },
+    { left: "Positive comment", right: "Not Cyberbullying" },
+    { left: "Hurtful messages", right: "Cyberbullying" },
+    { left: "Respectful disagreement", right: "Not Cyberbullying" },
+    { left: "Fake account to mock someone", right: "Cyberbullying" },
+    { left: "Reporting bullying", right: "Not Cyberbullying" },
+    { left: "Cruel comments", right: "Cyberbullying" },
+    { left: "Funny harmless meme", right: "Not Cyberbullying" },
+    { left: "Online threat", right: "Cyberbullying" }
 ],
 
 // ⭐ LAN and WAN
